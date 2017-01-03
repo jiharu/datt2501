@@ -1,2 +1,2 @@
 # datt2501
-FA/DATT 2501 Introduction to 3D Animation class at York University
+Class notes for the introduction to 3D animation course in York University 2016/2017

@@ -1,0 +1,24 @@
+$m = 0; 
+$r = 0; 
+$l = 0; 
+$all = 0; 
+
+$m = L_Finger_Middle_Controller.translateY;
+$r = L_Finger_Right_Controller.translateY;
+$l = L_Finger_Left_Controller.translateY;
+$all = L_All_Fingers_Controller.translateY;
+
+$m = $m + $all;
+$r = $r + $all;
+$l = $l + $all;
+
+L_Middle_Finger.rotateZ = $m * 10;
+L_Middle_Ball.rotateZ = L_Middle_Finger.rotateZ *2;
+
+
+L_Right_Finger.rotateZ = $r * 10;
+L_Right_Ball.rotateZ = L_Right_Finger.rotateZ * 2;
+
+
+L_Left_Finger.rotateZ = $l * 10;
+L_Left_Ball.rotateZ = L_Left_Finger.rotateZ * 2;

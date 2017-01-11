@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Introduction to 3D Animation</title>
+    
+<link href="css/site.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="css/highlight.default.css" media="screen" rel="stylesheet" type="text/css" />
+  
+<script src="js/jquery.js"></script>
+<script src="js/showdown.js" type="text/javascript"></script>
+
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+<body>
+<!--
+Write the markdown code below.
+A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
+
+Tumblr 
+https://www.tumblr.com/docs/en/custom_themes
+
+add dates:
+<i><small>{block:Date}{MonthNumberWithZero}/{DayOfMonthWithZero}/{ShortYear} {24HourWithZero}:{Minutes}{/block:Date} by {PostAuthorName}</small></i>
+
+under   <section class="post">
+-->
+
+<div style="display: none" id="sourcetext">
+
+# Lab Week 3
+## To do list	
+1. Creating bouncing ball animation 
+2. Graph editor: controlling splines
+3. Tumblr class portfolio review 
+4. Project Q&A 
+5. Next class
+
+--------------------------
+## Creating bouncing ball animation 
+- Select the project and save a scene.  
+
+### Step 1: Preparing the scene for the most efficient work environment. 
+- Create ***a ball animation hierarchy***: make a sphere and create three group nodes:
+	
+### Step 2: Timing
+
+- Decide how many bounces will occur - and do keyframing 
+	- keyframing of the transformation node.
+	- Use your notes to capture the timing.	
+
+### Step 3: Spacing
+
+- Using the Graph Editor to alter the graph, applying spacing
+
+![break](img/lab/break.png)   
+
+![tan](img/lab/tangent.png) 
+
+### Step 4
+- Squashing and stretching.
+	- keyframing of the scale node.
+_____________________________
+
+### Criteria of evaluation
+1. Showing convincing physics relationships.  
+2. Aesthetically pleasing actions. 
+3. Presenting action to viewers effectively.
+
+-------------------------------	
+
+## Graph editor: controlling splines 
+### How it works:
+- Display and navigate animation curves
+- Select keys and change times and values
+- Select keys and move or scale them
+- Controlling tangets
+
+### Navigation
+The standard Viewport navigation shortcut keys and transform tools can be used while working in the Graph Editor.
+
+- **Dolly** (Alt + RMB or scrolling)/ **Track** (Alt + MMB) – This can be used to Dolly and track around the Graph Editor to change the view of the scenes motion graphs.
+
+- You can also use the standard Viewport shortcuts to frame selected keys (**F**) or frame all keys (**A**).
+
+- When you control keys and tangents, use select keys (**Q**) and move (**W**) or scale (**R**)  them.
+
+### Splines
+![grp01](img/maya/graph.png)
+
+### Acceleration (ease-in), Deceleration (ease-out)        
+![grp02](img/maya/acel.png), ![grp03](img/maya/deac.png)   
+
+### Spline techniques
+1. Keys at *the extremes*.  It makes things clear, easy to edit, and the values can't be changed without you knowing.  
+2. Use flat or linear tangents at extremes.
+3. Only use the number of keys you need and make sure the tangents are the way you want them. Too many keys makes changes very difficult. 
+
+_______________
+## Tumblr review	
+
+_______________________
+### Project Q&A 
+[Project 1 link](due.html)
+_______________________
+### Next class
+
+Path animation & Set driven animation
+___________________
+
+</div>
+<div id="wrapper">
+	
+	<div class="header">
+		
+		<h1>DATT2501</h1>		
+		<a href="index.html">Overview</a><br/>
+		<a href="DATT2501_ji.pdf">Syllabus</a><br/>	
+		<a href="due.html">Due dates</a><br/><br/>
+					
+		Tumblr process portfolio:<br/> <a href=http://2017datt2501.tumblr.com/>Lab 01</a>/ <a href=https://2017datt2501-02.tumblr.com/>Lab 02</a>/<a href=https://2017datt2501-03.tumblr.com/>Lab 03</a><br/><br/>
+				
+	    Week 1:<a href="lecture01.html"> lecture</a> /<a href="lab01.html"> lab</a> (<a href="due.html">ASGMT 1</a>)<br/>
+		Week 2:<a href="lecture02.html"> lecture</a> /<a href="lab02.html"> lab</a> (<a href="due.html">ASGMT 2</a>)<br/><!--
+		Week 3:<a href="lecture02.html"> lecture</a> /<a href="lab03.html"> lab</a> (<a href="due.html">Project 1</a>)<br/>
+		Week 4:<a href="lecture04.html"> lecture</a> /<a href="lab04.html"> lab</a> (<a href="due.html">ASGMT 3</a>)<br/>
+		Week 5:<a href="lecture05.html"> lecture</a> /<a href="lab05.html"> lab</a> (<a href="due.html">ASGMT 4</a>)<br/>
+		Week 6:<a href="lecture06.html"> lecture</a> /<a href="lab06.html"> lab</a> (<a href="due.html">ASGMT 5</a>)<br/>
+		Reading week<br/>
+		Week 7:<a href="lecture07.html"> lecture</a> /<a href="lab08.html"> lab</a> (<a href="due.html">ASGMT 6</a>)<br/>
+		Week 8:<a href="lecture08.html"> Rigging I </a> (<a href="due.html">ASGMT 7</a>)<br/>
+		Week 9:<a href="lecture09.html"> Rigging II </a> (<a href="due.html">Project 2</a>)<br/>
+		Week 10:<a href="lecture10.html"> Walking I </a> (<a href="due.html">ASGMT 8</a>)<br/>
+		Week 11:<a href="lecture11.html"> Walking II</a> (<a href="due.html">ASGMT 9</a>)<br/>   
+		Week 12:<a href="lecture12.html"> Rendering </a> (<a href="due.html">Project 3</a>)<br/>  <br/>-->
+	
+	</div>
+	<div class="section">
+		<script type="text/javascript">
+		//var converter = new Markdown.Converter();
+		var converter = new Showdown.converter();
+		document.write(converter.makeHtml($('#sourcetext').text()));
+		</script>
+	</div>
+	
+	<div class="footer">Haru (HyunKyung) Ji, 2017</div>
+	
+</div>
+</body>
+</html>

@@ -33,8 +33,19 @@ under   <section class="post">
 1. Graph editor: controlling splines 
 2. Creating bouncing ball animation 
 3. Digital Cinematography   
+	- Camera
 
 -------------------------------	
+
+## Video
+- Inspiration
+	- [Sony Bravia Bouncy Balls](https://www.youtube.com/watch?v=0_bx8bnCoiU)    
+	- [Gravity](https://vimeo.com/6111739): Short film by Renaud Hallée.
+	Falling objects synchronized to produce rhythm (2009). More creations: music-driven short films and interactive projects by Renaud Hallée: [Possible Metrics](http://possiblemetrics.com/) 
+
+	
+- Reference
+	- [Ball bounce reference](https://www.youtube.com/watch?v=sKJegbjS4N8)  	
 
 ## Graph editor: controlling splines 
 ### How it works:
@@ -96,13 +107,43 @@ _____________________________
 3. Presenting action to viewers effectively.
 
 --------
-## Digital Cinematography
-### Camera, light, and shadow
+## Digital Cinematography: optional
+### Hardware rendering options for Playblast
+
+![render](img/lab/hardwarerender.png)
+
+### Camera
 
 [We covered this subject from the pre requisite class - Introduction to 3D modeling](http://jiharu.github.io/datt2500/lecture05.html). Therefore, we will not cover it now however if you want to create a higher quality animation, digital cinematography is fundamentally important.  
 
 ![camera](img/maya/film/camera.png)
 
+### Camera animation video tutorial
+- [4 Tips for Camera Animation (for Maya or any other 3D software) by Bloop Animation](https://www.youtube.com/watch?v=b3PHRNvwl4A&t=3s) 
+
+
+- [Camera Shake by Henry Medhurst](https://www.youtube.com/watch?v=6AS1PJlcHAE)    
+	MEL expression for a simple shaking camera: 
+
+```	
+cameraShape1.horizontalShake = noise(frame*0.7)/30; 
+```
+	
+Or 
+
+```	
+	float $min = rand (-0.1, -0.3);  
+	float $max = rand (0.1, 0.3);  
+	if (frame <= 60){  
+		camera1.translateX = rand($min, $max);  
+		camera1.translateY = rand($min, $max);  
+		camera1.translateZ = rand($min, $max);  
+	} else {  
+		camera1.translateX = 0;  
+		camera1.translateY = 0;  
+		camera1.translateZ = 0;  
+	}  
+```
 _______________
 ## Tumblr review	
 
@@ -128,8 +169,8 @@ Path animation & Set driven animation
 		Tumblr process portfolio:<br/> <a href=http://2017datt2501.tumblr.com/>Lab 01</a>/ <a href=https://2017datt2501-2.tumblr.com/>Lab 02</a>/<a href=https://2017datt2501-03.tumblr.com/>Lab 03</a><br/><br/>
 				
 	    Week 1:<a href="lecture01.html"> lecture</a> /<a href="lab01.html"> lab</a> (<a href="due.html">ASGMT 1</a>)<br/>
-		Week 2:<a href="lecture02.html"> lecture</a> /<a href="lab02.html"> lab</a> (<a href="due.html">ASGMT 2</a>)<br/><!--
-		Week 3:<a href="lecture02.html"> lecture</a> /<a href="lab03.html"> lab</a> (<a href="due.html">Project 1</a>)<br/>
+		Week 2:<a href="lecture02.html"> lecture</a> /<a href="lab02.html"> lab</a> (<a href="due.html">ASGMT 2</a>)<br/>
+		Week 3:<a href="lecture03.html"> lecture</a> /<a href="lab03.html"> lab</a> (<a href="due.html">Project 1</a>)<br/>  <!--
 		Week 4:<a href="lecture04.html"> lecture</a> /<a href="lab04.html"> lab</a> (<a href="due.html">ASGMT 3</a>)<br/>
 		Week 5:<a href="lecture05.html"> lecture</a> /<a href="lab05.html"> lab</a> (<a href="due.html">ASGMT 4</a>)<br/>
 		Week 6:<a href="lecture06.html"> lecture</a> /<a href="lab06.html"> lab</a> (<a href="due.html">ASGMT 5</a>)<br/>

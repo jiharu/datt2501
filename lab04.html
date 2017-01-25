@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Introduction to 3D Animation</title>
+    
+<link href="css/site.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="css/highlight.default.css" media="screen" rel="stylesheet" type="text/css" />
+  
+<script src="js/jquery.js"></script>
+<script src="js/showdown.js" type="text/javascript"></script>
+
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+<body>
+<!--
+Write the markdown code below.
+A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
+
+Tumblr 
+https://www.tumblr.com/docs/en/custom_themes
+
+add dates:
+<i><small>{block:Date}{MonthNumberWithZero}/{DayOfMonthWithZero}/{ShortYear} {24HourWithZero}:{Minutes}{/block:Date} by {PostAuthorName}</small></i>
+
+under   <section class="post">
+-->
+
+<div style="display: none" id="sourcetext">
+
+# Week 4
+	1. Review
+		- Tumblr		
+	2. Get to know joint chain
+	3. Ik and FK
+	4. Wave animation  
+	5. Assignments & next class
+	
+
+## Review
+- Tumblr
+
+## Joint chain
+### Preparation
+
+- **Adjust grid**   
+open Diplay/Grid option box and adjust the size: 
+	- Length and width: 30 units  
+	- Grid lines every: 1 unit
+	- Subdivision: 5 unit  
+	
+We will use *snapping to grid* often. The sizes of bones and joints are relative to the grid unit.
+
+- To change the size of joints: Display/Animation/Joint Size.
+
+1. In the Rigging menu set (press F3), select Skeleton > Create Joints.
+2. In an orthogonal view, click on the location in your model where you want to create a joint.   
+***Tip: Click to create joints, middle-click and drag to move the last placed joint.***  
+
+3. Click again in the model where you want to create the next joint in your joint chain.
+A bone appears between the first and second joints. Continue clicking in the view until you create all the joints for your joint chain.
+Press *Enter* or  to complete your joint chain.
+
+- Using the **Hypergraph:** It presents a graphical view of the scene hierarchy or dependency graph, with boxes representing nodes and lines representing relationships.  
+***You can rename (push a right mouse button), connect, or disconnect joints (push a left mouse button) in the Hypergraph.*** 
+
+- In order to easily control them later, ***name joints properly***.  
+
+![hyper](img/lab/hypergraph.png)  
+
+- You can ***Mirror*** for symmetrical joints.
+
+- Let's complete 
+
+#### Related Maya help files
+- [Set up joint chains](https://knowledge.autodesk.com/support/maya/learn-explore/caas/CloudHelp/cloudhelp/2016/ENU/Maya/files/GUID-52E337C4-87DD-4052-99D4-EA5D336D8977-htm.html)
+
+- [Understanding the attributes of a joint](https://knowledge.autodesk.com/support/maya/learn-explore/caas/CloudHelp/cloudhelp/2016/ENU/Maya/files/GUID-5A8BB621-96E0-4CE8-9792-085EC8F07164-htm.html)
+
+- [Joint tool attributes](https://knowledge.autodesk.com/support/maya/learn-explore/caas/mne-help/global/docs/maya2014/en_us/files/CST-Joint-Tool-htm.html)	
+ 
+- [Building skeletons](https://knowledge.autodesk.com/support/maya/learn-explore/caas/CloudHelp/cloudhelp/2016/ENU/Maya/files/GUID-906B71D3-C153-4880-A8EF-F9A6D1AE4AD5-htm.html)
+
+- [Skeleton components](https://knowledge.autodesk.com/support/maya/learn-explore/caas/CloudHelp/cloudhelp/2016/ENU/Maya/files/GUID-00179257-5BC7-4943-8C99-B5DCEC7B7181-htm.html)
+
+
+## Create a joint chain with an IK handle
+- [Create a joint chain with an IK handle](https://knowledge.autodesk.com/support/maya/learn-explore/caas/mne-help/global/docs/maya2014/en_us/files/CSS-Create-a-joint-chain-with-an-IK-handle-htm.html)
+
+In the Joint Tool settings (Skeleton > Joint Tool >), turn on Create IK Handle.
+
+- To add an IK handle to an existing joint, use Skeleton > Create IK Handle command.
+
+![ik](img/lab/ik.png)  
+
+### Setting up IK
+
+- In the IK Handle option box, choose Rotate-Plane Solver and commit IK Handle command.
+
+![cs06](img/maya/kinematic/ikhandle_rotate.png)  
+The difference between Rotate-Plane solver and Single-Plane solver is how your can control the rotation of a middle joint. 
+
+### Control the size of IK display 
+
+![ik01](img/lab/ikdisplay.png)  
+
+## Create point contraints
+A point constraint causes an object to move to and follow the position of an object, or the average position of several objects. This is useful for having an object match the motion of other objects.
+
+- Select one or more target objects, followed by the object you want to constrain to them.
+	- In the Animation or Rigging menu set, select Constrain > Point. The last object selected will be the constrained object.
+	
+### Animate target object weights
+
+A target object’s weight specifies how much the position of the constrained object can be influenced by a target object. The weights are attributes of the point constraint. For each target object, an attribute named ***targetObject Wn*** is included that specifies the weight of each target object. By default, the weights are set to 1, which gives each target object an equal influence over the constrained object’s position. However, you can change the weights so that some target objects can have more (or less) influence than others. You can change target object weights with the Channel Box or the Attribute Editor.
+
+![const](img/lab/constaint_weight.png)
+
+-------------------------------------------------------
+
+### Let's make an animation!
+
+![ikfk](img/lab/ikfk.png)  
+
+### More to do
+<!--- Check the pivot's orientation. 
+- Check the character set in Maya. -->
+- Control *'Degrees of Freedom'* and *Rotate 'min' and 'max'*.
+
+![l](img/lab/limit.png) 
+
+------------------------------------------------------------------
+
+## Wave animation using Dope Sheet.
+
+### Inspiration
+- [Follow Through & Overlapping Action – 12 Principles of Animation](http://www.cgmeetup.net/home/12-principles-of-animation-by-frank-thomas-and-ollie-johnston/)
+
+### How to do
+
+1. Create a tail as a string of joints.
+2. Pose all the joints rotated to one side and set a keyframe for all. ***Do this by shift selecting each of the joints individually, starting from the tip and moving up to the base.*** Alternatively, you can do 'Select/Hierarchy' command.
+3. Move the frame and set a keyframe for the joints rotated in the opposite direction. 
+4. Repeat while considering, 'anticipation', 'slow in and slow out', and 'secondary action'
+5. Lastly, use the Dope Sheet to offset all the keyframes for child joints down by one frame. In the Dope Sheet, first zoom out to see all the keys, then marquee around all the keys and activate the Move Tool (hit w) and middle-mouse-drag the keys one frame to the right.
+6. Make playbalst to check out timing and completion.
+7. Repeat until you are satisfied.
+
+![w1](img/lab/wave01.png)  
+With Graph Editor: control values and scales.
+![w2](img/lab/wave2.png)  
+With Dope Sheet: control timing more efficiently.
+
+In Dope Sheet, you can have at-a-glance feedback on the timing of your keys, as well as access all of the keyframes in the scene without having to make complex selections. It comes from traditional animation’s exposure sheet, which would tell the cameraman how to shoot each frame by listing instructions from the animator.
+_________________
+## Next class
+
+Skinning
+___________________
+</div>
+<div id="wrapper">
+	
+	<div class="header">
+		
+		<h1>DATT2501</h1>		
+		<a href="index.html">Overview</a><br/>
+		<a href="datt2501_ji.pdf">Syllabus</a><br/>	
+		<a href="due.html">Due dates</a><br/><br/>
+					
+		Tumblr process portfolio:<br/> <a href=http://2017datt2501.tumblr.com/>Lab 01</a>/ <a href=https://2017datt2501-2.tumblr.com/>Lab 02</a>/<a href=https://2017datt2501-03.tumblr.com/>Lab 03</a><br/><br/>
+				
+	    Week 1:<a href="lecture01.html"> lecture</a> /<a href="lab01.html"> lab</a> (<a href="due.html">ASGMT 1</a>)<br/>
+		Week 2:<a href="lecture02.html"> lecture</a> /<a href="lab02.html"> lab</a> (<a href="due.html">ASGMT 2</a>)<br/>
+		Week 3:<a href="lecture03.html"> lecture</a> /<a href="lab03.html"> lab</a> (<a href="due.html">Project 1</a>)<br/>  
+		Week 4:<a href="lecture04.html"> lecture</a> /<a href="lab04.html"> lab</a> (<a href="due.html">ASGMT 3</a>)<br/><!--
+		Week 5:<a href="lecture05.html"> lecture</a> /<a href="lab05.html"> lab</a> (<a href="due.html">ASGMT 4</a>)<br/>
+		Week 6:<a href="lecture06.html"> lecture</a> /<a href="lab06.html"> lab</a> (<a href="due.html">ASGMT 5</a>)<br/>
+		Reading week<br/>
+		Week 7:<a href="lecture07.html"> lecture</a> /<a href="lab08.html"> lab</a> (<a href="due.html">ASGMT 6</a>)<br/>
+		Week 8:<a href="lecture08.html"> Rigging I </a> (<a href="due.html">ASGMT 7</a>)<br/>
+		Week 9:<a href="lecture09.html"> Rigging II </a> (<a href="due.html">Project 2</a>)<br/>
+		Week 10:<a href="lecture10.html"> Walking I </a> (<a href="due.html">ASGMT 8</a>)<br/>
+		Week 11:<a href="lecture11.html"> Walking II</a> (<a href="due.html">ASGMT 9</a>)<br/>   
+		Week 12:<a href="lecture12.html"> Rendering </a> (<a href="due.html">Project 3</a>)<br/>  <br/>-->
+			    			
+	<br/></div>
+	<div class="section">
+		<script type="text/javascript">
+		//var converter = new Markdown.Converter();
+		var converter = new Showdown.converter();
+		document.write(converter.makeHtml($('#sourcetext').text()));
+		</script>
+	</div>
+	
+	<div class="footer">Haru (HyunKyung) Ji, 2017</div>
+	
+</div>
+</body>
+</html>

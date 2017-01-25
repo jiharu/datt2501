@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Introduction to 3D Animation</title>
+    
+<link href="css/site.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="css/highlight.default.css" media="screen" rel="stylesheet" type="text/css" />
+  
+<script src="js/jquery.js"></script>
+<script src="js/showdown.js" type="text/javascript"></script>
+
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+<body>
+<!--
+Write the markdown code below.
+A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
+-->
+
+<div style="display: none" id="sourcetext">
+
+# Week 4: Maya Kinematics
+
+## References
+- [Maya 2016 online Help](http://help.autodesk.com/view/MAYAUL/2016/ENU//)
+- Art of Maya [pdf link](http://web.cse.ohio-state.edu/~parent/classes/682/MAYA/art_of_maya.pdf): P.57~61 : Character Animation 
+- Maya® Character Creation: Modeling and Animation Controls
+
+## Goal
+- Understanding how skeleton work.
+- Building your joint chains.
+
+-------------------
+
+# Joint system
+## Skeletons & Skinning
+**Skeletons** are hierarchical, articulated structures that let you pose and animate bound models. A skeleton provides a deformable model with the same underlying structure as the human skeleton gives the human body.
+
+![skl](img/maya/kinematic/comp_aboutWhatSkeletons.png)
+
+Just like in the human body, the location of joints and the number of joints you add to a skeleton determine how the skeleton’s bound model or ‘body’ moves. When you bind a model to a skeleton, it is called **skinning**.
+
+
+
+### Skeleton components
+A skeleton is composed of a series of **joints** and **bones** that form joint chains. You can pose and animate these joint chains using IK (inverse kinematics) handles or by translating or rotating individual joints (FK: forward kinematics).
+
+![skl01](img/maya/kinematic/comp_jointBone.png)
+
+### Joints
+Joints are the building blocks of skeletons and their points of articulation. Also, joints have no shape and therefore can not be rendered. Each joint can have one or more bone attached to it, and more than one child joint. Joints let you transform a skeleton when posing and animating a bound model.
+
+### Bones
+Bones do not have nodes, and they do not have a physical or calculable presence in your scene. Bones are only visual cues that illustrate the relationships between joints.
+
+### Joint chains
+A joint chain is any group of joints and their bones connected in a series. Joints are connected linearly, and their paths are drawn on screen by the bones. A joint chain begins at the highest joint in the chain’s hierarchy, and its bones are drawn pointing down the chain.
+
+![skl03](img/maya/kinematic/comp_aboutJointChain.png)
+
+When you create a joint chain, the position of each joint should approximate the anatomical positions of the joints of the character you are trying to create. For example, if you are creating joint chains for the skeleton of a human biped model, you should place the joints at points of articulation such as the elbows, knees, ankles and so on.
+
+![skl02](img/maya/kinematic/comp_nodes_figure.png)
+
+- [Basics of Joints in Maya, Youtube, 7:43](https://www.youtube.com/watch?v=LDe4rmgLz6c)
+
+###Skeleton hierarchy
+A **parent joint** is any joint higher in a skeleton’s hierarchy than any of the other joints that are influenced by that joint’s actions. Joints below a parent joint in the skeleton hierarchy are called **child joints**. Joints at the top of bones are always parents, and joints at the bottom of bones are always children. Parent joints drive the transformations of their respective child joints. Thus, when you translate or rotate a parent joint, you also translate or rotate all of its child joints.
+
+![hier](img/maya/kinematic/hier.png)
+
+The **root joint** is the highest joint in a skeleton’s hierarchy. A skeleton can have only *one* root joint. You can move and orient the entire skeleton in world space by translating and rotating the root joint.
+
+![root](img/maya/kinematic/root.png)
+
+------------------
+## Inverse kinematics
+With inverse kinematics (IK), you move an ***IK handle*** to pose an entire joint chain. An IK handle is an object you can select and move that affects the joints it is assigned to. A joint chain that has an IK handle is called an ***IK chain***. When you pose and animate a joint chain with an IK handle, the IK solver automatically rotates all the joints in the IK chain. The ***IK solver*** is what Maya uses to calculate the rotations of all the joints in the IK chain when you position the IK handle. 
+
+- [Inverse Kinematics in Maya](http://accad.osu.edu/~midori/Materials/IK_solvers.html)
+
+### IK & FK
+
+Inverse kinematics is more intuitive for goal-directed motion than forward kinematics because you can focus on the goal you want a joint chain to reach without worrying about how each joint in the chain should rotate.
+
+### Check points
+- You can not add to or remove joints from a skeleton if it is bound (skinned) to a model. If you do so, you will have to redo the IK handles or the skinning.
+- If you want to pose your joint chains using IK handles, you should avoid creating joint chains that are drawn in straight lines. Rotating some of the joints in your joint chains slightly at various appropriate angles before inserting an IK handle makes it easier for you to pose the chains with IK.
+
+### Rotate Plane IK solver
+The rotate plane solver is ideal for posing joint chains (such as arms and legs) that you want to stay in the same plane. For example, the shoulder, elbow, and wrist joints of an arm driven by a rotate plane IK handle all stay within the same plane as the elbow rotates. The plane itself can be rotated from the shoulder joint by the pole vector.
+
+### Twist disc
+The twist disc is a manipulator that you can use to twist or rotate the joint chain.
+
+![ik01](img/maya/kinematic/ik_rp.png)  
+
+--------------------------
+
+## Constraints: creating relations
+
+Constraints are a system for allowing one object to control another object. Constraints can allow you to connect only the translation of one object to another or the rotation, scale, or even the surface of one object to another, keeping the hierarchies separated from each other.
+
+![con](img/maya/skinning/constrain.png)
+
+- **Parent constraint:** you can relate the pose—translation and rotation—of one object to another. An object’s movement can also be constrained by the average pose of multiple objects.
+
+- **Point constraint:** the translation of one object to another. This enables the artist to attach two or more objects together.
+
+- **Aim constraint:** the rotation of one object to aim or point at another object. This type of constraint is great for creating an eye-control system; the eyeball shape will always point at the controller so the animator can lock the eyes of a character on a specific object if needed.
+
+- **Orient constraint:** one object’s rotation to another object’s rotation. This enables the artist to attach the rotations of two or more objects. The orient constraint is different from a parent-child relationship. The orient constraint allows the constrained object to rotate on its own axis. In a parent-child relationship, the child rotates around the parent’s axis.
+
+- **Scale constraint:** one object’s scale to another object’s scale. In other words, the scale size of one object controls the scale size of one or more other objects.
+
+	![cns01](img/maya/kinematic/constrain.png)   
+	Comparison of *parent* and *orient* constrain.
+	
+#### Animation using parent constraint	
+- [Basic Animation of passing a Box using Parent Constraint by mceyno89, 0:03](https://www.youtube.com/watch?v=zbc1QPJ_Svk)  
+
+
+
+</div>
+<div id="wrapper">
+	
+	<div class="header">
+		
+		<h1>DATT2501</h1>		
+		<a href="index.html">Overview</a><br/>
+		<a href="datt2501_ji.pdf">Syllabus</a><br/>	
+		<a href="due.html">Due dates</a><br/><br/>
+					
+		Tumblr process portfolio:<br/> <a href=http://2017datt2501.tumblr.com/>Lab 01</a>/ <a href=https://2017datt2501-2.tumblr.com/>Lab 02</a>/<a href=https://2017datt2501-03.tumblr.com/>Lab 03</a><br/><br/>
+				
+	    Week 1:<a href="lecture01.html"> lecture</a> /<a href="lab01.html"> lab</a> (<a href="due.html">ASGMT 1</a>)<br/>
+		Week 2:<a href="lecture02.html"> lecture</a> /<a href="lab02.html"> lab</a> (<a href="due.html">ASGMT 2</a>)<br/>
+		Week 3:<a href="lecture03.html"> lecture</a> /<a href="lab03.html"> lab</a> (<a href="due.html">Project 1</a>)<br/>  
+		Week 4:<a href="lecture04.html"> lecture</a> /<a href="lab04.html"> lab</a> (<a href="due.html">ASGMT 3</a>)<br/><!--
+		Week 5:<a href="lecture05.html"> lecture</a> /<a href="lab05.html"> lab</a> (<a href="due.html">ASGMT 4</a>)<br/>
+		Week 6:<a href="lecture06.html"> lecture</a> /<a href="lab06.html"> lab</a> (<a href="due.html">ASGMT 5</a>)<br/>
+		Reading week<br/>
+		Week 7:<a href="lecture07.html"> lecture</a> /<a href="lab08.html"> lab</a> (<a href="due.html">ASGMT 6</a>)<br/>
+		Week 8:<a href="lecture08.html"> Rigging I </a> (<a href="due.html">ASGMT 7</a>)<br/>
+		Week 9:<a href="lecture09.html"> Rigging II </a> (<a href="due.html">Project 2</a>)<br/>
+		Week 10:<a href="lecture10.html"> Walking I </a> (<a href="due.html">ASGMT 8</a>)<br/>
+		Week 11:<a href="lecture11.html"> Walking II</a> (<a href="due.html">ASGMT 9</a>)<br/>   
+		Week 12:<a href="lecture12.html"> Rendering </a> (<a href="due.html">Project 3</a>)<br/>  <br/>-->
+			    			
+	<br/></div>
+	<div class="section">
+		<script type="text/javascript">
+		//var converter = new Markdown.Converter();
+		var converter = new Showdown.converter();
+		document.write(converter.makeHtml($('#sourcetext').text()));
+		</script>
+	</div>
+	
+	<div class="footer">Haru (HyunKyung) Ji, 2017</div>
+	
+</div>
+</body>
+</html>	

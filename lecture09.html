@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Introduction to 3D Animation</title>
+    
+<link href="css/site.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="css/highlight.default.css" media="screen" rel="stylesheet" type="text/css" />
+  
+<script src="js/jquery.js"></script>
+<script src="js/showdown.js" type="text/javascript"></script>
+
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+<body>
+<!--
+Write the markdown code below.
+A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
+-->
+
+<div style="display: none" id="sourcetext">
+
+# Week 9: Character Rigging
+
+## References
+- [Maya 2016 online Help](http://help.autodesk.com/view/MAYAUL/2016/ENU//)
+- Art of Maya [pdf link](http://web.cse.ohio-state.edu/~parent/classes/682/MAYA/art_of_maya.pdf): P.57~61 : Character Animation 
+- Maya® Character Creation: Modeling and Animation Controls from [PEARSON](http://www.peachpit.com/articles/article.aspx?p=102022) 
+- 3D Animation Essentials, Maya ® Professional Tips and Techniques.
+
+## Goal
+- Creating skeleton systems for characters
+- Setting up control curves and deformers
+- Connecting the curves to your skeleton
+- Finalizing your character rig
+
+___________________
+# Character set-up
+## Organising data
+1. Enforcing a naming scheme.  
+2. Using layers: creating layers for the mesh, skeleton, and rig controllers respectively.  
+3. Applying a color scheme: you can assign controllers different color according to their positions (left, right, and center) using layer colors or changing colors in the Attribute editor / Drawing Overrides. 
+3. Properly grouping and parenting in the outliner and hypergraph. 
+4. Hiding or locking unused attributes.
+5. Restricting how each joint moves.
+
+![color](img/lab/bs02.png)
+
+## Preparing body mesh
+### 1. Import a body mesh  
+
+You can find mesh data from [GettingStarted2015LessonData](https://knowledge.autodesk.com/support/maya/learn-explore/caas/CloudHelp/cloudhelp/ENU/123112/files/maya-tutorials-html.html)
+
+Or download human obj mesh from [here](data/Human.obj).
+
+- **Clean up the history and transformations**. Do this by first choosing Edit > Delete All by Type > History. Then, select the body and choose **Modify > Freeze Transformations.**   
+It’s very important to have a mesh that is devoid of all history when getting ready to do any rigging or skinning. Deforming a mesh can be a processor intensive procedure, and if there is other history on the mesh, Maya has to recalculate all those history nodes for every tweak to a skinned joint. 
+
+---------------------------------
+
+## Building a skeleton
+Building a skeleton is the process of placing and orienting joints to create a system with which you can pose a deformable object.  
+
+![build](img/maya/kinematic/build_sk.png)
+
+You can use the skeleton generator or build a skeleton from scratch.
+
+### Skeleton generator in Maya
+#### HIK
+Animation Main Menu → Skeleton → Human IK
+
+If you use the HIK, your character must be defined in the T-stance, facing the positive Z-axis, Y-axis up, with the arms aligned with the X-axis to apply HIK.
+
+#### Related Maya help
+- [Prepare an existing skeleton for HumanIK](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-8D27BAFD-7785-4173-860E-515FEB2E9C98)  
+- [Create and define a HumanIK skeleton](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-795BDC06-8A1D-4D58-B55D-FD88D9B5A022)  
+
+### 2. Creating the lower-body skeleton
+
+![skl03](img/maya/kinematic/comp_aboutJointChain.png)
+
+
+### 3. Creating the spine and the arm skeleton
+
+![root](img/maya/kinematic/root.png)
+
+![sk01](img/lab/bs01.png) 
+
+#### Making
+1. **In the side view panel**, start to place a joint (Animation|Skeleton > Joint Tool). In the Outliner, **rename** the joint to *Root*. By placing joints in the side view panel, it is sitting at X = 0 in the middle of the character.  
+	It will be important that this *Root* joint has a very clean orientation that it isn’t oriented toward any particular joint and is set to be rotated at **0, 0, 0** in the world space. The Root joint will be right in the middle of the character.
+
+2. Still in the side View Panel, create five joints for the hip, knee, ankle, ball, and toe. This time when using the Joint Tool, simply click and release for the placement of each joint and hit the Enter key after creating the last joint. Label them.  
+	**Special note that the knee is bent.** If the hip, knee, and ankle are all in a straight vertical line, there will be problems later when we set up the IK rig. Place joints in the middle of the body or where the actual physical joint would be on a real person. However, for the ball and toe, place them where the ball and toe of the foot actually would touch the ground.
+	
+
+	![cs03](img/maya/kinematic/newleg01.png)   
+	An example of leg joint chain.
+
+
+--------------------------------------------
+
+## Orienting joint chains
+
+To see the joint orientations in the object mode:
+
+1. Click on the root joint in the chain.  
+2. Then select Edit > Select Hierarchy. Once all the joints are selected, select Display > Transform Display > Local Rotation Axes. This will display the actual orientations of the axes on the selected joints. 
+3. You can use Animation | Skeleton > Orient Joint (Options) to change its orientation values.
+
+![cs04](img/maya/kinematic/newfirstLeg.png), ![cs05](img/maya/kinematic/newleg.png)  
+Displaying local axis of leg joint chains.
+
+![rv03](img/maya/rendering/rev/armla.png)
+Displaying local axis of arm joint chains.
+
+--------------------------------------------
+
+## Modifying joints
+In the attribute editor, you will mainly be modifying the following attributes for setting up joints:  
+
+1. Joint/Degrees of Freedom: to specify the kind of joint. * See the image below. 
+2. Joint Labelling: to let Maya know which joint it is, for example in order to connect with motion capture data.
+3. Limit Information: specifing the value for the movement of each joint.  
+
+-------------------
+
+## Skeleton and joints
+### Anatomical joint types in Maya
+#### Ball joint
+A ball joint is a joint that can rotate about all three of its local axes. For example, the human shoulder is a ball joint.
+
+#### Universal joint
+A universal joint is a joint that can rotate about only two of its local axes. The human wrist is a good example of a universal joint, though the wrist has limitations on the extent it can rotate.
+
+#### Hinge joint
+A hinge joint is a joint that can rotate about only one of its local axes. For example, the human knee is a hinge joint.
+
+![sa01](img/maya/kinematic/anatomy.png)![sa02](img/maya/kinematic/joints.png)
+
+The abobe: The two main kinds of joints in the human body: ball and hinge joints 
+
+
+![joint](img/maya/kinematic/joints01.jpg)  
+The abobe: Illustration from Anatomy & Physiology. CC BY 3.0.  
+
+
+![joint1](img/maya/kinematic/Gelenke_Zeichnung01.jpg)  
+
+The abobe: Joints 1 Ball-and-Socket-Joint 2 Ellipsoid Joint 3 Saddle Joint 4 Hinge Joint 5 Pivot Joint. CC BY-SA 3.0.
+
+
+
+### Transformation
+![trans](img/maya/kinematic/space.png)
+
+***World Space*** manipulates an object with an axis of the same orientations as the world, regardless of the hierarchy. ***Local Space*** is an alignment of the transform axis to the parent of the object. The transform channels of a node (rotate, translate, scale) are all stored in local space. ***Object Space*** is the result of an object's transform in addition to the hierarchy above it. 
+
+***Gimbal Space*** is a breakdown of local space rotations. It displays each axis separately, showing you each rotation channel's actual orientation, rather that the accumulation of them as is shown in local space. 
+
+***Gimbal lock*** is the loss of one degree of freedom in a three-dimensional, three-gimbal mechanism that occurs when the axes of two of the three gimbals are driven into a parallel configuration, "locking" the system into rotation in a degenerate two-dimensional space.  
+The word lock is misleading: no gimbal is restrained. All three gimbals can still rotate freely about their respective axes of suspension. Nevertheless, because of the parallel orientation of two of the gimbals axes there is no gimbal available to accommodate rotation along one axis. [Gimbal lock, wikipedia.](http://en.wikipedia.org/wiki/Gimbal_lock)
+
+A ***Hierarchy*** is a relationship of nodes to other nodes described in terms of perent. child, and sibling. By default, a child node will inherit what is done to its parent node, transforming along with it and maintaining the same spatial relationship.
+
+### Pivot Positions
+The pivot position, or pivot point, is the location an object rotates around. In 3D animation, the pivot point is also the position from which the other manipulators will move or scale the object. Setting the correct position of the pivot to create the proper point of manipulation is important in creating a rig.
+
+#### How to change the position of pivot
+In Window, using **Insert** key.    
+In Mac, using **fn + left arrow** key.
+Or you can change it while pressing 'd' key.
+
+-------------------------------------------
+## 4. Setting up IK
+
+![sa04](img/maya/kinematic/ik.png)  
+Leg joint chains with IK handle. You can change the hierarchical order using the MM button.
+
+- In the IK Handle option box, choose Rotate-Plane Solver and commit IK Handle command.
+
+![cs06](img/maya/kinematic/ikhandle_rotate.png)  
+The difference between Rotate-Plane solver and Single-Plane solver is how your can control the rotation of a middle joint. 
+
+--------------------
+## Mirror joints
+Animation | Skeleton > Mirror Joint (Options). 
+Change the Mirror across setting to *YZ* and change *Search for:* Left and *Replace with:* Right.
+
+### Naming side
+
+The naming here is important. If we effectively name one side of the skeleton we are creating, when we mirror it later, Maya will do some quick and effective renaming for us that will include replacing all the Left with Right.
+
+### Orient check up
+
+Sometimes the mirror will not properly applied for the local axis rotating direction. In this case, apply orient joint to fix.
+
+-------------------
+## Controller set-up
+
+![kinematic](img/maya/kinematic/kinematic.png)
+
+>### Curve controller
+- Create Curve controller
+	1. Draw using a primitive circle or CV curve tool with 1 linear curve degree in its options.   
+	2. Once done, delete its history.    
+	3. Place it at the right position with right size using the right workspace view. (The circle should be large enough to be easily selected but small enough to avoid overlapping other parts of the character.)     
+	4. Rename them.     
+	5. With the curve controller selected, apply **Modify / Freeze Transformations**.
+>
+- Make constraints
+	- Parent: choose the controller and Joint or IK node and Edit / Parent
+	- Other constraints 
+- Duplicate to the other side.
+
+### 5. Let's draw controllers and prepare them.
+1. Foot controllers: foot, heel, toe
+2. Body controller
+3. Spine controller
+4. Neck and arm controllers
+5. Knee and elbow controllers
+
+-----------------------
+## 6. Character rigging
+### Foot controller
+1. Creating three IK handles and naming them
+2. Position: foot controller - parenting top two IK handles to the foot controller and move the pivot positon of the controller into the heel position.  
+3. Orientation: heel controller - move the pivot positon of the controller into the ball position (delete history/freeze transformation) then parent the leg IK handle as a child node. Then parent the heel controller to the foot controller.
+4. Orientation: toe controller - move the pivot positon of the controller into the ball position (delete history/freeze transformation) then parent the toe IK handle as a child node. Then parent the heel controller to the foot controller.
+
+### To do the foot controller (after the week 8 lab)
+#### What to change:
+
+- Change the name of FootIK to LegIK.  
+- Move the pivot of TOE_CONTROL to a Ball joint. (Before you apply, unparent nodes and after moving the pivot, reparent them again)  
+
+#### 1. Draw CONTROL
+1. Draw, using EP curve tool, FOOT_CONTOROL, HEEL\_CONTROL, TOE\_CONTROL, KNEE\_CONTROL on each side of the leg.
+2. Choose them, delete history and freeze transformation
+3. (Optional) Override color 
+
+#### 2. Move pivot positions
+1. Move the pivot of FOOT\_CONTROL to the bottom of heel in the foot geometry.
+2. Move the pivot of BALL\_CONTROL and FOOT\_CONTROL to the ball joint position.
+
+Test point: When you control FOOT\_CONTROL and BALL\_CONTROL, you can rotate heel and foot sticking to the ground.
+
+#### 3. Create three IK handles
+1. From hip to ankle joint.
+2. From ankle to ball joint.
+3. From ball to toe joint.
+
+Properly name them.  
+
+#### 4. Pole Vector constrain
+1. Choose KNEE\_CONTOROL and shift select LegIK and apply Constrain / Pole Vector constrain.  
+
+- The location of KNEE\_CONTOROL should have enough space between the actual joint in order to prevent reverse folding.
+
+#### 5. Parenting
+
+- Check the image below.
+
+![foot](img/lab/foot.png)  
+Foot controller set up from the class.
+
+1. Parent  ToeIK to TOE\_CONTROL  
+2. Parent  LEGIK to HEEL\_CONTROL  
+3. Parent  BALLIK to FOOT\_CONTROL 
+ 
+4. Finally, parent TOE\_CONTROL, HEEL\_CONTROL, KNEE\_CONTOROL TO FOOT\_CONTROL 
+
+Test it.
+
+-------------------------- 
+
+### Body/root controller
+- Add a body controller to be able to move and rotate the center of the body without affecting foot motions.  
+- Use **orient** and **point** constrains; in the option box, turn on *maintain offset*.
+	
+#### Choice order to apply constrains:
+- Orient - choose CONTROL frist and next choose **joint**  
+- Point - choose **joint** first and next CONTROL.  
+
+### Knee controller
+- Position: use **pole vector** constrain
+	- The IK solver must be 'rotate plane' in the Attribute Editor.  
+	- Choose CONTROL frist and next choose **joint** 
+
+---------------------------
+## The upper body rigging
+### Spine controller using an expression
+
+![spine](img/maya/kinematic/spine.png)
+
+1. Create spine joints and properly group & rename them.
+2. Check the local axis (Component mode + ? button).
+3. Open the expression window (Window / Animation Editors / Expression Editor)
+4. Name the new expression and type someting like this:
+ 
+```
+spine1.rx=spineControl.ty * 2;    
+spine1.ry=spineControl.tx * 2 * -1;    
+spine1.rz=spineControl.tz * 2;    
+
+spine2.rx=spine1.rx * .75;    
+spine2.ry=spine1.ry * .75;    
+spine2.rz=spine1.rz * .75;
+
+spine3.rx=spine2.rx * .75;    
+spine3.ry=spine2.ry * .75;    
+spine3.rz=spine2.rz * .75;    
+```
+
+### FK arm controller
+- If you have an IK handle, turn off the **IK blend to 0**.
+- Orientation: create a Shoulder control, an Elbow control, and a Wrist control and snap them to each joint. (delete history/freeze transformation). Shift select each control and each joint and apply **orient** constrain.  
+- Parent controllers. 
+
+To create a walking cycle, we need only FK arm control, you can ignore the IK art control part.
+
+#### IK arm setting
+- Create an IK controller and parent the IK handle as a child node. 
+- Turn on the IK blend to 1. You can control the arm's position using the IK handle.   
+- This time, shift select each joint and each controller and apply **point** constrains.  
+- Parent the controllers to the spine controller.
+
+
+ 
+### Head controller
+- Apply **orient** constrain between NECK_CONTROL and Neck joint.
+- Apply **point** constrain between Neck joint and NECK_CONTROL.
+- Parent it to the BODY_CONTROL. 
+
+## Organize outliner and create master node
+
+-----------------
+## Finalising and testing
+### Check out rigging basics
+
+- freeze transformation
+- deleting histories
+- renaming
+- Proper parenting & grouping
+
+------------
+## Tutorial
+
+- Character Rigging in Maya from Lynda.com: if you have an account to the Toronto public library, you can have free access. First, you need to log in to the library website and then search its online database. 
+
+-----------------------------
+
+
+</div>
+<div id="wrapper">
+	
+	<div class="header">
+		
+		<h1>DATT2501</h1>		
+		<a href="index.html">Overview</a><br/>
+		<a href="DATT2501_ji.pdf">Syllabus</a><br/>	
+		<a href="due.html">Due dates</a><br/><br/>
+					
+		Tumblr process portfolio:<br/> <a href=http://2016datt2501.tumblr.com/>Lab 01</a>/ <a href=http://datt2501animlab002.tumblr.com/>Lab 02</a><br/><br/>
+				
+	    Week 1:<a href="lecture01.html"> lecture</a> /<a href="lab01.html"> lab</a> (<a href="due.html">ASGMT 1</a>)<br/>
+		Week 2:<a href="lecture02.html"> lecture</a> /<a href="lab02.html"> lab</a> (<a href="due.html">ASGMT 2</a>)<br/>
+		Week 3:<a href="lecture02.html"> lecture</a> /<a href="lab03.html"> lab</a> (<a href="due.html">Project 1</a>)<br/>
+		Week 4:<a href="lecture04.html"> lecture</a> /<a href="lab04.html"> lab</a> (<a href="due.html">ASGMT 3</a>)<br/>
+		Week 5:<a href="lecture05.html"> lecture</a> /<a href="lab05.html"> lab</a> (<a href="due.html">ASGMT 4</a>)<br/>
+		Week 6:<a href="lecture06.html"> lecture</a> /<a href="lab06.html"> lab</a> (<a href="due.html">ASGMT 5</a>)<br/>
+		Week 7: Reading week<br/>
+		Week 8:<a href="lecture08.html"> lecture</a> /<a href="lab08.html"> lab</a> (<a href="due.html">ASGMT 6</a>)<br/>
+		Week 9:<a href="lecture09.html"> Rigging</a> (<a href="due.html">ASGMT 7</a>)<br/>
+		Week 10:<a href="lecture10.html"> Walking</a> (<a href="due.html">Project 2</a>)<br/>
+		Week 11:<a href="lecture11.html"> Rendering</a> (<a href="due.html">Project 3</a>)<br/>  
+		Week 12:<a href="lecture12.html"> Game Engine & Visual Effects</a> (<a href="due.html">Project 3</a>)<br/>  <br/>
+
+			    			
+	<br/></div>
+	<div class="section">
+		<script type="text/javascript">
+		//var converter = new Markdown.Converter();
+		var converter = new Showdown.converter();
+		document.write(converter.makeHtml($('#sourcetext').text()));
+		</script>
+	</div>
+	
+	<div class="footer">Haru (HyunKyung) Ji, 2016</div>
+	
+</div>
+</body>
+</html>

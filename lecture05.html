@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Introduction to 3D Animation</title>
+    
+<link href="css/site.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="css/highlight.default.css" media="screen" rel="stylesheet" type="text/css" />
+  
+<script src="js/jquery.js"></script>
+<script src="js/showdown.js" type="text/javascript"></script>
+
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+<body>
+<!--
+Write the markdown code below.
+A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
+-->
+
+<div style="display: none" id="sourcetext">
+
+# Week 5: Skinning
+
+## References
+- [Maya 2016 online Help](http://help.autodesk.com/view/MAYAUL/2016/ENU//)
+- Art of Maya [pdf link](http://web.cse.ohio-state.edu/~parent/classes/682/MAYA/art_of_maya.pdf): P.57~61 : Character Animation 
+- **Rigging for Games** by Eyal Assaf, Focal Press, 2015
+
+## Demo file 
+- GettingStarted2015LessonData/HumanIK/HIKSkeleton.mb You can download Lesson data from [Autodesk.](https://knowledge.autodesk.com/support/maya/learn-explore/caas/CloudHelp/cloudhelp/ENU/123112/files/maya-tutorials-html.html)
+
+## Goal
+- **Skinning to connect joints to the mesh.**
+- Creating a skeleton.
+- Rigging the skeleton with handles to more easily manipulate the joints.  
+
+_______________
+# Skinning
+
+Skinning (Binding) is the process of attaching a mesh to a skeleton. It is probably the most common type of mesh deformation with the use of joints, since it offers the most amount of flexibility. The setup is more time-consuming and complex than other methods, but the end results will be as detailed as you like to make them.
+
+## Direct or indirect skinning
+
+- **Direct skinning**: the mesh is bound directly on the joint. The vertices on the mesh get weighted to the joints around them.   
+- **Indirect skinning**: a deformer such as a lattice or a wrap deformer gets bound to the joint, and in turn they affect the underlying mesh.
+
+## Three types of skinning 
+
+- **Rigid binding:** this allows a vertex to only have one joint influence it.
+It is an old method of skinning, still good for mechanical objects, and computes extremely efficiently.  
+- **Smooth binding:** this allows a vertex to have multiple joints influence it. You can paint smooth weights to fine tune the vertex/joint assignments. This “painting weights” is usually referred to when someone says they are “skinning.”  
+- **Interactive skin binding (an extension of smooth binding):** The workflow for this is to do an interactive skin bind first. This method also allows you to paint weights for finer tuning after completing first rough adjustments with the interactive tool.
+
+	*Note that as of Maya 2015, the rigid binding option has been removed. To emulate a rigid type of binding on your meshes using smooth binding, make sure the Maximum Influence is set to 1.*
+
+When testing skinning, sometimes you may notice that you don’t have enough places for your mesh to deform. If this is the case, you’ll need to insert some additional geometry (perhaps through something like the Insert Edge Loop Tool, or increasing subdivisions.)
+
+![rg](img/maya/skinning/rigid.png)   
+Bind Skin: rigid binding emulation. Max influences: 1, Second joint rotate Z: 45. 
+
+![sm](img/maya/skinning/smooth.png)
+Bind Skin: smooth binding emulation. Max influences: 5, second joint rotate Z: 45. 
+It also shows you the local joint orientations. How to see in the edit mode: select joints and push two buttons shown from the above figure. 
+
+## Joint orientation
+One of the most important aspects of setting joints in Maya is to understand the concept of joint orientation. When an object is created in Maya, by default its pivot point is aligned to the World axis. Joints, on the other hand, have the ability to have their pivots created based on user input through the *Orientation Settings* and by *drawing the subsequent joints in the chain*. 
+
+To see the joint orientations in the object mode:
+
+1. click on the root joint in the chain.  
+2. Then select Edit > Select Hierarchy. Once all the joints are selected, select Display > Transform Display > Local Rotation Axes. This will display the actual orientations of the axes on the selected joints. 
+
+How to change the local axis:
+
+- You can use Skeleton > [Orient Joint](http://help.autodesk.com/view/MAYAUL/2016/ENU//index.html?guid=GUID-29DF5D0F-1BDE-4464-850C-45769B3CF1CA).  
+- Change it manually: make the local axes visible in the edit mode by selecting joints and push the component button and '?' button together in the status line. With the rotation tool, you can rotate to change the local axis. However, often it is not recommended. Check the below tutorial.
+
+### Tutorial
+- [ABOUT MAYA JOINT ORIENT by Rigging Dojo](http://www.riggingdojo.com/2014/10/03/everything-thought-knew-maya-joint-orient-wrong/)
+
+#### Vocabulary of a Maya Joint
+Maya Joints have extra hidden transform values compared with regular Maya objects.
+
+- **Joint Orient (JO):** this aims/rotates the joint but leaves the “rotation channels” at 0,0,0  
+- **Rotation Order (RO):** this is on all Maya objects but is more interdependent on joints due to the Joint Orients
+- **Local Rotation Axis (LRA):** the visual axis showing how the joint is oriented/aiming due to the JO
+
+------------------------------
+
+## Controlling skin weights
+***Painting weights*** is the process of using a brush to paint values of color on the surface of the model to distinguish which areas are affected by the joints in the skeleton. Carefully painting smooth values in turn gives us smooth deformation in our model. 
+
+>Painting skin weights is a journey. When it’s working right, effective skin weights are magic as suddenly the character feels alive. But it takes a while to get them right. Even when you think they are right, once the character starts to animate, new problems will appear that weren’t obvious in the painting process.. A sloppy skin weight will forever affect the look of the animations you make with this rig. Getting it right is important. 
+- from Getting Started in 3D with Maya by Adam Watkins, Focal Press, 2012
+
+![paint](img/maya/skinning/paint.png)   
+
+### Maya help
+- [Common Artisan Brush Tool Settings](https://knowledge.autodesk.com/support/maya/learn-explore/caas/CloudHelp/cloudhelp/2015/ENU/Maya/files/GUID-67B8F095-4A0E-4BAE-938C-CB41B3EBD533-htm.html)  
+
+------------------------------------
+
+# Editors to manage
+## Component editor
+
+The most common way of editing the rigid weights (each mesh point is influenced by only one joint (in the Bind skin option, the max influence should bet set to 1.) is through the use of the Component Editor (Window > General Editors > Component Editor).
+
+![lego](img/maya/skinning/lego.png)   
+
+
+## Hypergraph
+This is where you can see, edit and manipulate the DAG and DG nodes in Maya.
+
+### Hypergraph: Hierarchy
+This view shows the DAG (directed acyclic graph) nodes. The main use of DAG nodes is to show the Transform and Shape nodes of an object. The Shape nodes represent the data that defines an object. The Transform nodes are the enablers that allow the Shape nodes to be positioned, rotated, scaled, etc. in the 3D environment. DAG nodes connect to one another via a linear hierarchical structure. This is similar to a fractal or a tree structure, where one top node can have multiple branches, and in turn, each branch can have additional branches of their own, and on and on. Any node that you select in the viewport when you’re in Object Mode and that you can manipulate is a DAG node. To see the relationship between the Transform and Shape nodes, select Options > Display > Shape Nodes in the Hypergraph, and you will then see the Shape DAG node connected to the Transform node.
+
+### Hypergraph: Connections 
+This view of the Hypergraph shows the DG (dependency graph) nodes. These are the building blocks of Maya and represent the connections, attributes and overall makeup of all of the elements within Maya. 
+
+> One difference is that, as opposed to unidirectional DAG nodes, DG nodes can be looped on themselves—or cycled. It is not a good idea to do so, since it can cause a state of an infinite loop—but the option is available, albeit with Maya throwing in a warning of following up with such an action. 
+
+![hyper](img/maya/skinning/hyper.png)  
+
+### Outliner
+Another way to show the DAG nodes is the Outliner (Window > Outliner). The Outliner shows a hierarchical list of all the objects in the scene, however it will not show DG node connections, only parent/child nodes.
+
+### Node editor 
+It has similar features with Hypershade, and adds the functionality of the connection editor and hypergraph. (Window > Node Editor)
+
+-----------------------------------------------
+# Review
+## Maya architecture
+
+Reference: Complete Maya Programming: An Extensive Guide to MEL and the C++ API 2003, 
+Introducing Maya 2011
+
+>A solid foundation in the fundamental Maya concepts will greatly ease your development efforts..  Maya allows you to "do it the wrong way." Since the Maya framework is extremely flexible, it rarely places strict guidelines on how you should achieve a particular task. This is extremely attractive, since almost any problem can be tackled from a variety of different angles.
+
+
+A broad overview of how Maya works internally.
+
+![system](img/maya/mayasystem.png)
+
+### The Dependency Graph
+
+Alias I Wavefront (before Autodesk) implemented Maya's core using this data flow paradigm. This core is physically embodied in the **Dependency Graph**. The data flow paradigm provides an intuitive framework for understanding how Maya works. 
+
+The DG is really the heart of Maya. It provides for all the fundamental building blocks. It allows you to create arbitrary data that is fed into a series of operations and that results in some processed data at the other end. The data and their operations are encapsulated in the DG as *nodes*.     	
+
+![node01](img/maya/node.png) ![node02](img/maya/snode.png)
+Respectively, functional and data node
+
+**A node** holds any number of slots that contain the data used by Maya. Nodes also contain an operator that can work on their data and produce some other data as a result.     
+
+In order to perform some complex modification to some data, you'd create **a network of these simple nodes**. 
+There is no restriction on the number of nodes and how they are connected, so you can create networks of arbitrary complexity. Much as a series of simple Lego blocks can be combined to created complex structures, so can Maya nodes be connected to create **complex data flows**.   
+
+![addnode](img/maya/dg.png) 
+
+-----------------
+
+![node03](img/maya/shape.png)  
+DAG node structure for an object
+
+-----------------
+ 
+![node04](img/maya/anistr.png) 
+![node05](img/maya/aninode.png)  
+DG node structure for animation.
+
+Maya has a very flexible workflow that doesn't impose very many constraints. For the most part there is more than one way to approach a particular problem. This means that you can use whichever approach is most suited to your needs. In time, you will learn how to create your very own custom workflows. 
+
+The majority of the MEL commands operate on the Dependency Graph. The reason for this is that the Dependency Graph can be intuitively thought of as the entire ***scene*** including animation, models, textures, lights, cameras, and so on. The scene is all the important data and information that make up the 3D world, including the objects, animation, dynamics, materials, and so on. **Not only does the Dependency Graph define what data is in the current scene, its very structure and layout define how data is processed.** The Dependency Graph is really the heart and brains of Maya.
+
+## Construction history
+A major component of working with DG nodes is the fact that Construction History is enabled (it’s on by default, although you can turn it off). Almost every action creates a node in the construction history of the object you’re working on. At times, the object’s history can become complex and unruly and begins affecting Maya’s performance.
+
+A way to remove the history is by selecting **Edit > Delete by Type > History**. This will clear up all the input nodes connected to the object up to that point. If you have animation on an object or are using blendshapes, it is strongly recommended to delete history, especially before the skinning. Another option, if you only want to keep the deformer connections intact, is to Edit > Delete by Type > Non-Deformer History.
+
+
+------------------------------------------------------------
+
+
+</div>
+<div id="wrapper">
+	
+	<div class="header">
+		
+		<h1>DATT2501</h1>		
+		<a href="index.html">Overview</a><br/>
+		<a href="DATT2501_ji.pdf">Syllabus</a><br/>	
+		<a href="due.html">Due dates</a><br/><br/>
+					
+		Tumblr process portfolio:<br/> <a href=http://2016datt2501.tumblr.com/>Lab 01</a>/ <a href=http://datt2501animlab002.tumblr.com/>Lab 02</a><br/><br/>
+				
+	    Week 1:<a href="lecture01.html"> lecture</a> /<a href="lab01.html"> lab</a> (<a href="due.html">ASGMT 1</a>)<br/>
+		Week 2:<a href="lecture02.html"> lecture</a> /<a href="lab02.html"> lab</a> (<a href="due.html">ASGMT 2</a>)<br/>
+		Week 3:<a href="lecture02.html"> lecture</a> /<a href="lab03.html"> lab</a> (<a href="due.html">Project 1</a>)<br/>
+		Week 4:<a href="lecture04.html"> lecture</a> /<a href="lab04.html"> lab</a> (<a href="due.html">ASGMT 3</a>)<br/>
+		Week 5:<a href="lecture05.html"> lecture</a> /<a href="lab05.html"> lab</a> (<a href="due.html">ASGMT 4</a>)<br/>
+		Week 6:<a href="lecture06.html"> lecture</a> /<a href="lab06.html"> lab</a> (<a href="due.html">ASGMT 5</a>)<br/>
+		Week 7: Reading week<br/>
+		Week 8:<a href="lecture08.html"> lecture</a> /<a href="lab08.html"> lab</a> (<a href="due.html">ASGMT 6</a>)<br/>
+		Week 9:<a href="lecture09.html"> Rigging</a> (<a href="due.html">ASGMT 7</a>)<br/>
+		Week 10:<a href="lecture10.html"> Walking</a> (<a href="due.html">Project 2</a>)<br/>
+		Week 11:<a href="lecture11.html"> Rendering</a> (<a href="due.html">Project 3</a>)<br/>  
+		Week 12:<a href="lecture12.html"> Game Engine & Visual Effects</a> (<a href="due.html">Project 3</a>)<br/>  <br/>
+			    			
+	<br/></div>
+	<div class="section">
+		<script type="text/javascript">
+		//var converter = new Markdown.Converter();
+		var converter = new Showdown.converter();
+		document.write(converter.makeHtml($('#sourcetext').text()));
+		</script>
+	</div>
+	
+	<div class="footer">Haru (HyunKyung) Ji, 2016</div>
+	
+</div>
+</body>
+</html>

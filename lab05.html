@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Introduction to 3D Animation</title>
+    
+<link href="css/site.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="css/highlight.default.css" media="screen" rel="stylesheet" type="text/css" />
+  
+<script src="js/jquery.js"></script>
+<script src="js/showdown.js" type="text/javascript"></script>
+
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+<body>
+<!--
+Write the markdown code below.
+A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
+
+Tumblr 
+https://www.tumblr.com/docs/en/custom_themes
+
+add dates:
+<i><small>{block:Date}{MonthNumberWithZero}/{DayOfMonthWithZero}/{ShortYear} {24HourWithZero}:{Minutes}{/block:Date} by {PostAuthorName}</small></i>
+
+under   <section class="post">
+-->
+
+<div style="display: none" id="sourcetext">
+
+# Week 5
+	1. Review
+		- Project 1
+		- Tumblr		
+	2. Basic skinning
+		- Cylinder skinning
+		- Using Visor
+	3. Creating joint chains for the lower part of a character  
+	4. Editing skin weights using a brush
+	5. Tutorial reference
+	6. Mixamo
+	7. Assignments & next class
+	
+
+## Review
+- Project 1
+- Tumblr
+
+## Skinning
+Joints are given an influence over the vertices near to them. As a joint rotates, it deforms the vertices it has influence over. The process of defining which vertices are manipulated by which joints is called skinning.
+
+## Rigging
+Creating the joints themselves and building handles to manipulate those joints is referred to as rigging.
+
+# Basic skinning
+Let's prepare a simple cylindrical mesh and simple joint chains to practice, and do experiments in order to get to know the basics of skinning.
+  
+## Cylinder skinning
+- Let's change the subdivision values and look at how different it looks when you apply Bind skin.  
+- Let's change the max influence value to emulate 'rigid' skin or 'smooth' skin.
+
+![rg](img/maya/skinning/rigid.png)   
+Bind Skin: rigid binding emulation. Max influences: 1, Second joint rotate Z: 45. 
+
+### Editing skin weight
+
+- Select the body surface and choose *Paint Skin Weights*. It employs the Artisan brush interface to set weights interactively.
+	- [Common Artisan Brush Tool Settings](https://knowledge.autodesk.com/support/maya/learn-explore/caas/CloudHelp/cloudhelp/2015/ENU/Maya/files/GUID-67B8F095-4A0E-4BAE-938C-CB41B3EBD533-htm.html)
+  
+- Use *Component Edito*r: It gives you precise control over each vertex and the exact amount of weight it receives.
+
+-------------------------------------
+
+## Visor
+Let's move to a hand model to practice further. You can collect a model to which you would like to add a skeleton from the Visor (Windows > General editors > Visor).
+
+![visor](img/maya/skinning/visor.png) 
+I selected a horse and wing and combined them, adjusting transformations, and then deleting history & combining to make into a single mesh. I also assigned a blinn material to change the color.
+
+We can start with a simpler model, such as an alien hand from the Bipens folder in the Visor.
+
+- Prepare the model with a proper position and size.
+- Create joint chains and don't forget to properly name the joints. 
+- Check out whether its local axis is aligned well.  
+- Delete history from the mesh first, then:
+- Bind skin
+- Let's practice with the 'paint skin weight' to control skinning.
+- Test while doing animation. 
+- Repeat the processes -- you can learn by trial and error while trying to understand the concepts.
+
+![hand](img/maya/skinning/hand.png) 
+
+![rv10](img/maya/rendering/rev/hands.png)  
+Reference photos of hand gestures
+
+Once you feel comfortable doing skinning, let's move to a more complex character.
+
+![an](img/maya/skinning/alien.png) ![lego](img/maya/skinning/lego.png)  
+
+You can find the alien body from the Visor.   
+You can download the lego model from here: [legomodel.obj](data/legomodel.obj)
+
+Here, we can work on more elaborate options from the Skeleton and Skin commands, such as 'Mirror joints', 'Orient joints', and 'Unbind skin', 'Go to Bind pose' and so on.
+
+![menu](img/maya/skinning/menu.png)
+
+Let's open the **component editor** to control skinning.
+
+------------------------------
+
+## Tutorial reference
+- [Painting Weights and Skinning: A Straighforward Approach by Kiel Figgins](http://www.3dfiggins.com/writeups/paintingWeights/) - This document covers: the importance of joint placement, creating a low resolution mesh to weight, transferring those weights back to the high-res mesh, additional time saving tools for weighting and mirroring weights, and other useful tips and information. 
+
+- [ABOUT MAYA JOINT ORIENT by Rigging Dojo](http://www.riggingdojo.com/2014/10/03/everything-thought-knew-maya-joint-orient-wrong/)
+
+----------------
+## Mixamo
+Mixamo develops and sells web-based services for 3D character animation. Mixamo's technologies use machine learning methods to automate the steps of the character animation process, including 3D modeling to rigging and 3D animation.
+
+This is where you can find an automated, finished character & animation:
+- [Mixamo](https://www.mixamo.com/)
+
+_________________
+## Next class
+
+After a reading week, we will work on rigging.
+
+___________________
+</div>
+<div id="wrapper">
+	
+	<div class="header">
+		
+		<h1>DATT2501</h1>		
+		<a href="index.html">Overview</a><br/>
+		<a href="DATT2501_ji.pdf">Syllabus</a><br/>	
+		<a href="due.html">Due dates</a><br/><br/>
+					
+		Tumblr process portfolio:<br/> <a href=http://2016datt2501.tumblr.com/>Lab 01</a>/ <a href=http://datt2501animlab002.tumblr.com/>Lab 02</a><br/><br/>
+				
+	    Week 1:<a href="lecture01.html"> lecture</a> /<a href="lab01.html"> lab</a> (<a href="due.html">ASGMT 1</a>)<br/>
+		Week 2:<a href="lecture02.html"> lecture</a> /<a href="lab02.html"> lab</a> (<a href="due.html">ASGMT 2</a>)<br/>
+		Week 3:<a href="lecture02.html"> lecture</a> /<a href="lab03.html"> lab</a> (<a href="due.html">Project 1</a>)<br/>
+		Week 4:<a href="lecture04.html"> lecture</a> /<a href="lab04.html"> lab</a> (<a href="due.html">ASGMT 3</a>)<br/>
+		Week 5:<a href="lecture05.html"> lecture</a> /<a href="lab05.html"> lab</a> (<a href="due.html">ASGMT 4</a>)<br/>
+		Week 6:<a href="lecture06.html"> lecture</a> /<a href="lab06.html"> lab</a> (<a href="due.html">ASGMT 5</a>)<br/>
+		Week 7: Reading week<br/>
+		Week 8:<a href="lecture08.html"> lecture</a> /<a href="lab08.html"> lab</a> (<a href="due.html">ASGMT 6</a>)<br/>
+		Week 9:<a href="lecture09.html"> Rigging</a> (<a href="due.html">ASGMT 7</a>)<br/>
+		Week 10:<a href="lecture10.html"> Walking</a> (<a href="due.html">Project 2</a>)<br/>
+		Week 11:<a href="lecture11.html"> Rendering</a> (<a href="due.html">Project 3</a>)<br/>  
+		Week 12:<a href="lecture12.html"> Game Engine & Visual Effects</a> (<a href="due.html">Project 3</a>)<br/>  <br/></div>
+	<div class="section">
+		<script type="text/javascript">
+		//var converter = new Markdown.Converter();
+		var converter = new Showdown.converter();
+		document.write(converter.makeHtml($('#sourcetext').text()));
+		</script>
+	</div>
+	
+	<div class="footer">Haru (HyunKyung) Ji, 2015</div>
+	
+</div>
+</body>
+</html>

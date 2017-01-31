@@ -28,7 +28,7 @@ A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
 - Maya® Character Creation: Modeling and Animation Controls
 
 ## Goal
-- Understanding how skeleton work.
+- Understanding how skeletons work.
 - Building your joint chains.
 
 -------------------
@@ -49,7 +49,7 @@ A skeleton is composed of a series of **joints** and **bones** that form joint c
 ![skl01](img/maya/kinematic/comp_jointBone.png)
 
 ### Joints
-Joints are the building blocks of skeletons and their points of articulation. Also, joints have no shape and therefore can not be rendered. Each joint can have one or more bone attached to it, and more than one child joint. Joints let you transform a skeleton when posing and animating a bound model.
+Joints are the building blocks of skeletons and their points of articulation. Also, joints have no shape and therefore can not be rendered. Each joint can have one or more bones attached to it, and a number of child joints. Joints let you transform a skeleton when posing and animating a bound model. 
 
 ### Bones
 Bones do not have nodes, and they do not have a physical or calculable presence in your scene. Bones are only visual cues that illustrate the relationships between joints.
@@ -65,6 +65,21 @@ When you create a joint chain, the position of each joint should approximate the
 
 - [Basics of Joints in Maya, Youtube, 7:43](https://www.youtube.com/watch?v=LDe4rmgLz6c)
 
+>## Anatomy study
+>### Structural similarities
+>The skeletons of turtles, horses, humans, birds, and bats are strikingly similar, in spite of the different ways of life of these animals and the diversity of their environments. The correspondence, bone by bone, can easily be seen not only in the limbs but also in every other part of the body. From a purely practical point of view, it is incomprehensible that a turtle should swim, a horse run, a person write, and a bird or a bat fly with forelimb structures built of the same bones. 
+>
+>### Homology: homologies of the forelimb among vertebrates
+![an02](img/homo.jpg) 
+>
+from [Encyclopedia Britannica online: evolution](http://global.britannica.com/EBchecked/topic/197367/evolution#toc49845)
+>
+>### A photo of bison
+![an01](img/bison.jpg) 
+>### Anatomy of bison 
+![an02](img/animal.png)   
+
+
 ###Skeleton hierarchy
 A **parent joint** is any joint higher in a skeleton’s hierarchy than any of the other joints that are influenced by that joint’s actions. Joints below a parent joint in the skeleton hierarchy are called **child joints**. Joints at the top of bones are always parents, and joints at the bottom of bones are always children. Parent joints drive the transformations of their respective child joints. Thus, when you translate or rotate a parent joint, you also translate or rotate all of its child joints.
 
@@ -75,20 +90,28 @@ The **root joint** is the highest joint in a skeleton’s hierarchy. A skeleton 
 ![root](img/maya/kinematic/root.png)
 
 ------------------
+# Kinematics
+***Kinematics*** is the study of the motion of objects. This is related to, but distinguished from, dynamics in that kinematics studies only the way in which objects move and not the cause of the objects’ motion. In 3D computer graphics, the term kinematics describes how joints can be moved to animate objects and characters. There are two main types of kinematics: ***forward kinematics*** and ***inverse kinematics***.
+
+## FK & IK
+
+The term forward kinematics (FK) refers to a situation in which each joint in the chain inherits the motion of its parent joint. Thus, if you have four joints in a chain, when you rotate the root, the three child joints move based on the rotation of the root. When you rotate the second joint, the third and fourth joints inherit the motion of the second.
+
+Inverse kinematics (IK) cause the joints in a chain to orient themselves based on the position of a goal known as the end effector. 
+
+Inverse kinematics can be a more intuitive technique than forward kinematics in many situations. When used on legs, the Sticky option for inverse kinematics can prevent joints from penetrating the floor or sliding during a walk cycle. 
+
 ## Inverse kinematics
 With inverse kinematics (IK), you move an ***IK handle*** to pose an entire joint chain. An IK handle is an object you can select and move that affects the joints it is assigned to. A joint chain that has an IK handle is called an ***IK chain***. When you pose and animate a joint chain with an IK handle, the IK solver automatically rotates all the joints in the IK chain. The ***IK solver*** is what Maya uses to calculate the rotations of all the joints in the IK chain when you position the IK handle. 
 
-- [Inverse Kinematics in Maya](http://accad.osu.edu/~midori/Materials/IK_solvers.html)
+- [Inverse Kinematics in Maya](https://www.youtube.com/watch?v=u6ZCoiMTCSI)
 
-### IK & FK
-
-Inverse kinematics is more intuitive for goal-directed motion than forward kinematics because you can focus on the goal you want a joint chain to reach without worrying about how each joint in the chain should rotate.
 
 ### Check points
 - You can not add to or remove joints from a skeleton if it is bound (skinned) to a model. If you do so, you will have to redo the IK handles or the skinning.
 - If you want to pose your joint chains using IK handles, you should avoid creating joint chains that are drawn in straight lines. Rotating some of the joints in your joint chains slightly at various appropriate angles before inserting an IK handle makes it easier for you to pose the chains with IK.
 
-### Rotate Plane IK solver
+### Rotate plane IK solver
 The rotate plane solver is ideal for posing joint chains (such as arms and legs) that you want to stay in the same plane. For example, the shoulder, elbow, and wrist joints of an arm driven by a rotate plane IK handle all stay within the same plane as the elbow rotates. The plane itself can be rotated from the shoulder joint by the pole vector.
 
 ### Twist disc
@@ -97,8 +120,12 @@ The twist disc is a manipulator that you can use to twist or rotate the joint ch
 ![ik01](img/maya/kinematic/ik_rp.png)  
 
 --------------------------
+# Constraints: creating relations
 
-## Constraints: creating relations
+	
+#### Animation using parent constraint:	
+- [Basic Animation of passing a Box using Parent Constraint by mceyno89, 0:03](https://www.youtube.com/watch?v=zbc1QPJ_Svk)  
+
 
 Constraints are a system for allowing one object to control another object. Constraints can allow you to connect only the translation of one object to another or the rotation, scale, or even the surface of one object to another, keeping the hierarchies separated from each other.
 
@@ -108,18 +135,14 @@ Constraints are a system for allowing one object to control another object. Cons
 
 - **Point constraint:** the translation of one object to another. This enables the artist to attach two or more objects together.
 
-- **Aim constraint:** the rotation of one object to aim or point at another object. This type of constraint is great for creating an eye-control system; the eyeball shape will always point at the controller so the animator can lock the eyes of a character on a specific object if needed.
-
 - **Orient constraint:** one object’s rotation to another object’s rotation. This enables the artist to attach the rotations of two or more objects. The orient constraint is different from a parent-child relationship. The orient constraint allows the constrained object to rotate on its own axis. In a parent-child relationship, the child rotates around the parent’s axis.
 
 - **Scale constraint:** one object’s scale to another object’s scale. In other words, the scale size of one object controls the scale size of one or more other objects.
 
+- **Aim constraint:** the rotation of one object to aim or point at another object. This type of constraint is great for creating an eye-control system; the eyeball shape will always point at the controller so the animator can lock the eyes of a character on a specific object if needed.
+
 	![cns01](img/maya/kinematic/constrain.png)   
 	Comparison of *parent* and *orient* constrain.
-	
-#### Animation using parent constraint	
-- [Basic Animation of passing a Box using Parent Constraint by mceyno89, 0:03](https://www.youtube.com/watch?v=zbc1QPJ_Svk)  
-
 
 
 </div>

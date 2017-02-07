@@ -28,12 +28,12 @@ A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
 - **Rigging for Games** by Eyal Assaf, Focal Press, 2015
 
 ## Demo file 
-- GettingStarted2015LessonData/HumanIK/HIKSkeleton.mb You can download Lesson data from [Autodesk.](https://knowledge.autodesk.com/support/maya/learn-explore/caas/CloudHelp/cloudhelp/ENU/123112/files/maya-tutorials-html.html)
+- GettingStarted2015LessonData/HumanIK/HIKSkeleton.mb You can download the Lesson data from [Autodesk.](https://knowledge.autodesk.com/support/maya/learn-explore/caas/simplecontent/content/maya-tutorials.html)
 
 ## Goal
-- **Skinning to connect joints to the mesh.**
-- Creating a skeleton.
-- Rigging the skeleton with handles to more easily manipulate the joints.  
+- Understanding what is skinning.
+- Knowing how to bind skin, which means to connect joints to a mesh.
+<!-- - Rigging the skeleton with handles to more easily manipulate the joints.  -->
 
 _______________
 # Skinning
@@ -42,17 +42,15 @@ Skinning (Binding) is the process of attaching a mesh to a skeleton. It is proba
 
 ## Direct or indirect skinning
 
-- **Direct skinning**: the mesh is bound directly on the joint. The vertices on the mesh get weighted to the joints around them.   
+- **Direct skinning**: the mesh is bound directly to the joint. The vertices of the mesh get weighted by the joints around them.   
 - **Indirect skinning**: a deformer such as a lattice or a wrap deformer gets bound to the joint, and in turn they affect the underlying mesh.
 
-## Three types of skinning 
+## Three types of (direct) skinning 
 
 - **Rigid binding:** this allows a vertex to only have one joint influence it.
 It is an old method of skinning, still good for mechanical objects, and computes extremely efficiently.  
-- **Smooth binding:** this allows a vertex to have multiple joints influence it. You can paint smooth weights to fine tune the vertex/joint assignments. This “painting weights” is usually referred to when someone says they are “skinning.”  
+- **Smooth binding:** this allows a vertex to have multiple joints influence it. You can paint smooth weights to fine tune the vertex/joint assignments. This “painting weights” is usually what is referred to when someone says they are “skinning.”  
 - **Interactive skin binding (an extension of smooth binding):** The workflow for this is to do an interactive skin bind first. This method also allows you to paint weights for finer tuning after completing first rough adjustments with the interactive tool.
-
-	*Note that as of Maya 2015, the rigid binding option has been removed. To emulate a rigid type of binding on your meshes using smooth binding, make sure the Maximum Influence is set to 1.*
 
 When testing skinning, sometimes you may notice that you don’t have enough places for your mesh to deform. If this is the case, you’ll need to insert some additional geometry (perhaps through something like the Insert Edge Loop Tool, or increasing subdivisions.)
 
@@ -68,27 +66,30 @@ One of the most important aspects of setting joints in Maya is to understand the
 
 To see the joint orientations in the object mode:
 
-1. click on the root joint in the chain.  
-2. Then select Edit > Select Hierarchy. Once all the joints are selected, select Display > Transform Display > Local Rotation Axes. This will display the actual orientations of the axes on the selected joints. 
+1. Click on the root joint in the chain.  
+2. Then select Select > Hierarchy. Once all the joints are selected, select Display > Transform Display > Local Rotation Axes. This will display the actual orientations of the axes on the selected joints. 
 
 How to change the local axis:
 
 - You can use Skeleton > [Orient Joint](http://help.autodesk.com/view/MAYAUL/2016/ENU//index.html?guid=GUID-29DF5D0F-1BDE-4464-850C-45769B3CF1CA).  
 - Change it manually: make the local axes visible in the edit mode by selecting joints and push the component button and '?' button together in the status line. With the rotation tool, you can rotate to change the local axis. However, often it is not recommended. Check the below tutorial.
 
-### Tutorial
+### Reference
 - [ABOUT MAYA JOINT ORIENT by Rigging Dojo](http://www.riggingdojo.com/2014/10/03/everything-thought-knew-maya-joint-orient-wrong/)
 
+<!--
 #### Vocabulary of a Maya Joint
 Maya Joints have extra hidden transform values compared with regular Maya objects.
 
-- **Joint Orient (JO):** this aims/rotates the joint but leaves the “rotation channels” at 0,0,0  
-- **Rotation Order (RO):** this is on all Maya objects but is more interdependent on joints due to the Joint Orients
-- **Local Rotation Axis (LRA):** the visual axis showing how the joint is oriented/aiming due to the JO
 
+- **Rotation Order (RO):** this is on all Maya objects but is more interdependent on joints due to the Joint Orients  
+- **Joint Orient (JO):** this aims/rotates the joint but leaves the “rotation channels” at 0,0,0  
+- **Local Rotation Axis (LRA):** the visual axis showing how the joint is oriented/aiming due to the JO
+-->
 ------------------------------
 
-## Controlling skin weights
+# Controlling skin weights
+## Painting weights
 ***Painting weights*** is the process of using a brush to paint values of color on the surface of the model to distinguish which areas are affected by the joints in the skeleton. Carefully painting smooth values in turn gives us smooth deformation in our model. 
 
 >Painting skin weights is a journey. When it’s working right, effective skin weights are magic as suddenly the character feels alive. But it takes a while to get them right. Even when you think they are right, once the character starts to animate, new problems will appear that weren’t obvious in the painting process.. A sloppy skin weight will forever affect the look of the animations you make with this rig. Getting it right is important. 
@@ -99,16 +100,14 @@ Maya Joints have extra hidden transform values compared with regular Maya object
 ### Maya help
 - [Common Artisan Brush Tool Settings](https://knowledge.autodesk.com/support/maya/learn-explore/caas/CloudHelp/cloudhelp/2015/ENU/Maya/files/GUID-67B8F095-4A0E-4BAE-938C-CB41B3EBD533-htm.html)  
 
-------------------------------------
-
-# Editors to manage
 ## Component editor
 
 The most common way of editing the rigid weights (each mesh point is influenced by only one joint (in the Bind skin option, the max influence should bet set to 1.) is through the use of the Component Editor (Window > General Editors > Component Editor).
 
 ![lego](img/maya/skinning/lego.png)   
 
-
+-------------------------------------
+# Review
 ## Hypergraph
 This is where you can see, edit and manipulate the DAG and DG nodes in Maya.
 
@@ -128,9 +127,10 @@ Another way to show the DAG nodes is the Outliner (Window > Outliner). The Outli
 ### Node editor 
 It has similar features with Hypershade, and adds the functionality of the connection editor and hypergraph. (Window > Node Editor)
 
+![node](img/maya/nodeditor.png) 
+
 -----------------------------------------------
-# Review
-## Maya architecture
+# Maya architecture
 
 Reference: Complete Maya Programming: An Extensive Guide to MEL and the C++ API 2003, 
 Introducing Maya 2011
@@ -148,8 +148,8 @@ Alias I Wavefront (before Autodesk) implemented Maya's core using this data flow
 
 The DG is really the heart of Maya. It provides for all the fundamental building blocks. It allows you to create arbitrary data that is fed into a series of operations and that results in some processed data at the other end. The data and their operations are encapsulated in the DG as *nodes*.     	
 
-![node01](img/maya/node.png) ![node02](img/maya/snode.png)
-Respectively, functional and data node
+![node01](img/maya/node.png) ![node02](img/maya/snode.png)  
+Respectively, functional and data node.
 
 **A node** holds any number of slots that contain the data used by Maya. Nodes also contain an operator that can work on their data and produce some other data as a result.     
 
@@ -205,8 +205,8 @@ A way to remove the history is by selecting **Edit > Delete by Type > History**.
 		Week 10:<a href="lecture10.html"> Walking I </a> (<a href="due.html">ASGMT 8</a>)<br/>
 		Week 11:<a href="lecture11.html"> Walking II</a> (<a href="due.html">ASGMT 9</a>)<br/>   
 		Week 12:<a href="lecture12.html"> Rendering </a> (<a href="due.html">Project 3</a>)<br/>  <br/>-->
-			    			
-	<br/></div>
+	
+	</div>
 	<div class="section">
 		<script type="text/javascript">
 		//var converter = new Markdown.Converter();

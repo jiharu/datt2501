@@ -29,19 +29,12 @@ under   <section class="post">
 <div style="display: none" id="sourcetext">
 
 # Week 5
-	1. Review
-		- Project 1
-		- Tumblr		
-	2. Basic skinning
+	1. Basic skinning
 		- Cylinder skinning
 		- Using Visor
-	3. Creating joint chains for the lower part of a character  
-	4. Editing skin weights using a brush
-	5. Tutorial reference
-	6. Mixamo
-	7. Assignments & next class
+	2. Creating joint chains for lower arm and practice skinning  
+	3. Editing skin weights
 	
-
 ## Review
 - Project 1
 - Tumblr
@@ -56,76 +49,113 @@ Creating the joints themselves and building handles to manipulate those joints i
 Let's prepare a simple cylindrical mesh and simple joint chains to practice, and do experiments in order to get to know the basics of skinning.
   
 ## Cylinder skinning
-- Let's change the subdivision values and look at how different it looks when you apply Bind skin.  
-- Let's change the max influence value to emulate 'rigid' skin or 'smooth' skin.
+### Preparation
+1. Create a cylinder and change its height and subdivision level from its input node (at the right side of window).   
+2. Duplicate it and move it using 'snap to grid'. 
+3. Create a joint chain at the center of the cylinder (you can turn on X-ray joints from teh Viewport / Shading / X-ray joints).  
+
+![bn](img/maya/skinning/cylinder.png)  
+
+### Experiment 1
+- Let's change ***the subdivision levels*** and look at how different it looks when you apply *Bind Skin*.  
+
+### Experiment 2
+- Let's change ***the max influence value*** in the Bind Skin option editor to emulate ***'rigid'*** skin or 'smooth' skin.
 
 ![rg](img/maya/skinning/rigid.png)   
 Bind Skin: rigid binding emulation. Max influences: 1, Second joint rotate Z: 45. 
 
-### Editing skin weight
-
-- Select the body surface and choose *Paint Skin Weights*. It employs the Artisan brush interface to set weights interactively.
-	- [Common Artisan Brush Tool Settings](https://knowledge.autodesk.com/support/maya/learn-explore/caas/CloudHelp/cloudhelp/2015/ENU/Maya/files/GUID-67B8F095-4A0E-4BAE-938C-CB41B3EBD533-htm.html)
-  
-- Use *Component Edito*r: It gives you precise control over each vertex and the exact amount of weight it receives.
-
 -------------------------------------
-
-## Visor
-Let's move to a hand model to practice further. You can collect a model to which you would like to add a skeleton from the Visor (Windows > General editors > Visor).
+## Bipeds modeling skinning
+Let's move to a hand model to practice further. You can collect a model to which you would like to add a skeleton from **the Visor editor** (Windows > General editors > Visor).
 
 ![visor](img/maya/skinning/visor.png) 
-I selected a horse and wing and combined them, adjusting transformations, and then deleting history & combining to make into a single mesh. I also assigned a blinn material to change the color.
+I imported a horse and a wing modeling, adjusting transformations, and then deleting history & combining to make into a single mesh. I also assigned a blinn material to change the color.
 
-We can start with a simpler model, such as an alien hand from the Bipens folder in the Visor.
+We can start with a simpler model, such as an alien hand from the Bipeds folder in the Visor.
+
+### Menu set
+
+![menu](img/maya/skinning/menu.png)  
+Menu sets for building a skeleton and skinning for today's lecture.
+
+### Bind skin
 
 - Prepare the model with a proper position and size.
 - Create joint chains and don't forget to properly name the joints. 
-- Check out whether its local axis is aligned well.  
+- Check out whether its local axis is aligned well (you can find how to do from today's lecture note).  
 - Delete history from the mesh first, then:
 - Bind skin
-- Let's practice with the 'paint skin weight' to control skinning.
-- Test while doing animation. 
-- Repeat the processes -- you can learn by trial and error while trying to understand the concepts.
+
+### Analyze and re-bind 
+
+- Pose to analyze the binding  
+If you need to fix the position or local axis then,
+- frist, Skin / Go to Bind Pose 
+- then Skin / Unbind Skin  
+Now you can move positions of joints or align its local axis (you can find how to do from today's lecture note).
 
 ![hand](img/maya/skinning/hand.png) 
 
 ![rv10](img/maya/rendering/rev/hands.png)  
 Reference photos of hand gestures
 
+If everything is fine, go to Bind Skin again.
+
+
+## Editing skin weight
+### Paint Skin Weight
+
+- Pose the hand (rotate joints) until finding any unnatural skin morphing.  
+- Select the body surface and apply 'Skin / Paint Skin Weight' to editing skinning. It employs the Artisan brush interface to set weights interactively.
+	- First, you need to select specific joint from the paint skin weight editor.     
+	- [Common Artisan Brush Tool Settings](https://knowledge.autodesk.com/support/maya/learn-explore/caas/CloudHelp/cloudhelp/2015/ENU/Maya/files/GUID-67B8F095-4A0E-4BAE-938C-CB41B3EBD533-htm.html)
+- Repeat the processes -- you can learn by trial and error while trying to understand the concepts.
+		
+	![paint](img/maya/skinning/paint01.png)	
+
+
 Once you feel comfortable doing skinning, let's move to a more complex character.
 
-![an](img/maya/skinning/alien.png) ![lego](img/maya/skinning/lego.png)  
+![an](img/maya/skinning/alien.png) 
 
 You can find the alien body from the Visor.   
+
+### Component editor
+
+![lego](img/maya/skinning/lego.png) 
+
+Let's open the **component editor** to control skinning. 
+It gives you control over each vertex precisely and the exact amount of weight it receives.
+
+1. Select the object and go to its vertex component mode.  
+2. Select vertices and go to 'Smooth Skins' section in the component editor. 
+	- At the right section, you can find the list of vertices. 
+	- At the middle section, you can find how each vertex's weight is distributed to different joints.  
+	- The total weight for each vertex should be 1. 
 <!--You can download the lego model from here: [legomodel.obj](data/legomodel.obj)-->
-
-Here, we can work on more elaborate options from the Skeleton and Skin commands, such as 'Mirror joints', 'Orient joints', and 'Unbind skin', 'Go to Bind pose' and so on.
-
-![menu](img/maya/skinning/menu.png)
-
-Let's open the **component editor** to control skinning.
 
 ------------------------------
 
-## Tutorial reference
+## Related reference
 - [Painting Weights and Skinning: A Straighforward Approach by Kiel Figgins](http://www.3dfiggins.com/writeups/paintingWeights/) - This document covers: the importance of joint placement, creating a low resolution mesh to weight, transferring those weights back to the high-res mesh, additional time saving tools for weighting and mirroring weights, and other useful tips and information. 
 
 - [ABOUT MAYA JOINT ORIENT by Rigging Dojo](http://www.riggingdojo.com/2014/10/03/everything-thought-knew-maya-joint-orient-wrong/)
-
+<!--
 ----------------
-## Mixamo
+	6. Mixamo
+	## Mixamo
 Mixamo develops and sells web-based services for 3D character animation. Mixamo's technologies use machine learning methods to automate the steps of the character animation process, including 3D modeling to rigging and 3D animation.
 
 This is where you can find an automated, finished character & animation:
-- [Mixamo](https://www.mixamo.com/)
+- [Mixamo](https://www.mixamo.com/)-->
 
 _________________
 ## Next class
 
-After a reading week, we will work on rigging.
+Creating a skeleton and a rig (using HumanIK Controls window).
 
-___________________
+
 </div>
 <div id="wrapper">
 	
@@ -151,8 +181,8 @@ ___________________
 		Week 10:<a href="lecture10.html"> Walking I </a> (<a href="due.html">ASGMT 8</a>)<br/>
 		Week 11:<a href="lecture11.html"> Walking II</a> (<a href="due.html">ASGMT 9</a>)<br/>   
 		Week 12:<a href="lecture12.html"> Rendering </a> (<a href="due.html">Project 3</a>)<br/>  <br/>-->
-			    			
-	<br/></div>
+	
+	</div>
 	<div class="section">
 		<script type="text/javascript">
 		//var converter = new Markdown.Converter();

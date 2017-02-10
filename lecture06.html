@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Introduction to 3D Animation</title>
+    
+<link href="css/site.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="css/highlight.default.css" media="screen" rel="stylesheet" type="text/css" />
+  
+<script src="js/jquery.js"></script>
+<script src="js/showdown.js" type="text/javascript"></script>
+
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+<body>
+<!--
+Write the markdown code below.
+A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
+-->
+
+<div style="display: none" id="sourcetext">
+
+# Week 6: Human Inverse Kinematics
+
+## References
+- [Maya 2016 online Help](http://help.autodesk.com/view/MAYAUL/2016/ENU//)
+- Mastering Autodesk Maya 2016: Autodesk Official Press. 
+
+## Demo file 
+- GettingStarted2015LessonData/HumanIK/HIKSkeleton.mb You can download the Lesson data from [Autodesk.](https://knowledge.autodesk.com/support/maya/learn-explore/caas/simplecontent/content/maya-tutorials.html)
+
+## Goal
+- Understanding rigging.  
+- Understanding Human IK controls including building and editing skeletons and control rigs.  
+- Creating custom skeletons and riggings using Human IK. 
+
+<!-- - Rigging the skeleton with handles to more easily manipulate the joints.  --> 
+# Rigging and character set-up
+The character’s mechanics must be convincing to an audience and the skin and clothing
+must also move and bend properly. Maya includes a number of tools that help you
+manage the parts that make up a typical character. This process of preparing character
+controls is called ***rigging*** and is used to let the animator focus on the process of animating.
+A fully rigged character can be quite complex as it brings together skeleton joints, surfaces,
+deformers, expressions, Set Driven Key, constraints, IK, BlendShapes, etc.
+
+- [Example: Basic Character Animation by Tales of Nalstone](https://www.youtube.com/watch?v=3tyQpoZsAJ4)  
+
+### Control set-up
+![cs02](img/maya/kinematic/controll.png)
+
+### Control set-up for a walking man
+![kinect](img/maya/kinematic/kinematic.png)
+
+## HIK
+Human Inverse Kinematics (HIK) is used for full-body inverse kinematics. This system creates IK Handles that control an entire biped or quadruped skeleton rather than using multiple IK chains on individual limbs. 
+
+![hik01](img/maya/skinning/hik01.png)
+
+It is a powerful system capable of producing smooth animations quickly. In addition, the time it takes to set up a full-body IK skeleton is a fraction of the time needed to create your own rig. HIK is a plug-in, but it is loaded automatically by default.
+
+Perhaps the greatest strength of the HIK system is its ability to retarget animations from one character to another. Characters of different sizes and proportions can swap motions. 
+
+### Skeleton generator
+The HIK tools allow you to create a custom skeleton and rig or use the system’s Skeleton Generator. Bipedal or quadrupedal characters can be created, but all must be in a **T-pose** or **T-stance** looking toward **the positive z-axis**. The HIK system also requires a standard set of 15 bones. 
+
+![hik](img/maya/kinematic/comp_nodes_figure.png)
+
+
+### Character controls
+
+![hik05](img/lab/hik05.png)	
+
+The HIK system comes with a Character Controls panel that allows you to select the control handles of your character quickly and easily and to toggle among FK, IK, and full body IK. You can also click the encircled arrows to see exploded views of the hands and feet.
+
+Within the Character Controls panel is a row of icons located above the Skeleton, Definition, and Controls tabs. The first two icons allow you to toggle the **visibility** of the FK handles and bones. The next icon toggles the visibility of the full body skeleton. By default, this is turned off. Go ahead and choose the Show/Hide Skeleton icon to display the full-body skeleton. Since it appears under the FK bones, click the Show/Hide FK icon to turn the FK bones off.
+
+The next three icons—Full Body, Body Part, and Selection—control the **functionality** of the control handles on the character. Starting in reverse order, the Selection icon allows you to move a handle without having the bones follow along. The next, Body Part, treats the bones connected to the selected handle as an ordinary IK system. Choose this icon, and select the left wrist handle. You can select the wrist handle through a viewport or from the humanoid image within the Character Controls panel. Use the Move tool to see how it affects the skeleton. Use Undo to return the skeleton to its default position. Now select the Full Body icon, and move the wrist handle again. Notice the difference.
+
+## Related reference
+
+- [Prepare an existing skeleton for HumanIK](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-8D27BAFD-7785-4173-860E-515FEB2E9C98)  
+- [Create and define a HumanIK skeleton](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-795BDC06-8A1D-4D58-B55D-FD88D9B5A022)  
+- [Rigging Demo Reel by Hassan Bensmaine](http://www.cgmeetup.net/home/rigging-demo-reel-by-hassan-bensmaine/)  
+- [Free Maya rigs](http://www.cgmeetup.net/home/ultimate-rigs-maya-rigs-maya-character-rigs-free-maya-rigs/)  
+- [Rig a Fish in Maya](http://cgi.tutsplus.com/tutorials/rig-a-fish-in-maya--cms-20873)  
+- [Mery Rig – Free Maya Character Rig, Female Character rig](http://www.cgmeetup.net/home/mery-rig-free-maya-character-rig-female-character-rig/)  
+- [Basic Character Rigging](https://courses.cs.washington.edu/courses/cse460/05sp/links/Rigging/basic_character.html)
+
+----------------
+## Mixamo
+Mixamo develops and sells web-based services for 3D character animation. Mixamo's technologies use machine learning methods to automate the steps of the character animation process, including 3D modeling to rigging and 3D animation.
+
+This is where you can find an automated, finished character & animation:  
+
+- [Mixamo](https://www.mixamo.com/)
+
+</div>
+<div id="wrapper">
+	
+	<div class="header">
+		
+		<h1>DATT2501</h1>		
+		<a href="index.html">Overview</a><br/>
+		<a href="datt2501_ji.pdf">Syllabus</a><br/>	
+		<a href="due.html">Due dates</a><br/><br/>
+					
+		Tumblr process portfolio:<br/> <a href=http://2017datt2501.tumblr.com/>Lab 01</a>/ <a href=https://2017datt2501-2.tumblr.com/>Lab 02</a>/<a href=https://2017datt2501-03.tumblr.com/>Lab 03</a><br/><br/>
+				
+	    Week 1:<a href="lecture01.html"> lecture</a> /<a href="lab01.html"> lab</a> (<a href="due.html">ASGMT 1</a>)<br/>
+		Week 2:<a href="lecture02.html"> lecture</a> /<a href="lab02.html"> lab</a> (<a href="due.html">ASGMT 2</a>)<br/>
+		Week 3:<a href="lecture03.html"> lecture</a> /<a href="lab03.html"> lab</a> (<a href="due.html">Project 1</a>)<br/>  
+		Week 4:<a href="lecture04.html"> lecture</a> /<a href="lab04.html"> lab</a> (<a href="due.html">ASGMT 3</a>)<br/>
+		Week 5:<a href="lecture05.html"> lecture</a> /<a href="lab05.html"> lab</a> (<a href="due.html">ASGMT 4</a>)<br/>
+		Week 6:<a href="lecture06.html"> lecture</a> /<a href="lab06.html"> lab</a> (<a href="due.html">ASGMT 5</a>)<br/>
+		Reading week<br/><!--
+		Week 7:<a href="lecture07.html"> lecture</a> /<a href="lab08.html"> lab</a> (<a href="due.html">ASGMT 6</a>)<br/>
+		Week 8:<a href="lecture08.html"> Rigging I </a> (<a href="due.html">ASGMT 7</a>)<br/>
+		Week 9:<a href="lecture09.html"> Rigging II </a> (<a href="due.html">Project 2</a>)<br/>
+		Week 10:<a href="lecture10.html"> Walking I </a> (<a href="due.html">ASGMT 8</a>)<br/>
+		Week 11:<a href="lecture11.html"> Walking II</a> (<a href="due.html">ASGMT 9</a>)<br/>   
+		Week 12:<a href="lecture12.html"> Rendering </a> (<a href="due.html">Project 3</a>)<br/>  <br/>-->
+	
+	</div>
+	<div class="section">
+		<script type="text/javascript">
+		//var converter = new Markdown.Converter();
+		var converter = new Showdown.converter();
+		document.write(converter.makeHtml($('#sourcetext').text()));
+		</script>
+	</div>
+	
+	<div class="footer">Haru (HyunKyung) Ji, 2017</div>
+	
+</div>
+</body>
+</html>

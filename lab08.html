@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Introduction to 3D Animation</title>
+    
+<link href="css/site.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="css/highlight.default.css" media="screen" rel="stylesheet" type="text/css" />
+  
+<script src="js/jquery.js"></script>
+<script src="js/showdown.js" type="text/javascript"></script>
+
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+<body>
+<!--
+Write the markdown code below.
+A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
+
+Tumblr 
+https://www.tumblr.com/docs/en/custom_themes
+
+add dates:
+<i><small>{block:Date}{MonthNumberWithZero}/{DayOfMonthWithZero}/{ShortYear} {24HourWithZero}:{Minutes}{/block:Date} by {PostAuthorName}</small></i>
+
+under   <section class="post">
+-->
+
+<div style="display: none" id="sourcetext">
+
+# Week 8
+	1. Character rigging
+		- Foot controller I	  
+		- Foot controller II  
+		- Body/root controller
+		- The upper body rigging
+		- Finalising and testing	
+	
+## Review
+- Tumblr
+
+-----------------------
+## Let's draw controllers to rig.
+1. Foot controllers: foot, heel, toe
+2. Body controller
+3. Spine controller
+
+## Foot controller I
+1. Creating three IK handles (Leg, Foot, Toe) and naming them
+2. Leg controller - move the pivot positon of the controller into the heel position and parenting the leg IK handle to it. 
+3. Foot controller - move the pivot positon of the controller into the heel position then parent the foot IK handle as a child node. Then parent the Foot controller to the Leg controller.
+4. Toe controller - move the pivot positon of the controller into the ball position then parent the Toe IK handle as a child node. Then parent the heel controller to the Foot controller.
+
+## Foot controller II
+### 1. Draw CONTROL
+1. Draw, using EP curve tool, LEG_CONTOROL, FOOT\_CONTROL, TOE\_CONTROL, KNEE\_CONTROL on each side of the leg.
+2. Choose them, delete history and freeze transformation
+3. (Optional) Override color from Attribute editor, or you can use the layer editor to sort the curves. 
+
+### 2. Move pivot positions
+1. Move the pivot of LEG\_CONTROL and FOOT\_CONTROL to the bottom of heel in the foot geometry.
+	- We can use a Locator and Snap to points to make the position the same for both pivot locations. 
+2. Move the pivot of TOE\_CONTROL to the ball joint position.
+
+### 3. Create three IK handles
+The IK solver must be 'rotate plane' in the Attribute Editor. 
+ 
+1. LegIK: From hip to ankle joint.
+2. FootIK: From ankle to ball joint.
+3. ToeIK: From ball to toe joint.
+
+Properly name them.  
+
+### 4. Pole Vector constrain
+1. Choose KNEE\_CONTOROL and shift select LegIK and apply Constrain / Pole Vector constrain.  	
+	- Choose **CONTROL frist** and next choose **IK handle** 
+	- The location of KNEE\_CONTOROL should have enough space between the actual joint in order to prevent reverse folding.  
+	- We can lock all attributes except Translate X from Channel Box. 
+	
+	![rig_c](img/lab/rig_clean.png) 
+
+### 5. Parenting
+
+- Check the image below.
+
+![foot](img/lab/foot.png)  
+Foot controller set up from the class.
+
+1. Parent  ToeIK to TOE\_CONTROL  
+2. Parent  FootIK to FOOT\_CONTROL  
+3. Parent  LegIK to LEG\_CONTROL 
+ 
+4. Finally, parent TOE\_CONTROL, FOOT\_CONTROL, KNEE\_CONTOROL TO LEG\_CONTROL 
+
+### 6. Test and lock attributes
+Test point: When you control LFOOT\_CONTROL and TOE\_CONTROL, you can rotate heel and foot sticking to the ground.
+
+-------------------------- 
+
+## Body/root controller
+- Add a body controller to be able to move and rotate the center of the body without affecting foot motions.  
+- Use **orient** and **point** constrains; in the option box, turn on *maintain offset*.
+	
+### Choice order to apply constrains:
+- Orient - choose CONTROL frist and next choose **joint**  
+- Point - choose **joint** first and next CONTROL.  
+
+---------------------------
+## The upper body rigging
+### Spine controller using an expression
+
+![spine](img/maya/kinematic/spine.png)
+
+1. Create spine joints and properly group & rename them.
+2. Check the local axis (Component mode + ? button).
+3. Open the expression window (Window / Animation Editors / Expression Editor)
+4. Name the new expression and type someting like this:
+ 
+```
+spine1.rx=spineControl.ty * 2;    
+spine1.ry=spineControl.tx * 2 * -1;    
+spine1.rz=spineControl.tz * 2;    
+
+spine2.rx=spine1.rx * .75;    
+spine2.ry=spine1.ry * .75;    
+spine2.rz=spine1.rz * .75;
+
+spine3.rx=spine2.rx * .75;    
+spine3.ry=spine2.ry * .75;    
+spine3.rz=spine2.rz * .75;    
+```
+When you use the HIK skeleton:
+
+```
+Character1_Spine.rotateX=spine_control.translateZ * 2;    
+Character1_Spine.rotateY=spine_control.translateY * 2 * -1;    
+Character1_Spine.rotateZ=spine_control.translateX * 2 * -1;    
+
+Character1_Spine1.rotateX=Character1_Spine.rotateX * .75;    
+Character1_Spine1.rotateY=Character1_Spine.rotateY * .75;    
+Character1_Spine1.rotateZ=Character1_Spine.rotateZ * .75;
+
+Character1_Spine2.rotateX=Character1_Spine1.rotateX * .75;    
+Character1_Spine2.rotateY=Character1_Spine1.rotateY * .75;    
+Character1_Spine2.rotateZ=Character1_Spine1.rotateZ * .75;
+```
+Please test and modify it.
+
+### FK arm controller
+- If you have an IK handle, turn off the **IK blend to 0**.
+- Orientation: create a Shoulder control, an Elbow control, and a Wrist control and snap them to each joint. (delete history/freeze transformation). Shift select each control and each joint and apply **orient** constrain.  
+- Parent controllers. 
+
+To create a walking cycle, we need only FK arm control, you can ignore the IK art control part.
+
+#### IK arm setting
+- Create an IK controller and parent the IK handle as a child node. 
+- Turn on the IK blend to 1. You can control the arm's position using the IK handle.   
+- This time, shift select each joint and each controller and apply **point** constrains.  
+- Parent the controllers to the spine controller.
+
+### Head controller
+- Apply **orient** constrain between NECK_CONTROL and Neck joint.
+- Apply **point** constrain between Neck joint and NECK_CONTROL.
+- Parent it to the BODY_CONTROL. 
+
+## Organize outliner and create master node (locator)
+
+-----------------
+## Finalising and testing
+### Check out rigging basics
+
+- Freeze transformation
+- Deleting histories
+- Renaming
+- Proper parenting & grouping
+
+------------
+## Tutorial
+
+- Character Rigging in Maya from Lynda.com: if you have an account to the Toronto public library, you can have free access. First, you need to log in to the library website and then search its online database. 
+
+
+
+</div>
+<div id="wrapper">
+	
+	<div class="header">
+		
+		<h1>DATT2501</h1>		
+		<a href="index.html">Overview</a><br/>
+		<a href="datt2501_ji.pdf">Syllabus</a><br/>	
+		<a href="due.html">Due dates</a><br/><br/>
+					
+		Tumblr process portfolio:<br/> <a href=http://2017datt2501.tumblr.com/>Lab 01</a>/ <a href=https://2017datt2501-2.tumblr.com/>Lab 02</a>/<a href=https://2017datt2501-03.tumblr.com/>Lab 03</a><br/><br/>
+				
+	    Week 1:<a href="lecture01.html"> lecture</a> /<a href="lab01.html"> lab</a> (<a href="due.html">ASGMT 1</a>)<br/>
+		Week 2:<a href="lecture02.html"> lecture</a> /<a href="lab02.html"> lab</a> (<a href="due.html">ASGMT 2</a>)<br/>
+		Week 3:<a href="lecture03.html"> lecture</a> /<a href="lab03.html"> lab</a> (<a href="due.html">Project 1</a>)<br/>  
+		Week 4:<a href="lecture04.html"> lecture</a> /<a href="lab04.html"> lab</a> (<a href="due.html">ASGMT 3</a>)<br/>
+		Week 5:<a href="lecture05.html"> lecture</a> /<a href="lab05.html"> lab</a> (<a href="due.html">ASGMT 4</a>)<br/>
+		Week 6:<a href="lecture06.html"> lecture</a> /<a href="lab06.html"> lab</a> (<a href="due.html">ASGMT 5</a>)<br/>
+		Reading week<br/>
+		
+		Week 7:<a href="lecture07.html"> lecture</a> /<a href="lab07.html"> lab</a> (<a href="due.html">ASGMT 6</a>)<br/>
+		Week 8:<a href="lecture08.html"> lecture</a> /<a href="lab08.html"> lab</a> (<a href="due.html">Project 2</a>)<br/>
+		Week 9:<a href="lecture09.html"> lecture</a> /<a href="lab09.html"> lab</a> (<a href="due.html">ASGMT 7</a>)<br/><!--
+		Week 10:<a href="lecture10.html"> Walking I </a> (<a href="due.html">ASGMT 8</a>)<br/>
+		Week 11:<a href="lecture11.html"> Walking II</a> (<a href="due.html">ASGMT 9</a>)<br/>   
+		Week 12:<a href="lecture12.html"> Rendering </a> (<a href="due.html">Project 3</a>)<br/>  <br/>-->
+	
+	</div>
+	<div class="section">
+		<script type="text/javascript">
+		//var converter = new Markdown.Converter();
+		var converter = new Showdown.converter();
+		document.write(converter.makeHtml($('#sourcetext').text()));
+		</script>
+	</div>
+	
+	<div class="footer">Haru (HyunKyung) Ji, 2017</div>
+	
+</div>
+</body>
+</html>

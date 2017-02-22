@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Introduction to 3D Animation</title>
+    
+<link href="css/site.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="css/highlight.default.css" media="screen" rel="stylesheet" type="text/css" />
+  
+<script src="js/jquery.js"></script>
+<script src="js/showdown.js" type="text/javascript"></script>
+
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+<body>
+<!--
+Write the markdown code below.
+A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
+-->
+
+<div style="display: none" id="sourcetext">
+
+# Week 8: Character Rigging
+
+## References
+- [Maya 2016 online Help](http://help.autodesk.com/view/MAYAUL/2016/ENU//)
+- Art of Maya [pdf link](http://web.cse.ohio-state.edu/~parent/classes/682/MAYA/art_of_maya.pdf): P.57~61 : Character Animation 
+- Maya® Character Creation: Modeling and Animation Controls from [PEARSON](http://www.peachpit.com/articles/article.aspx?p=102022) 
+- 3D Animation Essentials, Maya ® Professional Tips and Techniques.
+
+## Goal
+- Setting up control curves and deformers
+- Connecting the curves to your skeleton
+
+___________________
+## Goal
+- Understanding and applying rigging.
+- Ultimately, creating rigs for an entire skeleton to using it to animate your character.
+___________________
+# Basics
+## Creating relations: attaching meshes to joints
+
+### Parenting
+Parenting a mesh to joints is probably the quickest way of checking if the underlying skeleton works as planned. This method works great with non-organic objects made up of multiple pieces, such as robots. They should ideally be grouped together in a logical construction and then be parented to the relevant joint. For organic characters, usually low-resolution, proxy characters will be created and segmented around the main joint points. It will have the exact same dimensions and volume as their final high-resolution equivalent. With this method, layout artists and animators can start blocking out the shots, while the final mesh and rig gets updated. 
+
+>### Character Resolution
+A fully rigged 3D character includes many bound
+surfaces and deformers that can slow down the
+interactive manipulation and playback of the scene.
+Therefore, a low resolution character that has
+surfaces parented to the skeleton makes it possible
+to work interactively while animating. You can then
+switch to the fully rigged character for rendering. A
+low resolution version of a character also makes it
+possible to begin animating before the entire
+character is fully developed.
+>
+>#### Example layout reel   
+>
+- [The very first Blue Umbrella Layout Reel, Vimeo](https://vimeo.com/81467189)  
+- [The Blue Umbrella, Youtube](https://www.youtube.com/watch?v=Ws54EoxJQU8)    
+The Blue Umbrella: a 2013 Pixar computer-animated short film that is directed by Saschka Unseld of Pixar's technical department. The short featured new techniques in photorealistic lighting, shading, and compositing. 
+
+
+### Constraints
+Similar to the parenting method described above, constraints are a system for allowing one object to control another object. Constraints can allow you to connect only the translation of one object to another or the rotation, scale, or even the surface of one object to another, keeping the hierarchies separated from each other.
+
+![con](img/maya/skinning/constrain.png)
+
+- **Parent constraint:** you can relate the pose—translation and rotation—of one object to another. An object’s movement can also be constrained by the average pose of multiple objects.
+
+- **Point constraint:** the translation of one object to another. This enables the artist to attach two or more objects together.
+
+- **Aim constraint:** the rotation of one object to aim or point at another object. This type of constraint is great for creating an eye-control system; the eyeball shape will always point at the controller so the animator can lock the eyes of a character on a specific object if needed.
+
+- **Orient constraint:** one object’s rotation to another object’s rotation. This enables the artist to attach the rotations of two or more objects. The orient constraint is different from a parent-child relationship. The orient constraint allows the constrained object to rotate on its own axis. In a parent-child relationship, the child rotates around the parent’s axis.
+
+- **Scale constraint:** one object’s scale to another object’s scale. In other words, the scale size of one object controls the scale size of one or more other objects.
+
+	![cns01](img/maya/kinematic/constrain.png)   
+	Comparison of *parent* and *orient* constrain.
+	
+#### Picking up animation using parent constraint	
+- [Basic Animation of passing a Box using Parent Constraint by mceyno89, 0:03](https://www.youtube.com/watch?v=zbc1QPJ_Svk)  
+- [Animating A Character Throwing a Ball in Autodesk Maya 2014 by Mr. H 25:36](https://www.youtube.com/watch?v=XII9aKbVXrg)
+
+------------------
+## Creating control handles
+Animators hardly ever manipulate and keyframe IK handles or joints directly, but define and use a rig as a number of control handles.
+
+### Naming
+The nodes for rigging become easily too complex, with numbers of joints in hierarchical relations with different controllers. In order to reduce confusion and mistakes, it is very important to name each node properly. For the parts of a symmetric body, use R or L in naming, preparing mirroring later.  
+
+### Freezing
+Modify / Freeze Transformations
+ 
+When you are creating controls for a rig, you want to freeze transformations on all controls after sizing and positining them correctly. This is to be sure that if an animator selects all of the controls and resets their transformations to zero, that the rig will be in its natural “start” position.
+
+### Deleting histories
+When you rig, it is better and safer make your nodes as simple as possible. 
+
+
+## Controller set-up
+
+![kinematic](img/maya/kinematic/kinematic.png)
+
+>### Curve controller
+- Create Curve controller
+	1. Draw using a primitive circle or CV curve tool with 1 linear curve degree in its options.   
+	2. Once done, delete its history.    
+	3. Place it at the right position with right size using the right workspace view. (The circle should be large enough to be easily selected but small enough to avoid overlapping other parts of the character.)     
+	4. Rename them.     
+	5. With the curve controller selected, apply **Modify / Freeze Transformations**.
+>
+- Make constraint relations
+	- Parent: choose the controller and Joint or IK node and Edit / Parent
+	- Other constraints 
+- Duplicate to the other side.
+
+
+## Character set-up
+### Organising data
+1. Enforcing a naming scheme.  
+2. Using layers: creating layers for the mesh, skeleton, and rig controllers respectively.  
+3. Applying a color scheme: you can assign controllers different color according to their positions (left, right, and center) using layer colors or changing colors in the Attribute editor / Drawing Overrides. 
+3. Properly grouping and parenting in the outliner and hypergraph. 
+4. Hiding or locking unused attributes.
+5. Restricting how each joint moves.
+
+![color](img/lab/bs02.png)
+
+---------------------------------
+
+## Building a skeleton
+
+You can use the skeleton generator or build a skeleton from scratch.
+<!--
+Building a skeleton is the process of placing and orienting joints to create a system with which you can pose a deformable object. --> 
+
+![build](img/maya/kinematic/build_sk.png)
+
+#### Related Maya help
+- [Prepare an existing skeleton for HumanIK](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-8D27BAFD-7785-4173-860E-515FEB2E9C98)  
+- [Create and define a HumanIK skeleton](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-795BDC06-8A1D-4D58-B55D-FD88D9B5A022)  
+
+### Example to build a lower-body skeleton from scratch
+#### Making
+1. **In the side view panel**, start to place a joint (Animation|Skeleton > Joint Tool). In the Outliner, **rename** the joint to *Root*. By placing joints in the side view panel, it is sitting at X = 0 in the middle of the character.  
+	It will be important that this *Root* joint has a very clean orientation that it isn’t oriented toward any particular joint and is set to be rotated at **0, 0, 0** in the world space. The Root joint will be right in the middle of the character.
+
+2. Still in the side View Panel, create five joints for the hip, knee, ankle, ball, and toe. This time when using the Joint Tool, simply click and release for the placement of each joint and hit the Enter key after creating the last joint. Label them.  
+	**Special note that the knee is bent.** If the hip, knee, and ankle are all in a straight vertical line, there will be problems later when we set up the IK rig. Place joints in the middle of the body or where the actual physical joint would be on a real person. However, for the ball and toe, place them where the ball and toe of the foot actually would touch the ground.
+
+![skl03](img/maya/kinematic/comp_aboutJointChain.png)
+
+
+#### Creating the spine and the arm skeleton
+
+![root](img/maya/kinematic/root.png)
+
+![sk01](img/lab/bs01.png) 
+
+
+--------------------------------------------
+
+## Orienting joint chains
+
+To see the joint orientations in the object mode:
+
+1. Click on the root joint in the chain.  
+2. Then select Edit > Select Hierarchy. Once all the joints are selected, select Display > Transform Display > Local Rotation Axes. This will display the actual orientations of the axes on the selected joints. 
+3. You can use Animation | Skeleton > Orient Joint (Options) to change its orientation values.
+
+![cs04](img/maya/kinematic/newfirstLeg.png), ![cs05](img/maya/kinematic/newleg.png)  
+  
+Displaying local axis of leg joint chains.
+
+![rv03](img/maya/rendering/rev/armla.png)
+Displaying local axis of arm joint chains.
+
+--------------------------------------------
+
+## Modifying joints
+In the attribute editor, you will mainly be modifying the following attributes for setting up joints:  
+
+1. Joint/Degrees of Freedom: to specify the kind of joint. * See the image below. 
+2. Joint Labelling: to let Maya know which joint it is, for example in order to connect with motion capture data.
+3. Limit Information: specifing the value for the movement of each joint.  
+
+-------------------
+
+## Skeleton and joints
+### Anatomical joint types in Maya
+#### Ball joint
+A ball joint is a joint that can rotate about all three of its local axes. For example, the human shoulder is a ball joint.
+
+#### Universal joint
+A universal joint is a joint that can rotate about only two of its local axes. The human wrist is a good example of a universal joint, though the wrist has limitations on the extent it can rotate.
+
+#### Hinge joint
+A hinge joint is a joint that can rotate about only one of its local axes. For example, the human knee is a hinge joint.
+
+![sa01](img/maya/kinematic/anatomy.png)![sa02](img/maya/kinematic/joints.png)
+
+The abobe: The two main kinds of joints in the human body: ball and hinge joints 
+
+
+![joint](img/maya/kinematic/joints01.jpg)  
+The abobe: Illustration from Anatomy & Physiology. CC BY 3.0.  
+
+
+![joint1](img/maya/kinematic/Gelenke_Zeichnung01.jpg)  
+
+The abobe: Joints 1 Ball-and-Socket-Joint 2 Ellipsoid Joint 3 Saddle Joint 4 Hinge Joint 5 Pivot Joint. CC BY-SA 3.0.
+
+
+
+### Transformation
+![trans](img/maya/kinematic/space.png)
+
+***World Space*** manipulates an object with an axis of the same orientations as the world, regardless of the hierarchy. ***Local Space*** is an alignment of the transform axis to the parent of the object. The transform channels of a node (rotate, translate, scale) are all stored in local space. ***Object Space*** is the result of an object's transform in addition to the hierarchy above it. 
+
+***Gimbal Space*** is a breakdown of local space rotations. It displays each axis separately, showing you each rotation channel's actual orientation, rather that the accumulation of them as is shown in local space. 
+
+***Gimbal lock*** is the loss of one degree of freedom in a three-dimensional, three-gimbal mechanism that occurs when the axes of two of the three gimbals are driven into a parallel configuration, "locking" the system into rotation in a degenerate two-dimensional space.  
+The word lock is misleading: no gimbal is restrained. All three gimbals can still rotate freely about their respective axes of suspension. Nevertheless, because of the parallel orientation of two of the gimbals axes there is no gimbal available to accommodate rotation along one axis. [Gimbal lock, wikipedia.](http://en.wikipedia.org/wiki/Gimbal_lock)
+
+## Review
+
+A ***Hierarchy*** is a relationship of nodes to other nodes described in terms of perent. child, and sibling. By default, a child node will inherit what is done to its parent node, transforming along with it and maintaining the same spatial relationship.
+
+### Pivot Positions
+The pivot position, or pivot point, is the location an object rotates around. In 3D animation, the pivot point is also the position from which the other manipulators will move or scale the object. Setting the correct position of the pivot to create the proper point of manipulation is important in creating a rig.
+
+#### How to change the position of pivot
+In Window, using **Insert** key.    
+In Mac, using **fn + left arrow** key.
+Or you can change it while pressing 'd' key.
+
+### Setting up IK
+
+![sa04](img/maya/kinematic/ik.png)  
+Leg joint chains with IK handle. You can change the hierarchical order using the MM button.
+
+- In the IK Handle option box, choose Rotate-Plane Solver and commit IK Handle command.
+
+![cs06](img/maya/kinematic/ikhandle_rotate.png)  
+The difference between Rotate-Plane solver and Single-Plane solver is how your can control the rotation of a middle joint. 
+
+
+### Mirror joints
+Animation | Skeleton > Mirror Joint (Options). 
+Change the Mirror across setting to *YZ* and change *Search for:* Left and *Replace with:* Right.
+
+### Naming
+
+Naming is very important. If we effectively name one side of the skeleton we are creating, when we mirror it later, Maya will do some quick and effective renaming for us that will include replacing all the Left with Right.
+
+### Orient check up
+
+Sometimes the mirror will not properly applied for the local axis rotating direction. In this case, apply orient joint to fix.
+
+
+
+
+</div>
+<div id="wrapper">
+	
+	<div class="header">
+		
+		<h1>DATT2501</h1>		
+		<a href="index.html">Overview</a><br/>
+		<a href="datt2501_ji.pdf">Syllabus</a><br/>	
+		<a href="due.html">Due dates</a><br/><br/>
+					
+		Tumblr process portfolio:<br/> <a href=http://2017datt2501.tumblr.com/>Lab 01</a>/ <a href=https://2017datt2501-2.tumblr.com/>Lab 02</a>/<a href=https://2017datt2501-03.tumblr.com/>Lab 03</a><br/><br/>
+				
+	    Week 1:<a href="lecture01.html"> lecture</a> /<a href="lab01.html"> lab</a> (<a href="due.html">ASGMT 1</a>)<br/>
+		Week 2:<a href="lecture02.html"> lecture</a> /<a href="lab02.html"> lab</a> (<a href="due.html">ASGMT 2</a>)<br/>
+		Week 3:<a href="lecture03.html"> lecture</a> /<a href="lab03.html"> lab</a> (<a href="due.html">Project 1</a>)<br/>  
+		Week 4:<a href="lecture04.html"> lecture</a> /<a href="lab04.html"> lab</a> (<a href="due.html">ASGMT 3</a>)<br/>
+		Week 5:<a href="lecture05.html"> lecture</a> /<a href="lab05.html"> lab</a> (<a href="due.html">ASGMT 4</a>)<br/>
+		Week 6:<a href="lecture06.html"> lecture</a> /<a href="lab06.html"> lab</a> (<a href="due.html">ASGMT 5</a>)<br/>
+		Reading week<br/>
+		Week 7:<a href="lecture07.html"> lecture</a> /<a href="lab07.html"> lab</a> (<a href="due.html">ASGMT 6</a>)<br/><!--
+		Week 8:<a href="lecture08.html"> Rigging I </a> (<a href="due.html">ASGMT 7</a>)<br/>
+		Week 9:<a href="lecture09.html"> Rigging II </a> (<a href="due.html">Project 2</a>)<br/>
+		Week 10:<a href="lecture10.html"> Walking I </a> (<a href="due.html">ASGMT 8</a>)<br/>
+		Week 11:<a href="lecture11.html"> Walking II</a> (<a href="due.html">ASGMT 9</a>)<br/>   
+		Week 12:<a href="lecture12.html"> Rendering </a> (<a href="due.html">Project 3</a>)<br/>  <br/>-->
+	
+	</div>
+	<div class="section">
+		<script type="text/javascript">
+		//var converter = new Markdown.Converter();
+		var converter = new Showdown.converter();
+		document.write(converter.makeHtml($('#sourcetext').text()));
+		</script>
+	</div>
+	
+	<div class="footer">Haru (HyunKyung) Ji, 2017</div>
+	
+</div>
+</body>
+</html>

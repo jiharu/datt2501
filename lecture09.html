@@ -24,17 +24,15 @@ A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
 
 ## References
 - [Maya 2016 online Help](http://help.autodesk.com/view/MAYAUL/2016/ENU//)
-- Art of Maya [pdf link](http://web.cse.ohio-state.edu/~parent/classes/682/MAYA/art_of_maya.pdf): P.57~61 : Character Animation 
+- Art of Maya [pdf link](http://web.cse.ohio-state.edu/~parent/classes/682/MAYA/art_of_maya.pdf): P.75~79 : Rendering 
 
 ## Goal
-- Completing walking cycle.  
-- Improve quality and expression.
+- Completing a walking cycle.  
+- Improving the quality and expression of your project.
 
 # Batch render 
 Rendering is where all of the work in setting up models, textures, lights, cameras
-and effects comes together into a final sequence of images. The **Batch Renderer (Rendering // Render / Batch Render)** is to render your animation. It can also be launched from a Command Line terminal.
-
-
+and effects comes together into a final sequence of images. The **Batch Renderer (Rendering // Render / Batch Render)** is used to render your animation. It can also be launched from a Command Line terminal.
 
 ![render00](img/maya/rendering/br.png)
 
@@ -42,8 +40,8 @@ and effects comes together into a final sequence of images. The **Batch Renderer
 [Batch renders from within Maya](https://knowledge.autodesk.com/support/maya/learn-explore/caas/CloudHelp/cloudhelp/2016/ENU/Maya/files/GUID-B9968102-631F-44C4-B497-90A48C88B53A-htm.html)
 
 ## Hardware & software rendering
-- Hardware rendering (using **Playblast**): shading, texturing, and lighting use the computer’s graphics hardware to display objects on the screen.  
-- Software rendering (using **Batch render**) can be slower than hardware rendering, however the added functionality lets you achieve more sophisticated results. This is because software companies can add functionality by changing algorithms in the code without being restricted by the graphics hardware. 
+- Hardware rendering (e.g., using **Playblast**): shading, texturing, and lighting use the computer’s graphics hardware to display objects on the screen.  
+- Software rendering (e.g., using **Batch render**) can be slower than hardware rendering, however the added functionality lets you achieve more sophisticated results. This is because software companies can add functionality by changing algorithms in the code without being restricted by the graphics hardware. 
 
 ## Frame vs field (interlaced)
 
@@ -68,7 +66,7 @@ and effects comes together into a final sequence of images. The **Batch Renderer
 
 	![render01](img/maya/rendering/getfile.jpeg)
 	
-	- Image size and aspect ration in the render Settings window.
+	- Image size and aspect ratio in the render Settings window.
 	
 		- Image size: the number of pixels on the horizontal axis by the number of pixels on the vertical axis. 
 		- Resolution: how many pixels fit within an inch. (Computer screen resolution vs. Print resolution)
@@ -120,15 +118,74 @@ A bitmap image uses pixels (colored squares) arranged in a grid to describe the 
 Maya's image/image sequence viewer. It comes with your installation with Maya.
 
 ### To launch FCheck
-- You can find it in the folder of Autodesk Mayain the Application (Mac) or Programs (Window) folder.
+- You can find it in the folder of Autodesk Maya in the Applications (Mac) or Programs (Windows) folder.
 
 ![render03](img/maya/rendering/fch.png)
 
 - You can make image sequences into a single movie file using Fcheck on Mac OS. However on Windows, you will need to use a different application.
 
-
-
 --------------------
+## Infinite cycle 
+
+**Cycle animation:** Use Maya's Pre and Post Infinity curve types to determine how to cycle animation before your first and after your last keyframe.   
+
+In the Graph Editor, turn on the View/Infinity and check Curves/Post Infinity/Cycle or Cycle with Offset. To turn off you can choose Constant instead of Cycle.
+
+ ![wc02](img/maya/rendering/if.png)
+ ![wc03](img/maya/rendering/ifp.png)
+	
+------------------------	
+## Sound
+
+Import Sound (Animation > Animation Basics > [Add audio to your animation](http://help.autodesk.com/view/MAYAUL/2016/ENU//?guid=GUID-9D69DD33-CAEB-4FB9-9559-67984E9ABC2A))
+
+![snd](img/maya/kinematic/sound.png)
+
+To load an audio file into your scene, do one of the following:
+
+1. Select File / Import. A file browser lets you select the name of the sound file(s) to import.
+2. Drag the file(s) from a file browser into one of the Maya modeling views, or onto the Time Slider.  
+3. You can open the attribute editor of the sound from the time slide.
+
+![snd](img/lab/sound.png)
+
+
+
+--------------------------------
+
+## Trax Editor (Window / Animation Editors / Trax Editor)
+You can import, export, copy, and paste animation clips and arrange them in a window to do nonlinear animation. 
+
+This view is analogous to video-editing software; layers of clips can be arranged as well, and the resulting animation will be added together.
+
+![trax](img/maya/kinematic/trax.png)
+
+------------
+## Visualizing
+### Animation / Visualize
+- [Maya help: Visualize menu](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-8363B4BF-6BD6-4385-ABCD-6293DBDB1B2E)  
+- Create Turntable
+	- You can add a turntable camera named turntableCamera to your scene. This camera generates a turntable animation.  
+	- [Turntable animation](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-F5171AFE-7B64-44F8-80A8-D7D2253E31D6)  
+
+- Create Editable Motion Trail
+	- Creates a motion trail for the current object. 
+
+- Ghost
+	- Select Visualize > Ghost Selected >  to set the Ghost Selected Options.
+
+- Snapshot
+	- Create Animation Snapshot
+	- Create Animated Sweep
+	
+----------------------------		
+	
+## Adding sun and sky to your scene	
+
+![sky](img/maya/rendering/sky.png)
+
+- [Maya help: physical sun and sky](https://knowledge.autodesk.com/support/maya/learn-explore/caas/CloudHelp/cloudhelp/2016/ENU/Maya/files/GUID-DBE14B41-02D8-4B23-A525-1FD0FAEB5F82-htm.html)    
+	- If you use Maya 2017, check out the Arnold for Maya user guide about [Physical Sun](https://support.solidangle.com/display/AFMUG/Physical+Sky) from SolidAngle.
 
 
 
@@ -152,8 +209,8 @@ Maya's image/image sequence viewer. It comes with your installation with Maya.
 		Week 6:<a href="lecture06.html"> lecture</a> /<a href="lab06.html"> lab</a> (<a href="due.html">ASGMT 5</a>)<br/>
 		Reading week<br/>
 		Week 7:<a href="lecture07.html"> lecture</a> /<a href="lab07.html"> lab</a> (<a href="due.html">ASGMT 6</a>)<br/>
-		Week 8:<a href="lecture08.html"> Rigging I </a> (<a href="due.html">ASGMT 7</a>)<br/>
-		Week 9:<a href="lecture09.html"> Rigging II </a> (<a href="due.html">Project 2</a>)<br/><!--
+		Week 8:<a href="lecture08.html"> lecture</a> /<a href="lab08.html"> lab</a> (<a href="due.html">ASGMT 7</a>)<br/>
+		Week 9:<a href="lecture09.html"> lecture</a> /<a href="lab09.html"> lab</a> (<a href="due.html">Project 2</a>)<br/><!--
 		Week 10:<a href="lecture10.html"> Walking I </a> (<a href="due.html">ASGMT 8</a>)<br/>
 		Week 11:<a href="lecture11.html"> Walking II</a> (<a href="due.html">ASGMT 9</a>)<br/>   
 		Week 12:<a href="lecture12.html"> Rendering </a> (<a href="due.html">Project 3</a>)<br/>  <br/>-->

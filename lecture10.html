@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Introduction to 3D Animation</title>
+    
+<link href="css/site.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="css/highlight.default.css" media="screen" rel="stylesheet" type="text/css" />
+  
+<script src="js/jquery.js"></script>
+<script src="js/showdown.js" type="text/javascript"></script>
+
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+<body>
+<!--
+Write the markdown code below.
+A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
+-->
+
+<div style="display: none" id="sourcetext">
+
+# Week 10: Animation Techniques
+
+## References
+- [Maya 2016 online Help](http://help.autodesk.com/view/MAYAUL/2016/ENU//)
+- Art of Maya [pdf link](http://web.cse.ohio-state.edu/~parent/classes/682/MAYA/art_of_maya.pdf): P.35~38 : Animation techniques 
+
+![concen](img/con.png)   
+The Animator’s Survival Kit by Richard Williams. The first lesson: concentration!
+
+- [theanimatorssurvivalki.com](http://www.theanimatorssurvivalkit.com/biography.html)
+- [blog 1](https://yckcyouth.wordpress.com/2011/06/01/god-is-pure-concentrationanimation-is-second/)  
+- [blog 2](http://blog.ishback.com/?p=468)
+
+"There is no particular mystery in animation.., it's really very simple, and
+like anything that is simple, it is about the hardest thing in the world to
+do." Bill Tytla at the Walt Disney Studio, June 28, 1937. [14] 
+
+___________________
+
+# Animation in Maya
+Art of Maya p. 35~38.
+>When 3D artists animate, they paint with motion instead of color. As an object
+moves, rotates or changes shape over time, it is being animated.
+>There are a number of tools for creating motion in Maya. In some
+cases, 3D artists will animate all the parts of an object separately. In other cases,
+they use higher level controls to help streamline their workflow.
+
+In Maya, there are a number of ways to animate an object.
+Using a bouncing ball as a common example, it is possible to explore
+the different animation techniques available. In a real project,
+you will most often combine several of these techniques to achieve the
+best results.
+
+## Setting Keys
+Setting keys (or keyframing) is the most fundamental technique for animating on a computer. This technique involves recording attribute values as keys for one or more objects at particular points in time. As you set multiple keys, you can play back the scene to see your object animated. 
+Setting keys gives you a great deal of control over timing. When you animate using keys, you generate animation curves that plot the key values against time. These curves are great tools for analyzing and editing the motion of an object. Other animation techniques are usually combined with some keyframing. Most animation you do in Maya will involve some form of setting keys.
+
+Terms: Keying Attributes, Secondary Motion, Hierarchical Animation, Animation Curves
+
+## Motion Path Animation
+(Motion) Path animation involves attaching the object to a curve where points on the path are used to determine where the object will be at particular points in time. It is easy to understand the way an object moves around in 3D space through a path, since its curve clearly depicts where the object is going.
+
+## Set Driven Key
+Set Driven Key allows you to control or "drive," the value of one attribute with another attribute. The
+relationship between the two attributes is defined by an animation curve. The driving attribute can be used to drive multiple other attributes. For example, the rotation of an elbow joint could drive a bulging bicep muscle and the wrinkling of a sleeve.
+Custom attributes can be added to a control node, then connected to other attributes in the scene using Set Driven Key. This creates centralized controls.
+
+## Non-linear Animation
+Non-linear animation uses animation clips that contain keyframed motion. These clips can be cycled and blended with other clips in the Maya Trax Editor. For a bouncing ball, a single bounce clip could be cycled, then blended with a clip of the ball rolling. These clips can be moved, scaled, cycled and blended. You can also add and subtract clips from the Trax Editor to quickly explore different animation options.
+
+### Trax editor
+Apart from being the best place to import and manipulate audio, the trax editor was built to load animation “clips” onto character sets. This can be very fun and intuitive.
+Manipulating clips is kind of like “mixing” animation. You can create a library of clips and mix and match the animation to create entire performances, or, perhaps more usually, multiple permutations of background animation. 
+
+## Expressions & MEL
+Another way of animating object attributes is through expressions. Expressions can be mathematical equations, conditional statements or MEL commands that define the value of a given attribute. Expressions are evaluated on every frame. You can animate using an expression when you have a mathematical relationship that you want to achieve. In the case below, the absolute value of a sine wave creates the bounce of the ball.
+
+
+## Dynamic Simulation
+To animate a ball that is bouncing off a series of objects or against a non-flat terrain, a dynamics simulation is required for the most realistic results. The ball can be turned into a rigid body that is propelled forward using dynamic attributes. Forces such as gravity or wind can then be applied to the ball to bring it to the ground. Objects in the scene can also be turned into rigid bodies so the ball will collide with them. If they are passive, they will not be affected by the collision. If they are Active Rigid Bodies, they will move as the ball hits them. In the end, the simulation can be baked to turn the motion into keys.
+
+## Motion Capture 
+
+- [mocapdata.com](http://mocapdata.com/)  
+mocapdata.com provides 933 premium and 4671 free motion datasets and is advertised as 'the world biggest state of the art motion capture library on the earth.'
+- [turbosquid.com](http://www.turbosquid.com/Search/Motion-Capture/free/fbx)  
+ TurboSquid provides 3D assets including 3D models. You can find free 3D models as well as free motion capture FBX data that can be imported to Maya. 
+ 
+## Deformation, Blend Shape 
+
+Blend Shapes are essentially copies of your main character geometry with specific, focused changes to a small part of the geometry. e.g., facial expressions.
+
+- [Non-linear deformer](https://www.youtube.com/watch?v=tI2zSsKGmQM)
+- [Lattice Deformer](https://www.youtube.com/watch?v=jviQSB6quJY)  
+- [Creating and Animating Facial Blendshapes by Andrew Silke](https://www.youtube.com/watch?v=YpBsWuPvbFo)
+
+![bs](img/maya/deformer/blendshape.png)
+
+
+
+
+<!--
+- Getting Started in 3D with Maya, 2012
+- Creating Visual Effects in Maya, Focal Press, 2014
+
+## Brief history 
+Maya began as part of Alias Research, Inc. that ironically was first developed for the Mac. The code was ported to IRIX (the porting process was code named Maya) and joined to Wavefront Technologies, Inc., upcoming 3D technology. Silicon Graphics, Inc., which at the time was really a player, was battling it out with Microsoft, which had just acquired a rival high-end product, SoftImage.
+
+Maya then only ran on SGI IRIX machines, which is where most old timers first encountered Maya. The first time I used Maya was on an IRIX box on a Silicon Graphics Octane machine, which (at the time) was stunningly expensive. The Octane was many thousands of dollars, and Maya was charging a per-seat license that was thousands of dollars per year. Our lab had three machines and three licenses, and the budget was well over $ 100,000.
+
+Early in its life cycle, Maya made some stunning market expansions. Maya 1.0 was released in 1998 (then usually referred to as Alias|Wavefront Maya) and quickly won high-profile clients such as Industrial Light and Magic and Tippet studios from SoftImage. By the way, SoftImage after freeing itself from Microsoft has made a real resurgence and has some really amazing technologies. Ironically, it too has recently been acquired by Autodesk — and thus is now the step-cousin of Maya, which was acquired by Autodesk in 2005.
+
+Since 1998, Maya has been through many iterations and some confusing “Complete” and “Unlimited” editions. It made its way to Windows and into a Mac OSX version. Now, it has settled into a single version and is released as an updated version nearly every summer. Nowadays, Maya is not versioned by number, but by year — Maya 2012 is the current version as of this writing.
+
+## What Maya is
+Maya aims to be a one-stop shop, and indeed, it is an incredibly robust, powerful, flexible, customizable, expanding, and complicated tool. Most any emerging tool in 3D — from particles, to cloth, to hair, to fluids, to motion tracking — finds an early iteration in Maya. Maya is very quick to develop and exploit new techniques and ideas.
+Now sometimes, this move to be on the bleeding edge can be a problem. Yeah, fluid effects are awesome — but it can be pretty hard to use for the uninitiated and takes a huge amount of development horsepower for Maya developers. And at the end of the day, how many projects really use fluid — or need realistically rendered fluid effects? In the past, this has meant that as Maya has chased the newest big things, old things like modeling tools have remained in very static forms as other competing softwares (who aren’t necessarily chasing the absolute latest technology) refined their core modeling, texturing, and animation tools. For a while there, this was of great frustration as Maya showed new cloth simulations but still had modeling tools that were 10 years old, and indeed, many animators and animation houses found that supplementing Maya’s tools with other more specialized tools was a good thing.
+Luckily, especially since their Autodesk acquisition, Maya has made some good progress in continuing to evolve their core tool sets. It is this set of core tools (modeling, texturing, animation, and rendering) that is the basis of all 3D projects and the technology we will be exploring through this volume.
+So, for our purposes, Maya is a 3D-production tool that allows us to model forms, texture them to indicate surface qualities, animate those forms, and render out the frames to sequential stills. Note that it is not a game engine (you can’t really export a game from Maya). However, Maya allows for assets (including animated assets) to be exported in a variety of formats that can then be imported into various game engines and made interactive.
+
+## What you need to run it
+
+In its evolution, Maya moved from IRIX to Windows, where of course its potential customer base increased dramatically (SGI machines were always powerful but expensive). More recently, it has also found a home on Mac OSX. Increasingly, the hardware required to run Maya has become available to the masses — regardless of your OS persuasion. One of the things I really like about Maya is that its cross-platform nature is pretty flawless. Generally, the keyboard shortcuts are even the same between Macs and PCs. Files generally flow quite well from one platform to the other (although sometimes there are some strange inconsequential error messages that show up). I will frequently work with a student who worked on a Mac at home, worked on the project in class on a PC, sent it to me where I worked with it on my PC at home and continued working with it on my MacBook Pro at school the next day, only to pass it back to the student on a PC. Few problems arise. In fact, over the course of this book, some tutorials will be written using Maya 2012 for Mac and some with Maya 2012 for PC.
+Having said that, hardware matters, although not in the ways you may think. At its core, hardware (for our needs) includes a) processor b) memory c) video card d) hard drive, and e) monitor.
+
+## How Maya works
+So Maya is robust. Maya is flexible. Part of the reason it’s accumulated this reputation is due to its nodal structure. This is a little different than how most 3D software works — shoot, it’s different than how most any software works.
+Here’s the idea: when you do things in Maya, you essentially create a node. Maya keeps track of these nodes in something called History. What this means is that an object will build up a collection of nodes that can just be thought of as a collection of instructions. So here’s where it gets interesting. In most applications, let’s say five things were done to an object. If there was a mistake in Step 2, it can be undone by using the Undo function to go back to that step. However, to get back to the state of things where they were earlier, the next three steps have to be done again.
+In Maya, these five steps are all indicated by nodes that are accessible via the Channels Box and Attribute Editor. By selecting one of these nodes, the parameters of that node become accessible and editable. When changed, Maya automatically uses the new information in that node to recalculate all the rest of the nodes attached — it recalculates all the other instructions that are “downstream” of the instruction just altered.
+Indeed, this is a powerful idea, but has a few restrictions. Objects collecting these nodes — collecting this history — can slow Maya down. Every change the user makes essentially causes Maya to relook at everything it’s done to the object and redo it again.
+It also means that things have to happen pretty linearly in many cases. For instance, if a model is done and then rigged and skinned, so that there are joints deforming the mesh, and then the UV map is altered (thus changing how the texture is applied to the surface), Maya distorts the model first (as per the joints) and then applies the texture (as per the UV map), but the UVs at this point are no longer in the same place as when they were applied (they’ve been deformed by the joints). What this means is that the texture crawls across the form and doesn’t stay where it was intended to be.
+Now, both of these examples are solvable. Maya allows models to be worked on without saving the History. Further, even if the History is saved through the process, if things get slow, the History can be deleted. In the joints/UV example, recent versions of Maya allow for “Non-Deformer History” to be deleted — essentially allowing changes like UV map adjustments to no longer be dynamically calculated which means the texture won’t crawl across the surface as it is deformed.
+The core idea here is to remember this nodal structure as we will be referring to it often through the coming tutorials. It’s central to Maya’s design and, like any powerful tool, when used correctly can be intensely useful or amazingly problematic if not considered.
+
+## What Maya do
+
+### An Overview of Visual Effects
+Visual effects is imagery created or adjusted for a film or video that cannot be obtained during a live-action, real-world shoot. The current visual effects industry creates such imagery, with the majority of the work produced digitally through 3D animation programs, such as Autodesk Maya, and 2D compositing programs, such as Autodesk Composite. The industry produces visual effects for theatrical motion pictures, television programs, television commercials, and various on-demand online content.
+In a broader sense, visual effects refers to digitally-created special effects that recreate natural phenomena that are too complex for standard 3D modeling, rigging, animation, and rendering techniques. Such phenomena might include the flash flood of a valley, the explosive collapse of a building, the eruption of a super-volcano, the plying of an ancient ship on stormy seas, or an angry swarm of giant insects. These effects might appear in a live-action feature film, a 2D or 3D animated feature film, an independent short film, a scientific visualization, or a cross platform video-game.
+Hence, this book will tackle visual effects in two forms: visual effects designed to stay within Maya and visual effects intended to be integrated with live-action footage. The first seven chapters include three tutorials that introduce you to the majority of Maya’s visual effects tools. The effects are applied to pre-built 3D scenes and are not exported. In contrast, the last three chapters cover a single tutorial that creates visual effects within Maya for the purpose of exportation and compositing with video footage.
+
+Many of the visual effects created in this book are time-intensive—they either slow down the interactive playback of the timeline or they take a significantly long time to render. Here are some steps you can take to make sure your work flow is efficient:
+Alter the render resolution. Start with a small resolution, such as 640×360, and work your way up to larger resolutions, such 1280×720 or 1920×1080.
+Render small regions when testing. Use the Render Region function in the Render View. (Click drag a red marquee box in the Render View render area and click the Render Region button.)
+Temporarily lower the render quality. With Maya Software, change the Edge Anti-Aliasing menu to different quality presets. With mental ray, alter the attribute settings within the Sampling section of the Quality tab (Maya 2014) or change the Quality Presets menu at the top of the Quality tab (Maya 2013 and earlier). Raise the render quality once the visual effects have been adjusted.
+Temporarily hide unwanted objects. Alternatively, create display or render layers to divide the objects among layers that you can turn on or off. Render layers are discussed in Chapters 1, 2, and 10.
+Create Playblast movies (Window > Playblast) when the timeline playback is slow.
+Employ Dynamics or nDynamics caches. Caches save the motion of objects, such as nParticles, in memory. When a simulation is cached, you can play the timeline in reverse or start the playback on a late frame. Caches are discussed in Chapter 10.
+When working with Dynamics and nDynamics systems, reduce the number of dynamic items. For example, try to work with fewer nCloth objects, particles, or Fluid Effects container voxels. Many Dynamics and nDynamics components have their own quality settings. Start with low-quality settings and work your way up to high-quality. These settings are discussed throughout this book.
+Although these techniques are mentioned when they are the most critical to efficiency, feel free to apply them at any time.
+_________________
+
+## Inspiration
+- Notgames:     
+	- [Minecraft](http://www.youtube.com/watch?v=FaMTedT6P0I)    
+	- [BOKITA](http://www.youtube.com/watch?feature=player_embedded&v=9wJevMZm0Os)    
+	- [Trip](http://www.youtube.com/watch?v=88zN-CYLWvM), [(blog)](http://www.blog.radiator.debacle.us/2012/06/trip-crazy-psychedelic-first-person.html)    
+	- [Dumpy](http://www.dumpygame.com/media/index.html)
+
+- -->
+_____________________
+## Inspiration
+### Animatics  
+An animatic is a film industry term referring to a rough animation designed to help plan a shot, like a moving storyboard. Typically, models in an animatic are very low resolution and untextured with simple lighting. Animatics are used to plan both computer-generated (CG) and live-action shots. Camera work, timing, and the composition of elements within the frame are the most important aspects of an animatic.
+
+- ['The Grand Budapest Hotel' Storyboard Animatics](https://www.youtube.com/watch?v=rxqp2msGOhQ)
+
+
+</div>
+<div id="wrapper">
+	
+	<div class="header">
+		
+		<h1>DATT2501</h1>		
+		<a href="index.html">Overview</a><br/>
+		<a href="datt2501_ji.pdf">Syllabus</a><br/>	
+		<a href="due.html">Due dates</a><br/><br/>
+					
+		Tumblr process portfolio:<br/> <a href=http://2017datt2501.tumblr.com/>Lab 01</a>/ <a href=https://2017datt2501-2.tumblr.com/>Lab 02</a>/<a href=https://2017datt2501-03.tumblr.com/>Lab 03</a><br/><br/>
+				
+	    Week 1:<a href="lecture01.html"> lecture</a> /<a href="lab01.html"> lab</a> (<a href="due.html">ASGMT 1</a>)<br/>
+		Week 2:<a href="lecture02.html"> lecture</a> /<a href="lab02.html"> lab</a> (<a href="due.html">ASGMT 2</a>)<br/>
+		Week 3:<a href="lecture03.html"> lecture</a> /<a href="lab03.html"> lab</a> (<a href="due.html">Project 1</a>)<br/>  
+		Week 4:<a href="lecture04.html"> lecture</a> /<a href="lab04.html"> lab</a> (<a href="due.html">ASGMT 3</a>)<br/>
+		Week 5:<a href="lecture05.html"> lecture</a> /<a href="lab05.html"> lab</a> (<a href="due.html">ASGMT 4</a>)<br/>
+		Week 6:<a href="lecture06.html"> lecture</a> /<a href="lab06.html"> lab</a> (<a href="due.html">ASGMT 5</a>)<br/>
+		Reading week<br/>
+		
+		Week 7:<a href="lecture07.html"> lecture</a> /<a href="lab07.html"> lab</a> (<a href="due.html">ASGMT 6</a>)<br/>
+		Week 8:<a href="lecture08.html"> lecture</a> /<a href="lab08.html"> lab</a> (<a href="due.html">ASGMT 7</a>)<br/>
+		Week 9:<a href="lecture09.html"> lecture</a> /<a href="lab09.html"> lab</a> (<a href="due.html">Project 2</a>)<br/>
+		Week 10:<a href="lecture10.html"> lecture</a> /<a href="lab10.html"> lab</a> (<a href="due.html">ASGMT 8</a>)<br/><!--
+		Week 11:<a href="lecture11.html"> lecture</a> /<a href="lab11.html"> lab</a> (<a href="due.html">ASGMT 9</a>)<br/>
+		Week 12:<a href="lecture12.html"> lecture </a> /<a href="lab12.html"> lab</a> (<a href="due.html">Project 3</a>)<br/>-->
+		
+	
+	</div>
+	<div class="section">
+		<script type="text/javascript">
+		//var converter = new Markdown.Converter();
+		var converter = new Showdown.converter();
+		document.write(converter.makeHtml($('#sourcetext').text()));
+		</script>
+	</div>
+	
+	<div class="footer">Haru (HyunKyung) Ji, 2017</div>
+	
+</div>
+</body>
+</html>

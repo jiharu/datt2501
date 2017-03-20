@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Introduction to 3D Animation</title>
+    
+<link href="css/site.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="css/highlight.default.css" media="screen" rel="stylesheet" type="text/css" />
+  
+<script src="js/jquery.js"></script>
+<script src="js/showdown.js" type="text/javascript"></script>
+
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+<body>
+<!--
+Write the markdown code below.
+A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
+-->
+
+<div style="display: none" id="sourcetext">
+
+# Week 11: Visual effects
+
+## References
+- [Maya 2016 online Help](http://help.autodesk.com/view/MAYAUL/2016/ENU//)
+- Art of Maya [pdf link](http://web.cse.ohio-state.edu/~parent/classes/682/MAYA/art_of_maya.pdf): P.57~61 : Character Animation 
+
+## Goal
+- Completing walking cycle.  
+- Improve quality and expression.
+
+# Visual effects
+
+## Maya classic dynamics
+Dynamics is a branch of physics that describes how objects move. Dynamic animation uses rules of physics to simulate natural forces. You specify the actions you want the object to take, then let the software figure out how to animate the object.
+
+Dynamic animation lets you create realistic motion that's hard to achieve with traditional keyframe animation. For instance, you can make effects such as tumbling dice, waving flags, and exploding fireworks.
+
+The Maya Dynamics guide, which provides information about creating dynamic simulations in Maya, is available at [http://www.autodesk.com/maya-docs-archive](http://www.autodesk.com/maya-docs-archive).
+
+## nDynamics simulation framework
+nDynamics is a dynamic simulation framework powered by Maya® Nucleus™ technology. A Maya Nucleus system is composed of a series of Nucleus objects, which consists of nCloth, nParticle, nHair, Soft Bodies, and passive collision objects, as well as dynamic constraints, and the Maya Nucleus solver.
+
+## Effects Assets in the Visor
+Effects Assets provides a number of preset effects that are organized as Maya assets. Effects Assets are available in the Visor window and can be quickly imported into your scene, applied to objects, then played and rendered with little or no modification. Effects Assets include 3D fluid effects, nParticles, nParticle emitters, and Maya fields, and provide effects such as explosions, fire, smoke, rain, and fireworks.
+
+![ess](img/lab/esset.png)
+
+Effects Assets are advanced assets, which allow them to be parented to objects outside the asset. For example, some assets, such as a fire asset, can be parented to a polygon object or applied as a surface emitter. Depending on the effect, selecting Effects Assets > Apply Effect from the FX menu set either parents the effect to an object, or applies it to a surface. Effects with Point or Volume emitters are parented while Surface emitter are applied. Free-standing effects, such as the Bomb.ma, do not need to be applied to objects in the scene. - [Maya help](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-235C9A6C-42C9-4132-81BE-727B4A43AB1B)
+
+![effect02](img/lab/effect01.png) 
+Rendering image of Visor/nCloth Examples/PartyStreamers.ma
+![effect03](img/lab/effect02.png) 
+Rendering image of Visor/Fluid Examples/Nuke.ma
+
+## Ocean Shader, Paint Effect, Turntable, Bifrost, and more
+
+- [Maya Ocean shader test by LTKY823](https://www.youtube.com/watch?v=8fqUvntiuSw)  
+- [Maya Paint Effects Tutorial: Growing Animated Vines](https://www.youtube.com/watch?v=Y1ignag-NmY) 
+
+### Bifröst
+
+**Bifröst** is a procedural framework that can create simulated liquid effects using a FLIP (fluid implicit particle) solver. You can generate liquid from emitters and have it fall under gravity, interact with colliders to direct the flow and create splashes, and use accelerators to create jets and other effects.
+
+![bifro](img/maya/rendering/bifrost.png)
+
+- [bifrost simulation](http://www.igorfx.com/bifrost/)
+- [knowledge.autodesk.com](http://knowledge.autodesk.com/support/maya/learn-explore/caas/CloudHelp/cloudhelp/2015/ENU/Maya/files/GUID-43D655E2-45A3-4FD8-847C-6622AF22995C-htm.html?v=2016)
+- [simple tutorial](https://www.youtube.com/watch?v=ZrVW1Izzb7c)
+
+
+---------------
+## Paint effect
+**Paint Effects** is a powerful tool that allows you to interactively paint specialized strokes that create complex geometry as a post-process. Numerous Paint Effects brushes are included with Maya and are grouped in such categories as trees, flowers, weather, and fire.
+
+![pe01](img/maya/pe/comp_butterflyhill.png)
+
+You can use Paint Effects as a traditional paint program to paint images on a canvas, or to paint repeatable textures that you can apply to geometry in your scenes.
+
+### Paint Effect attributes
+After you create a Paint Effects stroke, you can edit the look and movement of the effect through the Attribute Editor. There are a large number of attributes to edit with Paint Effects.
+
+- Select the stroke, and open the Attribute Editor. Switch to the stroke’s tab to the brush attributes.
+
+A summary of some Paint Effects attributes:
+
+**Brush Profile** gives you control over how the tubes are generated from the stroke; this is done with the Brush Width attribute. This makes tubes emit from a wider breadth from the stroke to cover more of an area.
+
+**Shading** and **Tube Shading** gives you access to the color controls for the tubes on a stroke.
+
+- **Color1 and Color2** from bottom to top, graduates from Color1 to Color 2 along the stalk only: The leaves and branches have their own color attributes, which you can display by choosing **Tubes / Growth**.
+- **Incandescence1 and 2** Adds a gradient self-illumination to the tubes.
+- **Transparency1 and 2** Adds a gradient transparency to each tube.
+- **Hue/Sat/Value Rand** add some randomness to the color of the tubes.
+
+**Tubes**: you’ll find all the attributes to control the growth of the Paint Effects effect. 
+
+- In the **Creation** subsection, you can access the following:       
+- **Tubes per Step** controls the number of tubes along the stroke.     
+- **Length Min/Max** controls how tall the tubes are grown.    
+- **Tube Width1 and Width2** controls the width of the tubes.   
+		
+- In the **Growth** subsection, you can access controls for branches, twigs, leaves, flowers, and buds for the Paint Effects strokes. Each attribute in these sections controls the number, size, and shape of those elements. Although not all Paint Effects strokes create flowers, all strokes contain these headings; some may or may not be active.
+	
+- In the **Behavior** subsection contains the controls for the dynamic forces affecting the tubes in a Paint Effects stroke. Adjust these attributes if you want your flowers to blow more in the wind.
+
+
+#### Additional Notes
+> Although Paint Effects brushes can create convincing results, they are unable to cover large areas effectively. For example, you can use the tool to paint patches of grass, weeds, or trees, but filling the entire park, meadow, or forest would be impractical in terms of render times and render stability.
+
+> Paint Effects are rendered as a post process, which means they won’t render in reflections or refractions as is. 
+
+> You can also **convert Paint Effects to polygonal surfaces** that will render in the scene along with any other objects so that they may take part in reflections and refractions. To convert a Paint Effects stroke to polygons, select the stroke and choose **Modify / Convert / Paint Effects to Polygons (or to NURBS, or to Curves)**. The polygon Paint Effects tubes can still be edited by most of the Paint Effects attributes mentioned so far; however, some, such as color, don’t affect the poly tubes. Instead, the color information is converted into a shader (you can check or edit the shading information with its textures from the Hypergraph) that is assigned to the polygons. It’s best to finalize your Paint Effects strokes before converting to polygons, to avoid any confusion.
+
+> Paint Effects is a strong Maya tool and you can use it to create complex effects such as a field of blowing flowers. A large number of controls to create a variety of effects come with that complexity. Fortunately, Maya comes with a generous sampling of preset brushes. Experiment with a few brushes and their attributes to see what kinds of effects and strange plants you can create.
+
+> Also Maya has really good documentation about Paint Effects in the Help files.
+
+-----------------------
+
+## Post processing in Maya
+### Depth of field 
+
+Depth of field is the range of distances that encompass objects that appear acceptably sharp. Due to the optical nature of real-world lenses and the physical qualities of the atmosphere, photography and videography rarely produce images that are 100 percent in focus. In contrast, 3D renders are always in perfect focus unless artificial depth of field is used. 
+
+You can activate Maya's depth of field by checking the Depth Of Field attribute in the Depth Of Field section of the camera's Attribute Editor tab. 
+
+![dof00](img/maya/rendering/dof.png)    
+[View the depth of field effect in Viewport 2.0](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-93DFCF2E-1B24-4C4C-89FD-4C4C202746ED)   
+
+![sp04](img/maya/shading/dof.png)
+
+The F Stop attribute roughly approximates the f-stop of real-world cameras. F-stop is a number that represents the ratio between the diameter of the lens aperture and the focal length of the lens. F-stops are scaled by an approximate factor of 1.4 (for example, f/1.4, f/2, f/2.8, and so on). Each increased f-stop halves the open area of the aperture, halves the amount of light striking the film, and increases the depth of field. The f-stop isn't the only factor to influence depth of field, however. Depth of field is inversely proportional to the focal length of the lens and directly proportional to the distance from the camera to the subject.
+ 
+![dof02](img/maya/rendering/dof02.png)  
+The Distance tool used to determine the focus distance.
+   
+### Motion blur
+When you playback animation on an object with motion blur enabled, the object appears blurred in the viewport. 
+
+If some surfaces in the scene don’t move, or move only slightly, do not enable motion blur 
+for them. Being selective about what you motion blur can decrease rendering times.
+
+You can enable Motion Blur on a per-object basis using the Attribute Editor, under the Render Stats section when you select an object shape node
+
+To set motion blur when rendering using the Maya Software renderer, enable it via the Render Settings window, Motion Blur section.
+
+To set motion blur when rendering using the mental ray renderer, enable it via the Render Settings window, Quality tab, Motion Blur section. 
+	
+Check out Maya help. There are a number of limitations: [Motion blur](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-7FA79999-3527-4D89-8F0C-CBF2754DA7BE)
+		
+--------
+## Digital Cinematography
+### Camera, light, and shadow
+
+[We covered this subject from the pre requisite class - Introduction to 3D modeling](http://jiharu.github.io/datt2500/lecture05.html). Therefore, we will not cover it now however if you want to create a higher quality animation, digital cinematography is fundamentally important.  
+
+![camera](img/maya/film/camera.png)
+
+
+</div>
+<div id="wrapper">
+	
+	<div class="header">
+		
+		<h1>DATT2501</h1>		
+		<a href="index.html">Overview</a><br/>
+		<a href="datt2501_ji.pdf">Syllabus</a><br/>	
+		<a href="due.html">Due dates</a><br/><br/>
+					
+		Tumblr process portfolio:<br/> <a href=http://2017datt2501.tumblr.com/>Lab 01</a>/ <a href=https://2017datt2501-2.tumblr.com/>Lab 02</a>/<a href=https://2017datt2501-03.tumblr.com/>Lab 03</a><br/><br/>
+				
+	    Week 1:<a href="lecture01.html"> lecture</a> /<a href="lab01.html"> lab</a> (<a href="due.html">ASGMT 1</a>)<br/>
+		Week 2:<a href="lecture02.html"> lecture</a> /<a href="lab02.html"> lab</a> (<a href="due.html">ASGMT 2</a>)<br/>
+		Week 3:<a href="lecture03.html"> lecture</a> /<a href="lab03.html"> lab</a> (<a href="due.html">Project 1</a>)<br/>  
+		Week 4:<a href="lecture04.html"> lecture</a> /<a href="lab04.html"> lab</a> (<a href="due.html">ASGMT 3</a>)<br/>
+		Week 5:<a href="lecture05.html"> lecture</a> /<a href="lab05.html"> lab</a> (<a href="due.html">ASGMT 4</a>)<br/>
+		Week 6:<a href="lecture06.html"> lecture</a> /<a href="lab06.html"> lab</a> (<a href="due.html">ASGMT 5</a>)<br/>
+		Reading week<br/>
+		
+		Week 7:<a href="lecture07.html"> lecture</a> /<a href="lab07.html"> lab</a> (<a href="due.html">ASGMT 6</a>)<br/>
+		Week 8:<a href="lecture08.html"> lecture</a> /<a href="lab08.html"> lab</a> (<a href="due.html">Project 2</a>)<br/>
+		Week 9:<a href="lecture09.html"> lecture</a> /<a href="lab09.html"> lab</a> (<a href="due.html">ASGMT 7</a>)<br/>
+		Week 10:<a href="lecture10.html"> lecture </a> /<a href="lab10.html"> lab</a> (<a href="due.html">ASGMT 8</a>)<br/>
+		Week 11:<a href="lecture11.html"> lecture</a> /<a href="lab11.html"> lab</a> (<a href="due.html">ASGMT 9</a>)<br/><!--
+		Week 12:<a href="lecture12.html"> lecture </a> /<a href="lab12.html"> lab</a> (<a href="due.html">Project 3</a>)<br/>-->
+		
+	
+	</div>
+	<div class="section">
+		<script type="text/javascript">
+		//var converter = new Markdown.Converter();
+		var converter = new Showdown.converter();
+		document.write(converter.makeHtml($('#sourcetext').text()));
+		</script>
+	</div>
+	
+	<div class="footer">Haru (HyunKyung) Ji, 2017</div>
+	
+</div>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Introduction to 3D Animation</title>
+    
+<link href="css/site.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="css/highlight.default.css" media="screen" rel="stylesheet" type="text/css" />
+  
+<script src="js/jquery.js"></script>
+<script src="js/showdown.js" type="text/javascript"></script>
+
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+<body>
+<!--
+Write the markdown code below.
+A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
+
+Tumblr 
+https://www.tumblr.com/docs/en/custom_themes
+
+add dates:
+<i><small>{block:Date}{MonthNumberWithZero}/{DayOfMonthWithZero}/{ShortYear} {24HourWithZero}:{Minutes}{/block:Date} by {PostAuthorName}</small></i>
+
+under   <section class="post">
+-->
+
+<div style="display: none" id="sourcetext">
+
+# Week 11
+	1. Review
+		- Tumblr		
+	2. Basic rigging
+		- Parenting & Grouping (snowman & solar system)
+		- Constraints (ripple & eyeball animation)
+	3. Rigging on parts of body (spine)
+		- Basics
+			- freeze transformation
+			- deleting histories
+			- naming
+		- Proper parenting & grouping
+		- Good analyzing & planning 
+		- Trial & error	 
+	4. HIK and Control Rig in Maya
+	5. Assignments & next class
+	
+
+## Review
+- Tumblr
+
+-----------
+## Basic rigging: parenting & grouping
+## 1. Snowman
+***Can you make a snowman nodding and dancing?***
+### What to practice:
+- Proper naming
+- Practice ***pivot position*** using different snapping.
+- Proper ***parenting & grouping***
+   
+![pvt01](img/maya/kinematic/pivot01.png)  
+![pvt02](img/maya/kinematic/pivot02.png) ![pvt03](img/maya/kinematic/pivot03.png)  
+
+- Modeling a simple snowman, applying squash deformation.   
+- Then, naming & parenting properly.        
+- Now let's work on pivot positions before animating.
+	- Using snapping.
+	- Hide or lock unused attributes.
+	
+> **Pivot Positions:** the pivot position, or pivot point, is the location an object rotates around. In 3D animation, the pivot point is also the position from which the other manipulators will move or scale the object. Setting the correct position of the pivot to create the proper point of manipulation is important in creating a rig.
+>
+>### How to change the position of pivot:
+In Window, using **Insert** key.    
+In Mac, using **fn + left arrow** key.	
+
+## 2. Solar system 
+To review the techniques in making the snowman animation, try to make your own [solar system](https://www.youtube.com/watch?v=Tsnph4RBQ4c).
+
+--------
+
+## Basic rigging: constrains
+## 1. Ripple animation
+- [Ripple animation](https://www.youtube.com/watch?v=LLXpD4ejqzY)
+- Here you will use **geometry and normal constraints** (Rigging | Deform / Constrain /) to make your object float on the wavy surface. 
+- You can apply **wave deformation** (Rigging | Deform / Nonlinear / Wave) to the surface to create waves. 
+- Proper pivot positioning
+- Normal constraints: in the option box, change the value in y axis of the aim vector into 1. 
+
+## 2. Eyeball animation: using handles
+- [Eyeball animation](https://youtu.be/01zNa0Yzfy8)  
+- You can choose your body in the Visor (sculpting base meshes).   
+- You can make an eye ball using a NURBS sphere and a lamp texture (U Ramp)
+- Create eyeball handles with NURBs curves.
+- In the outliner, rename them, delete histories, freeze transformation, and properly group and parent them.
+
+![eveball](img/lab/eyeball.png) 
+
+### Make relations
+- Choose the curve handle and the geometry respectively and connect them through **aim constrain.** 
+ 	
+![aim](img/lab/aim.png)   
+Reset the options and turn on *maintain offset*.
+
+- Test your eyeball animation.
+
+
+<!-------------------
+## Rigging on parts of body
+
+	- Important basics
+		- freeze transformation
+		- deleting histories
+		- renaming
+	- Proper parenting & grouping
+	- Good analyzing & planning 
+	- Trial & error	 
+	
+## Spine animation
+- Create spine joints and one NURBS controller.	
+
+### Create Curve controller:  
+1. Draw using a primitive circle or CV curve tool with 1 Linear curve degree in its option.   
+2. Place it at the right position with the right size. (The circle should be large enough to be easily selected but small enough to avoid overlapping with other parts of the character.)     
+3. Once it is done, delete its history and rename them.     
+4. Lastly, with the curve controller selected, apply **Modify / Freeze Transformations**.
+5. If necessary, move the pivot position.
+
+![spine](img/lab/spine.png) 
+
+- Renaming all.  
+- Deleting histories and freeze transformation of the spineHandle.
+- Lock or hiding unused attributes.
+
+![expression](img/lab/expression.png) 
+
+- Analyzing your animation and planning.
+- Open the expression editor and create an expression for the spine animation. 
+
+-->
+
+</div>
+<div id="wrapper">
+	
+	<div class="header">
+		
+		<h1>DATT2501</h1>		
+		<a href="index.html">Overview</a><br/>
+		<a href="datt2501_ji.pdf">Syllabus</a><br/>	
+		<a href="due.html">Due dates</a><br/><br/>
+					
+		Tumblr process portfolio:<br/> <a href=http://2017datt2501.tumblr.com/>Lab 01</a>/ <a href=https://2017datt2501-2.tumblr.com/>Lab 02</a>/<a href=https://2017datt2501-03.tumblr.com/>Lab 03</a><br/><br/>
+				
+	    Week 1:<a href="lecture01.html"> lecture</a> /<a href="lab01.html"> lab</a> (<a href="due.html">ASGMT 1</a>)<br/>
+		Week 2:<a href="lecture02.html"> lecture</a> /<a href="lab02.html"> lab</a> (<a href="due.html">ASGMT 2</a>)<br/>
+		Week 3:<a href="lecture03.html"> lecture</a> /<a href="lab03.html"> lab</a> (<a href="due.html">Project 1</a>)<br/>  
+		Week 4:<a href="lecture04.html"> lecture</a> /<a href="lab04.html"> lab</a> (<a href="due.html">ASGMT 3</a>)<br/>
+		Week 5:<a href="lecture05.html"> lecture</a> /<a href="lab05.html"> lab</a> (<a href="due.html">ASGMT 4</a>)<br/>
+		Week 6:<a href="lecture06.html"> lecture</a> /<a href="lab06.html"> lab</a> (<a href="due.html">ASGMT 5</a>)<br/>
+		Reading week<br/>
+		
+		Week 7:<a href="lecture07.html"> lecture</a> /<a href="lab07.html"> lab</a> (<a href="due.html">ASGMT 6</a>)<br/>
+		Week 8:<a href="lecture08.html"> lecture</a> /<a href="lab08.html"> lab</a> (<a href="due.html">Project 2</a>)<br/>
+		Week 9:<a href="lecture09.html"> lecture</a> /<a href="lab09.html"> lab</a> (<a href="due.html">ASGMT 7</a>)<br/>
+		Week 10:<a href="lecture10.html"> lecture </a> /<a href="lab10.html"> lab</a> (<a href="due.html">ASGMT 8</a>)<br/>
+		Week 11:<a href="lecture11.html"> lecture</a> /<a href="lab11.html"> lab</a> (<a href="due.html">ASGMT 9</a>)<br/><!--
+		Week 12:<a href="lecture12.html"> lecture </a> /<a href="lab12.html"> lab</a> (<a href="due.html">Project 3</a>)<br/>-->
+		
+	
+	</div>
+	<div class="section">
+		<script type="text/javascript">
+		//var converter = new Markdown.Converter();
+		var converter = new Showdown.converter();
+		document.write(converter.makeHtml($('#sourcetext').text()));
+		</script>
+	</div>
+	
+	<div class="footer">Haru (HyunKyung) Ji, 2017</div>
+	
+</div>
+</body>
+</html>

@@ -29,30 +29,70 @@ under   <section class="post">
 <div style="display: none" id="sourcetext">
 
 # Week 10
-	1. Path animation & lattice
-		- Camera animation
+
+	1. Set Driven animation  
+	2. Blend Shape
+	3. Path animation & lattice
 		- Lattice deformation
-	2. Set Driven animation
-	3. Assignments & Next class
+		- Camera/airplane animation
+			- MEL & Expression 
+			- Camera crane set-up 
+	4. Assignments & Next class
 	
 ## Review
 - Tumblr	
 
+## Set Driven Animation
+[Set Driven Key example](https://knowledge.autodesk.com/support/maya/learn-explore/caas/CloudHelp/cloudhelp/2016/ENU/Maya/files/GUID-8B9D9C60-DF7D-45EC-A278-56DBE07935A5-htm.html) 
+
+1. Select the driven object, then select Key > Set Driven Key > Set.
+The Set Driven Key window appears with the object in the Driven list.
+
+2. Select the driver object in the scene view, then click Load Driver.
+The object appears in the Driver list.
+
+3. Select the attribute in the Driven list (the attribute to be driven by the driver’s movement), and select the attribute in the Driver list (the attribute that will drive the driven object), then click Key.
+
+4. Repeat to complete an animation.
+
+5. You can use the Graph Editor to edit animation curves.	
+
+![set01](img/maya/deformer/set.png)
+Set driven example image.
+
+
+## Blend Shape deformation	
+![bs01](img/maya/deformer/bs01.png)
+![bs02](img/maya/deformer/bs02.png)  
+
+- When you prepare the target model, you need to work on the component mode not on the object mode to deform the shape to apply the blend shaping.
+
+------------------------------------------------
+
 ## Path animation
 Animate > Motion Paths > Attach to Motion Path > [option](http://help.autodesk.com/view/MAYAUL/2016/ENU//index.html?guid=GUID-69E8C704-1A7B-4C83-9333-80C3118541F6)
 
-### Camera animation
-When you add a camera to a scene, you should imagine how the shot will be composed and whether the camera will be animated. 
+### Lattice deformation
+![path](img/maya/deformer/path.png)   
+
+- Prepare bevel applied text objects and curve for a path animation.  
+- To create a flying text animation, select text objects and a curve and apply 'Constrain / Motion Paths / Attach to Motion Path'. Then you can apply 'Flow path object' to make your object flexibly follow the path.  
+
+![path03](img/lab/motionpath01.png) 
+
+- Later, you can select the lattice and deform it.
+	
+
+### Camera or airplane animation
+When you add a camera or airplane to a scene, you should imagine how the shot will be composed and whether the camera will be animated. 
 
 ![path01](img/lab/motionpath03.png)
 ![path02](img/lab/motionpath02.png)  
 
-- Camera animation using the 'Attach motion path' method, and keyframing on the 'aim vector' of the camera.  
+- You can animate the camera using the 'Attach motion path' method, and keyframing on the 'aim vector' of the camera.  
 - Or you can animate the camera and use the 'Set motion path key' method to make a motion path animation. 
 
-### Camera crane animation
-
-### MEL (Maya Embedded Language) to create objects:
+### Using MEL (Maya Embedded Language) to create objects:
 
 ```
 int $i;
@@ -74,24 +114,7 @@ for ($k = 0; $k < $n; $k++){
 
 How to apply: write the MEL in the script editor, select them, and 'command + enter' to execute. 
 
-_______________________
-## Set Driven Animation
-[Set Driven Key example](https://knowledge.autodesk.com/support/maya/learn-explore/caas/CloudHelp/cloudhelp/2016/ENU/Maya/files/GUID-8B9D9C60-DF7D-45EC-A278-56DBE07935A5-htm.html) 
-
-1. Select the driven object, then select Key > Set Driven Key > Set.
-The Set Driven Key window appears with the object in the Driven list.
-
-2. Select the driver object in the scene view, then click Load Driver.
-The object appears in the Driver list.
-
-3. Select the attribute in the Driven list (the attribute to be driven by the driver’s movement), and select the attribute in the Driver list (the attribute that will drive the driven object), then click Key.
-
-4. Repeat to complete an animation.
-
-5. You can use the Graph Editor to edit animation curves.	
-
-
-### Expression to control object's attributes:
+### Using xpressions to control object's attributes:
 
 ```
 // simple ball bounce expression (in the Expression editor)
@@ -130,14 +153,9 @@ if (ball.translateX < 20){
 - [SineBounce](http://www.cs.uni.edu/~jacobson/maya/mel/SineBounce.html)  
 - [Related expression](http://www.utdallas.edu/atec/midori/Handouts/expressions.htm)
 
-### Lattice deformation
+### Camera crane animation
 
-![path03](img/lab/motionpath01.png)   
-
-- Flying text using the 'Attach motion path' and 'Flow path object' methods.
-Later, you can select the lattice and deform it.
-	
-## Blend Shape deformation	
+![crane](img/maya/deformer/crane.png) 
 
 </div>
 <div id="wrapper">

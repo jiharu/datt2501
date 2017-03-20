@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Introduction to 3D Animation</title>
+    
+<link href="css/site.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="css/highlight.default.css" media="screen" rel="stylesheet" type="text/css" />
+  
+<script src="js/jquery.js"></script>
+<script src="js/showdown.js" type="text/javascript"></script>
+
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+<body>
+<!--
+Write the markdown code below.
+A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
+
+Tumblr 
+https://www.tumblr.com/docs/en/custom_themes
+
+add dates:
+<i><small>{block:Date}{MonthNumberWithZero}/{DayOfMonthWithZero}/{ShortYear} {24HourWithZero}:{Minutes}{/block:Date} by {PostAuthorName}</small></i>
+
+under   <section class="post">
+-->
+
+<div style="display: none" id="sourcetext">
+
+# Week 12
+
+Practice
+### Applying effects esset
+![effect01](img/lab/effect.png)  
+
+- When you simulate Maya dynamics, you need to set up the time slider preference first (check the above image), to let Maya calculates the simulation from the frame 1.  
+- Some effects can take much of your hardware resources and can be very slow. When you wan to cancel, and if stopping the play nor esc doesn't work, you need to kill the process.
+- Otherwise you can import effects or sometimes you can apply effects to the object or surfaces. You can check how it works by the label on top of icon, once you put your mouse on it.
+
+### Soft jelly cube animation
+
+![jelly01](img/lab/jelly.png)
+
+Let's make the simplest soft jelly cube animation!
+
+1. Prepare the scene - create cubes with multiple spans and the floor object.
+2. You can apply **FX // nCloth / Create nCloth** on to jelly cubes. 
+3. Apply **FX // nCloth / Create Passive Collider** to the floor object.
+
+You can check the outliner to see nCloth and nucleus are affected properly.
+
+![jelly02](img/lab/jelly01.png)
+
+Play to see the result and from the channel box of the cubes, and change the value of Rigid parameter to control its elasticity. 
+
+Finally you can add shaders and render while turning on the raytracing to see the final result.
+
+## Tutorial link
+- [Maya Effects in the Maya help](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-3B540876-C61D-4B4E-BF0D-C011EDE25D6C)  
+
+## Paint Effect Practice: to apply paint effect brushes on to a surface
+1. Create NURBs patch (increase its size and span numbers). 
+2. Select the surface and apply **Modeling // Generate / Make Paintable**.
+3. Choose **Modeling // Generate / Get Brush**, then the **Visor** window will open. Select a brush style from the brush folder.
+4. Click+drag the mouse over the chosen surface. The Paint Effects stroke is laid over the surface, and the Paint Effects tube will grow from it. When you release the mouse button, the stroke is ended. You can add additional strokes by click+dragging again. You can retrieve a new brush style at any time from Get Brush. You can delete a stroke by selecting the associated stroke node in the Hypergraph or Outliner.
+5. Render a test (Paint Effects is supported by Maya Software, but not mental ray). 
+
+![pe01_01](img/maya/pe/visor.png)
+
+***- You can convert the paint effect to other meshes such as Polygons, NURBS, or Curves (Modify / Covert /) which you can use in other pipelines.***
+
+![pe02](img/maya/pe/comp_wireframe.png)
+![pe03](img/maya/pe/comp_canvastubes.png)
+
+## Practice: paint effect animation
+![pe01](img/maya/pe/texture.png)
+
+1. From the Visor, click the grasses / grassWindWide.mel brush. 
+2. In the Perspective window, click and drag at least two lines across the grid to create two Paint Effects strokes of blowing grass. 
+3. From the Visor, Select the flower / africanLily.mel brush in the Flower folder. 
+4. Click and drag a new stroke between the strokes of grass.
+5. Render a frame using Maya Software. Render out a 120-frame sequence to see how the grasses and flowers animate in the wind. 
+
+
+</div>
+<div id="wrapper">
+	
+	<div class="header">
+		
+		<h1>DATT2501</h1>		
+		<a href="index.html">Overview</a><br/>
+		<a href="datt2501_ji.pdf">Syllabus</a><br/>	
+		<a href="due.html">Due dates</a><br/><br/>
+					
+		Tumblr process portfolio:<br/> <a href=http://2017datt2501.tumblr.com/>Lab 01</a>/ <a href=https://2017datt2501-2.tumblr.com/>Lab 02</a>/<a href=https://2017datt2501-03.tumblr.com/>Lab 03</a><br/><br/>
+				
+	    Week 1:<a href="lecture01.html"> lecture</a> /<a href="lab01.html"> lab</a> (<a href="due.html">ASGMT 1</a>)<br/>
+		Week 2:<a href="lecture02.html"> lecture</a> /<a href="lab02.html"> lab</a> (<a href="due.html">ASGMT 2</a>)<br/>
+		Week 3:<a href="lecture03.html"> lecture</a> /<a href="lab03.html"> lab</a> (<a href="due.html">Project 1</a>)<br/>  
+		Week 4:<a href="lecture04.html"> lecture</a> /<a href="lab04.html"> lab</a> (<a href="due.html">ASGMT 3</a>)<br/>
+		Week 5:<a href="lecture05.html"> lecture</a> /<a href="lab05.html"> lab</a> (<a href="due.html">ASGMT 4</a>)<br/>
+		Week 6:<a href="lecture06.html"> lecture</a> /<a href="lab06.html"> lab</a> (<a href="due.html">ASGMT 5</a>)<br/>
+		Reading week<br/>
+		
+		Week 7:<a href="lecture07.html"> lecture</a> /<a href="lab07.html"> lab</a> (<a href="due.html">ASGMT 6</a>)<br/>
+		Week 8:<a href="lecture08.html"> lecture</a> /<a href="lab08.html"> lab</a> (<a href="due.html">Project 2</a>)<br/>
+		Week 9:<a href="lecture09.html"> lecture</a> /<a href="lab09.html"> lab</a> (<a href="due.html">ASGMT 7</a>)<br/>
+		Week 10:<a href="lecture10.html"> lecture </a> /<a href="lab10.html"> lab</a> (<a href="due.html">ASGMT 8</a>)<br/>
+		Week 11:<a href="lecture11.html"> lecture</a> /<a href="lab11.html"> lab</a> (<a href="due.html">ASGMT 9</a>)<br/>
+		Week 12:<a href="lecture12.html"> lecture </a> /<a href="lab12.html"> lab</a> (<a href="due.html">Project 3</a>)<br/>
+		
+	
+	</div>
+	<div class="section">
+		<script type="text/javascript">
+		//var converter = new Markdown.Converter();
+		var converter = new Showdown.converter();
+		document.write(converter.makeHtml($('#sourcetext').text()));
+		</script>
+	</div>
+	
+	<div class="footer">Haru (HyunKyung) Ji, 2017</div>
+	
+</div>
+</body>
+</html>

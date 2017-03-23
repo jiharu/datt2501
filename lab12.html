@@ -29,58 +29,49 @@ under   <section class="post">
 <div style="display: none" id="sourcetext">
 
 # Week 12
+	1. Review
+		- Tumblr		
+	2. Basic rigging
+		- Parenting & Grouping (snowman & solar system)
+		- Constraints (ripple & eyeball animation)
+	3. Rigging on parts of body (spine)
+		- Basics
+			- freeze transformation
+			- deleting histories
+			- naming
+		- Proper parenting & grouping
+		- Good analyzing & planning 
+		- Trial & error	 
+	4. HIK and Control Rig in Maya
+	More rigging practices
+	5. Assignments & next class
 
-Practice
-### Applying effects esset
-![effect01](img/lab/effect.png)  
+-----------
+## Basic rigging: parenting & grouping
+## 1. Snowman
+***Can you make a snowman nodding and dancing?***
+### What to practice:
+- Proper naming
+- Practice ***pivot position*** using different snapping.
+- Proper ***parenting & grouping***
+   
+![pvt01](img/maya/kinematic/pivot01.png)  
+![pvt02](img/maya/kinematic/pivot02.png) ![pvt03](img/maya/kinematic/pivot03.png)  
 
-- When you simulate Maya dynamics, you need to set up the time slider preference first (check the above image), to let Maya calculates the simulation from the frame 1.  
-- Some effects can take much of your hardware resources and can be very slow. When you wan to cancel, and if stopping the play nor esc doesn't work, you need to kill the process.
-- Otherwise you can import effects or sometimes you can apply effects to the object or surfaces. You can check how it works by the label on top of icon, once you put your mouse on it.
+- Modeling a simple snowman, applying squash deformation.   
+- Then, naming & parenting properly.        
+- Now let's work on pivot positions before animating.
+	- Using snapping.
+	- Hide or lock unused attributes.
+	
+> **Pivot Positions:** the pivot position, or pivot point, is the location an object rotates around. In 3D animation, the pivot point is also the position from which the other manipulators will move or scale the object. Setting the correct position of the pivot to create the proper point of manipulation is important in creating a rig.
+>
+>### How to change the position of pivot:
+In Window, using **Insert** key.    
+In Mac, using **fn + left arrow** key.	
 
-### Soft jelly cube animation
-
-![jelly01](img/lab/jelly.png)
-
-Let's make the simplest soft jelly cube animation!
-
-1. Prepare the scene - create cubes with multiple spans and the floor object.
-2. You can apply **FX // nCloth / Create nCloth** on to jelly cubes. 
-3. Apply **FX // nCloth / Create Passive Collider** to the floor object.
-
-You can check the outliner to see nCloth and nucleus are affected properly.
-
-![jelly02](img/lab/jelly01.png)
-
-Play to see the result and from the channel box of the cubes, and change the value of Rigid parameter to control its elasticity. 
-
-Finally you can add shaders and render while turning on the raytracing to see the final result.
-
-## Tutorial link
-- [Maya Effects in the Maya help](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-3B540876-C61D-4B4E-BF0D-C011EDE25D6C)  
-
-## Paint Effect Practice: to apply paint effect brushes on to a surface
-1. Create NURBs patch (increase its size and span numbers). 
-2. Select the surface and apply **Modeling // Generate / Make Paintable**.
-3. Choose **Modeling // Generate / Get Brush**, then the **Visor** window will open. Select a brush style from the brush folder.
-4. Click+drag the mouse over the chosen surface. The Paint Effects stroke is laid over the surface, and the Paint Effects tube will grow from it. When you release the mouse button, the stroke is ended. You can add additional strokes by click+dragging again. You can retrieve a new brush style at any time from Get Brush. You can delete a stroke by selecting the associated stroke node in the Hypergraph or Outliner.
-5. Render a test (Paint Effects is supported by Maya Software, but not mental ray). 
-
-![pe01_01](img/maya/pe/visor.png)
-
-***- You can convert the paint effect to other meshes such as Polygons, NURBS, or Curves (Modify / Covert /) which you can use in other pipelines.***
-
-![pe02](img/maya/pe/comp_wireframe.png)
-![pe03](img/maya/pe/comp_canvastubes.png)
-
-## Practice: paint effect animation
-![pe01](img/maya/pe/texture.png)
-
-1. From the Visor, click the grasses / grassWindWide.mel brush. 
-2. In the Perspective window, click and drag at least two lines across the grid to create two Paint Effects strokes of blowing grass. 
-3. From the Visor, Select the flower / africanLily.mel brush in the Flower folder. 
-4. Click and drag a new stroke between the strokes of grass.
-5. Render a frame using Maya Software. Render out a 120-frame sequence to see how the grasses and flowers animate in the wind. 
+## 2. Solar system 
+To review the techniques in making the snowman animation, try to make your own [solar system](https://www.youtube.com/watch?v=Tsnph4RBQ4c).
 
 
 </div>
@@ -106,7 +97,7 @@ Finally you can add shaders and render while turning on the raytracing to see th
 		Week 7:<a href="lecture07.html"> lecture</a> /<a href="lab07.html"> lab</a> (<a href="due.html">ASGMT 6</a>)<br/>
 		Week 8:<a href="lecture08.html"> lecture</a> /<a href="lab08.html"> lab</a> (<a href="due.html">Project 2</a>)<br/>
 		Week 9:<a href="lecture09.html"> lecture</a> /<a href="lab09.html"> lab</a> (<a href="due.html">ASGMT 7</a>)<br/>
-		Week 10:<a href="lecture10.html"> lecture </a> /<a href="lab10.html"> lab</a> (<a href="due.html">ASGMT 8</a>)<br/>
+		Week 10:<a href="lecture10.html"> lecture</a> /<a href="lab10.html"> lab</a> (<a href="due.html">ASGMT 8</a>)<br/>
 		Week 11:<a href="lecture11.html"> lecture</a> /<a href="lab11.html"> lab</a> (<a href="due.html">ASGMT 9</a>)<br/>
 		Week 12:<a href="lecture12.html"> lecture </a> /<a href="lab12.html"> lab</a> (<a href="due.html">Project 3</a>)<br/>
 		

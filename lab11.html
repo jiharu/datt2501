@@ -29,64 +29,125 @@ under   <section class="post">
 <div style="display: none" id="sourcetext">
 
 # Week 11
-	1. Review
-		- Tumblr		
-	2. Basic rigging
-		- Parenting & Grouping (snowman & solar system)
-		- Constraints (ripple & eyeball animation)
-	3. Rigging on parts of body (spine)
-		- Basics
-			- freeze transformation
-			- deleting histories
-			- naming
-		- Proper parenting & grouping
-		- Good analyzing & planning 
-		- Trial & error	 
-	4. HIK and Control Rig in Maya
-	5. Assignments & next class
-	
+	1. Practice
+		- Dynamics: applying effects esset  
+		- Dynamics: soft jelly cube animation	
+		- Paint effect practices
+			- I. To apply paint effect brushes on to a surface
+			- II. Paint effect animation	
+	2. More rigging practices
+		- Ripple constrain animation  
+		- Eyeball animation)  
+	3. Assignments & next class  
 
 ## Review
 - Tumblr
 
------------
-## Basic rigging: parenting & grouping
-## 1. Snowman
-***Can you make a snowman nodding and dancing?***
-### What to practice:
-- Proper naming
-- Practice ***pivot position*** using different snapping.
-- Proper ***parenting & grouping***
-   
-![pvt01](img/maya/kinematic/pivot01.png)  
-![pvt02](img/maya/kinematic/pivot02.png) ![pvt03](img/maya/kinematic/pivot03.png)  
+# Practice
+## Dynamics: applying effects esset
+![effect01](img/lab/effect.png)  
 
-- Modeling a simple snowman, applying squash deformation.   
-- Then, naming & parenting properly.        
-- Now let's work on pivot positions before animating.
-	- Using snapping.
-	- Hide or lock unused attributes.
+- When you simulate Maya dynamics, you need to set up the time slider preference first (check the above image), to let Maya calculates the simulation from the frame 1.  
+- Some effects can take much of your hardware resources and can be very slow. When you wan to cancel, and if stopping the play nor esc doesn't work, you need to kill the process.
+- Otherwise you can import effects or sometimes you can apply effects to the object or surfaces. You can check how it works by the label on top of icon, once you put your mouse on it.
+
+## Dynamics: soft jelly cube animation
+
+![jelly01](img/lab/jelly.png)
+
+Let's make the simplest soft jelly cube animation!
+
+1. Prepare the scene - create cubes with multiple spans and the floor object.
+2. You can apply **FX // nCloth / Create nCloth** on to jelly cubes. 
+3. Apply **FX // nCloth / Create Passive Collider** to the floor object.
+
+You can check the outliner to see nCloth and nucleus are affected properly.
+
+![jelly02](img/lab/jelly01.png)
+
+Play to see the result and from the channel box of the cubes, and change the value of Rigid parameter to control its elasticity. 
+
+Finally you can add shaders and render while turning on the raytracing to see the final result.
+
+## Tutorial link
+- [Maya Effects in the Maya help](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-3B540876-C61D-4B4E-BF0D-C011EDE25D6C)  
+
+
+---------------
+## Paint effect practices
+### I. To apply paint effect brushes on to a surface
+1. Create NURBs patch (increase its size and span numbers). 
+2. Select the surface and apply **Modeling // Generate / Make Paintable**.
+3. Choose **Modeling // Generate / Get Brush**, then the **Visor** window will open. Select a brush style from the brush folder.
+4. Click+drag the mouse over the chosen surface. The Paint Effects stroke is laid over the surface, and the Paint Effects tube will grow from it. When you release the mouse button, the stroke is ended. You can add additional strokes by click+dragging again. You can retrieve a new brush style at any time from Get Brush. You can delete a stroke by selecting the associated stroke node in the Hypergraph or Outliner.
+5. Render a test (Paint Effects is supported by Maya Software, but not mental ray). 
+
+![pe01_01](img/maya/pe/visor.png)
+
+***- You can convert the paint effect to other meshes such as Polygons, NURBS, or Curves (Modify / Covert /) which you can use in other pipelines.***
+
+![pe02](img/maya/pe/comp_wireframe.png)
+![pe03](img/maya/pe/comp_canvastubes.png)
+
+### II. Paint effect animation
+![pe01](img/maya/pe/texture.png)
+
+1. From the Visor, click the grasses / grassWindWide.mel brush. 
+2. In the Perspective window, click and drag at least two lines across the grid to create two Paint Effects strokes of blowing grass. 
+3. From the Visor, Select the flower / africanLily.mel brush in the Flower folder. 
+4. Click and drag a new stroke between the strokes of grass.
+5. Render a frame using Maya Software. Render out a 120-frame sequence to see how the grasses and flowers animate in the wind. 
+
+### Paint Effect attributes
+After you create a Paint Effects stroke, you can edit the look and movement of the effect through the Attribute Editor. There are a large number of attributes to edit with Paint Effects.
+
+- Select the stroke, and open the Attribute Editor. Switch to the stroke’s tab to the brush attributes.
+
+A summary of some Paint Effects attributes:
+
+**Brush Profile** gives you control over how the tubes are generated from the stroke; this is done with the Brush Width attribute. This makes tubes emit from a wider breadth from the stroke to cover more of an area.
+
+**Shading** and **Tube Shading** gives you access to the color controls for the tubes on a stroke.
+
+- **Color1 and Color2** from bottom to top, graduates from Color1 to Color 2 along the stalk only: The leaves and branches have their own color attributes, which you can display by choosing **Tubes / Growth**.
+- **Incandescence1 and 2** Adds a gradient self-illumination to the tubes.
+- **Transparency1 and 2** Adds a gradient transparency to each tube.
+- **Hue/Sat/Value Rand** add some randomness to the color of the tubes.
+
+**Tubes**: you’ll find all the attributes to control the growth of the Paint Effects effect. 
+
+- In the **Creation** subsection, you can access the following:       
+- **Tubes per Step** controls the number of tubes along the stroke.     
+- **Length Min/Max** controls how tall the tubes are grown.    
+- **Tube Width1 and Width2** controls the width of the tubes.   
+		
+- In the **Growth** subsection, you can access controls for branches, twigs, leaves, flowers, and buds for the Paint Effects strokes. Each attribute in these sections controls the number, size, and shape of those elements. Although not all Paint Effects strokes create flowers, all strokes contain these headings; some may or may not be active.
 	
-> **Pivot Positions:** the pivot position, or pivot point, is the location an object rotates around. In 3D animation, the pivot point is also the position from which the other manipulators will move or scale the object. Setting the correct position of the pivot to create the proper point of manipulation is important in creating a rig.
->
->### How to change the position of pivot:
-In Window, using **Insert** key.    
-In Mac, using **fn + left arrow** key.	
+- In the **Behavior** subsection contains the controls for the dynamic forces affecting the tubes in a Paint Effects stroke. Adjust these attributes if you want your flowers to blow more in the wind.
 
-## 2. Solar system 
-To review the techniques in making the snowman animation, try to make your own [solar system](https://www.youtube.com/watch?v=Tsnph4RBQ4c).
+
+### Additional Notes
+> Although Paint Effects brushes can create convincing results, they are unable to cover large areas effectively. For example, you can use the tool to paint patches of grass, weeds, or trees, but filling the entire park, meadow, or forest would be impractical in terms of render times and render stability.
+
+> Paint Effects are rendered as a post process, which means they won’t render in reflections or refractions as is. 
+
+> You can also **convert Paint Effects to polygonal surfaces** that will render in the scene along with any other objects so that they may take part in reflections and refractions. To convert a Paint Effects stroke to polygons, select the stroke and choose **Modify / Convert / Paint Effects to Polygons (or to NURBS, or to Curves)**. The polygon Paint Effects tubes can still be edited by most of the Paint Effects attributes mentioned so far; however, some, such as color, don’t affect the poly tubes. Instead, the color information is converted into a shader (you can check or edit the shading information with its textures from the Hypergraph) that is assigned to the polygons. It’s best to finalize your Paint Effects strokes before converting to polygons, to avoid any confusion.
+
+> Paint Effects is a strong Maya tool and you can use it to create complex effects such as a field of blowing flowers. A large number of controls to create a variety of effects come with that complexity. Fortunately, Maya comes with a generous sampling of preset brushes. Experiment with a few brushes and their attributes to see what kinds of effects and strange plants you can create.
+
+> Also Maya has really good documentation about Paint Effects in the Help files.
 
 --------
 
-## Basic rigging: constrains
-## 1. Ripple animation
+## More rigging practices
+### 1. Ripple animation
 - [Ripple animation](https://www.youtube.com/watch?v=LLXpD4ejqzY)
 - Here you will use **geometry and normal constraints** (Rigging | Deform / Constrain /) to make your object float on the wavy surface. 
 - You can apply **wave deformation** (Rigging | Deform / Nonlinear / Wave) to the surface to create waves. 
 - Proper pivot positioning
 - Normal constraints: in the option box, change the value in y axis of the aim vector into 1. 
 
-## 2. Eyeball animation: using handles
+### 2. Eyeball animation: using handles
 - [Eyeball animation](https://youtu.be/01zNa0Yzfy8)  
 - You can choose your body in the Visor (sculpting base meshes).   
 - You can make an eye ball using a NURBS sphere and a lamp texture (U Ramp)
@@ -161,8 +222,8 @@ Reset the options and turn on *maintain offset*.
 		Week 7:<a href="lecture07.html"> lecture</a> /<a href="lab07.html"> lab</a> (<a href="due.html">ASGMT 6</a>)<br/>
 		Week 8:<a href="lecture08.html"> lecture</a> /<a href="lab08.html"> lab</a> (<a href="due.html">Project 2</a>)<br/>
 		Week 9:<a href="lecture09.html"> lecture</a> /<a href="lab09.html"> lab</a> (<a href="due.html">ASGMT 7</a>)<br/>
-		Week 10:<a href="lecture10.html"> lecture </a> /<a href="lab10.html"> lab</a> (<a href="due.html">ASGMT 8</a>)<br/>
-		Week 11:<a href="lecture11.html"> lecture</a> /<a href="lab11.html"> lab</a> (<a href="due.html">ASGMT 9</a>)<br/><!--
+		Week 10:<a href="lecture10.html"> lecture</a> /<a href="lab10.html"> lab</a> (<a href="due.html">ASGMT 8</a>)<br/>
+		Week 11:<a href="lecture11.html"> lecture</a> /<a href="lab11.html"> lab</a> (<a href="due.html">Project 3/ASGMT 9</a>)<br/><!--
 		Week 12:<a href="lecture12.html"> lecture </a> /<a href="lab12.html"> lab</a> (<a href="due.html">Project 3</a>)<br/>-->
 		
 	

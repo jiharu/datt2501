@@ -20,10 +20,139 @@ A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
 
 <div style="display: none" id="sourcetext">
 
-# Week 12: 
+# Week 12: Game Engine & MoCap Data
+
+## References
+- [Maya 2016 online Help](http://help.autodesk.com/view/MAYAUL/2016/ENU//)  
+- [Unreal Engine 4 Documentation](https://docs.unrealengine.com/latest/INT/)  
+- [Unity Manual: Importing Objects From Maya](http://docs.unity3d.com/Manual/HOWTO-ImportObjectMaya.html)  
+- Art of Maya [pdf link](http://web.cse.ohio-state.edu/~parent/classes/682/MAYA/art_of_maya.pdf): P. 81~85: Interactive 3D.  
+- Rigging for Games by Eyal Assaf, 2015: based on using Maya and Unity.
+
+---------------------
+# From Maya to a Game Engine
+## Interactive 3D
+Reference: Art of Maya.
+
+### Modeling
+Models built for interactive 3D are primarily polygonal models that use controlled polygon counts to suit gaming engines. Some next-generation game engines already have support for Bezier geometry, and NURBS and Subdivision surfaces may soon follow. 
+
+![lod](img/lab/lod.png)  
+Cinematic model and game model. Image from the book Rigging for Games by Eyal Assaf.
+
+### Animation
+When playing a game, the player drives the motion of the scene. Therefore, animation is stored in small sequences that are controlled using the joystick (the player's control). For character animation, some game engines support inverse kinematics (IK) and some do not. 
+
+### Effects
+Generally, effects are added to video games using 2D sprites that are composited on the fly. With next-generation systems, there will be support for more complex dynamics and particle effects. The limits are set by the game engine itself.
+
+### Rendering
+Whereas an animation is rendered to a series of still frames, games use hardware rendering to present content to the player. Models and textures must be designed for real-time playback. Lighting and texturing tricks help attain faster playback.
+
+---------------
+
+## Unreal Engine 4
+Unreal Engine 4 is a complete suite of game development tools made by game developers, for game developers. From 2D mobile games to console blockbusters and VR, Unreal Engine 4 gives you everything you need to start, ship, grow and stand out from the crowd.
+- description by [Unreal Engine.](https://www.unrealengine.com/what-is-unreal-engine-4)  
+
+The Unreal Engine is a game engine developed by Epic Games, first showcased in the 1998 first-person shooter game Unreal. Although primarily developed for first-person shooters, it has been successfully used in a variety of other genres, including stealth, MMORPGs, and other RPGs. With its code written in C++, the Unreal Engine features a high degree of portability and is a tool used by many game developers today.
+
+The current release is Unreal Engine 4, designed for Microsoft's DirectX 11 and 12 (for Microsoft Windows, Xbox One, Windows RT); OpenGL (for OS X, Linux, PlayStation 4, iOS, Android, Ouya and Windows XP); and JavaScript/WebGL (for HTML5 Web browsers).
+- [Wikipedia.](https://en.wikipedia.org/wiki/Unreal_Engine)
+
+-----------
+
+### Demo
+- [Unreal Engine Sizzle Reel 2016 - GDC](https://www.youtube.com/watch?v=XTgueDFaN6Y) 
+- [Unreal Engine Simulation, Visualization & Training - I/ITSEC 2015](https://www.youtube.com/watch?v=tdCOyNyrdqc)  
+- [NASA: Building the ISS in Unreal Engine](https://www.youtube.com/watch?v=WuyHqsjv-EY): The International Space Station is a unique place – a convergence of science, technology and human innovation that demonstrates new technologies and makes research breakthroughs not possible on Earth - [Nasa](https://www.nasa.gov/mission_pages/station/main/onthestation/facts_and_figures.html)   
+- [VR Editor - GDC 2016](https://www.youtube.com/watch?v=1VVr2vMVdjc): Epic's Mike Fricker and Nick Donaldson show the VR Editor, the full Unreal Editor running in VR mode, using Oculus Touch controls. The VR Editor is available now with Oculus and Vive support.  
+- [Procedural Nature Pack (UE4)](https://www.youtube.com/watch?v=gut5ermayK4)  
+- [GDC 2016 State of Unreal: Hellblade Live Performance & Real-Time Animation, Unreal Engine 4](https://www.youtube.com/watch?v=JbQSpfWUs4I)  
 
 
+### Tutorial
+- [Maya to UE4 Speed Modelling](https://www.youtube.com/watch?v=9bd7zgVjCW8)  
+- [Unreal Engine 4 Level Design and Maya 2016 Learning](https://www.youtube.com/watch?v=LdjS7_4gaZM)  
+- [Animating a Short Film in Maya and Unreal Engine](http://www.digitaltutors.com/tutorial/2359-Animating-a-Short-Film-in-Maya-and-Unreal-Engine): A 2 hour 14 m digital tutorial (Pluralsight) by Nathan Glemboski. 
 
+-----------------
+## Import modeling & animation assets from Maya
+
+![unreal01](img/lab/unreal.png) 
+![unreal02](img/lab/unreal01.png) 
+
+## File format to use: OBJ or FBX
+### Obj
+OBJ has it’s origins with Alias Wavefront, a simple data-format that represents 3D geometry — namely, the position of each vertex, the UV position of each texture coordinate vertex, vertex normals, and the faces that make each polygon defined as a list of vertices, and texture vertices. 
+
+- [Comparison I between OBJ & FBX](http://aecobjects.com/2014/10/which_format_is_better/)
+- [Comparison II between OBJ & FBX](http://www.reallusion.com/iclone/help/3DXchange5/Pipeline/05_Export/The_Comparison_of_OBJ_FBX.htm)
+
+### FBX
+- [FBX Content Pipeline in Unreal Engine 4](https://docs.unrealengine.com/latest/INT/Engine/Content/FBX/index.html)  
+
+FBX is a file format owned and developed by Autodesk. It is used to provide interoperability between digital content creation applications such as Autodesk MotionBuilder, Autodesk Maya, and Autodesk 3ds Max. Autodesk MotionBuilder software supports FBX natively, while Autodesk Maya and Autodesk 3ds Max software include FBX plug-ins.
+
+Unreal Engine features an FBX import pipeline which allows simple transfer of content from any number of digital content creation applications that support the format.
+
+The advantages of the Unreal FBX Importer over other importing methods are:
+
+- Static Mesh, Skeletal Mesh, animation, and morph targets in a single file format.
+- Multiple assets/content can be contained in a single file.
+- Import of multiple LODs and Morphs/Blendshapes in one import operation.
+- Materials and textures imported with and applied to meshes.
+
+## When you made assets in Maya
+- If it is static, you can save it as obj and import to the content browser in Unreal. 
+You need to import textures and build the material in the material editor in Unreal. Your object should have UV texture coordinate assigned.  
+
+- If it has rigs and animation, save it as fbx. You still need to import textures separately and your objects should have UV texture coordinate too. 
+
+## FBX exporter in Maya
+
+- You can export as fbx directly. 
+- Or you can use the game exporter as below, under File menu:
+
+![exporter](img/lab/exporter.png) 
+
+- In the Unreal UI, you will see this window to import FBX. Check some parameters:
+
+![importer](img/lab/importer.png) 
+
+_________________
+
+## ART (Maya Animation Rigging Toolset) 
+
+![unreal](img/lab/CharacterSetupImage.jpg)
+Image from [Unreal Engine 4 Maya Animation Rigging Toolset](https://docs.unrealengine.com/latest/INT/Engine/Content/Tools/MayaRiggingTool/index.html)  
+
+The Animation and Riggings Toolset (ART) is a comprehensive toolset that takes a character through skeleton creation, skeleton placement, and rig creation, as well as many animation tools to speed up your animators' workflow, currently tested and confirmed in Maya 2013 and up. Features include:
+
+- Intuitive user interfaces guide the user through every process.
+- Complete skeletal creation.
+- Custom skeleton placement via an intuitive positioning rig.
+- An entire rig can be published and sent to the animation team in under a minute!
+- Ability to provide simple skinning to your final character.
+- A full suite of animation tools complete with user interface, including importing mocap or animation data, exporting to FBX, pose tools, mirroring, space switching, and more!
+
+The ART is split into two modes: [Rigging](https://docs.unrealengine.com/latest/INT/Engine/Content/Tools/MayaRiggingTool/RigTool_Rigging/index.html) and [Animation](https://docs.unrealengine.com/latest/INT/Engine/Content/Tools/MayaRiggingTool/index.html), each with their own distinct interfaces. For a character to use the ART Animation interface, it must be produced from the Rigging interface.
+
+**** Caution: The ART is tested in Maya 2012-14 in the Window system. If you try other than these set-ups, you need to research and go through trials & errors (and may need to wait for the updates).***
+
+To download the latest ART set:
+- [Maya_AnimationRiggingTools](https://www.dropbox.com/sh/e49zvu9btm55o3t/Ietd28dXEJ):
+This is mainly developed my Jeremy Ernst, a lead technical animator from Epic Games. You can find the ART sources as well as tutorial videos.
+
+
+------------
+## Misc
+
+- Thank you for all. I will look forward seeing your unique and beautiful future 3D projects!  
+
+- If you have any suggestions or comments to the class, please send them to haruoneday at gmail.com. 
+
+-----------------------  
 
 </div>
 <div id="wrapper">
@@ -48,7 +177,7 @@ A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
 		Week 7:<a href="lecture07.html"> lecture</a> /<a href="lab07.html"> lab</a> (<a href="due.html">ASGMT 6</a>)<br/>
 		Week 8:<a href="lecture08.html"> lecture</a> /<a href="lab08.html"> lab</a> (<a href="due.html">Project 2</a>)<br/>
 		Week 9:<a href="lecture09.html"> lecture</a> /<a href="lab09.html"> lab</a> (<a href="due.html">ASGMT 7</a>)<br/>
-		Week 10:<a href="lecture10.html"> lecture </a> /<a href="lab10.html"> lab</a> (<a href="due.html">ASGMT 8</a>)<br/>
+		Week 10:<a href="lecture10.html"> lecture</a> /<a href="lab10.html"> lab</a> (<a href="due.html">ASGMT 8</a>)<br/>
 		Week 11:<a href="lecture11.html"> lecture</a> /<a href="lab11.html"> lab</a> (<a href="due.html">ASGMT 9</a>)<br/>
 		Week 12:<a href="lecture12.html"> lecture </a> /<a href="lab12.html"> lab</a> (<a href="due.html">Project 3</a>)<br/>
 		

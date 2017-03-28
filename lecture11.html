@@ -83,40 +83,6 @@ After you create a Paint Effects stroke, you can edit the look and movement of t
 
 - Select the stroke, and open the Attribute Editor. Switch to the stroke’s tab to the brush attributes.
 
-A summary of some Paint Effects attributes:
-
-**Brush Profile** gives you control over how the tubes are generated from the stroke; this is done with the Brush Width attribute. This makes tubes emit from a wider breadth from the stroke to cover more of an area.
-
-**Shading** and **Tube Shading** gives you access to the color controls for the tubes on a stroke.
-
-- **Color1 and Color2** from bottom to top, graduates from Color1 to Color 2 along the stalk only: The leaves and branches have their own color attributes, which you can display by choosing **Tubes / Growth**.
-- **Incandescence1 and 2** Adds a gradient self-illumination to the tubes.
-- **Transparency1 and 2** Adds a gradient transparency to each tube.
-- **Hue/Sat/Value Rand** add some randomness to the color of the tubes.
-
-**Tubes**: you’ll find all the attributes to control the growth of the Paint Effects effect. 
-
-- In the **Creation** subsection, you can access the following:       
-- **Tubes per Step** controls the number of tubes along the stroke.     
-- **Length Min/Max** controls how tall the tubes are grown.    
-- **Tube Width1 and Width2** controls the width of the tubes.   
-		
-- In the **Growth** subsection, you can access controls for branches, twigs, leaves, flowers, and buds for the Paint Effects strokes. Each attribute in these sections controls the number, size, and shape of those elements. Although not all Paint Effects strokes create flowers, all strokes contain these headings; some may or may not be active.
-	
-- In the **Behavior** subsection contains the controls for the dynamic forces affecting the tubes in a Paint Effects stroke. Adjust these attributes if you want your flowers to blow more in the wind.
-
-
-#### Additional Notes
-> Although Paint Effects brushes can create convincing results, they are unable to cover large areas effectively. For example, you can use the tool to paint patches of grass, weeds, or trees, but filling the entire park, meadow, or forest would be impractical in terms of render times and render stability.
-
-> Paint Effects are rendered as a post process, which means they won’t render in reflections or refractions as is. 
-
-> You can also **convert Paint Effects to polygonal surfaces** that will render in the scene along with any other objects so that they may take part in reflections and refractions. To convert a Paint Effects stroke to polygons, select the stroke and choose **Modify / Convert / Paint Effects to Polygons (or to NURBS, or to Curves)**. The polygon Paint Effects tubes can still be edited by most of the Paint Effects attributes mentioned so far; however, some, such as color, don’t affect the poly tubes. Instead, the color information is converted into a shader (you can check or edit the shading information with its textures from the Hypergraph) that is assigned to the polygons. It’s best to finalize your Paint Effects strokes before converting to polygons, to avoid any confusion.
-
-> Paint Effects is a strong Maya tool and you can use it to create complex effects such as a field of blowing flowers. A large number of controls to create a variety of effects come with that complexity. Fortunately, Maya comes with a generous sampling of preset brushes. Experiment with a few brushes and their attributes to see what kinds of effects and strange plants you can create.
-
-> Also Maya has really good documentation about Paint Effects in the Help files.
-
 -----------------------
 
 ## Review: post processing in Maya

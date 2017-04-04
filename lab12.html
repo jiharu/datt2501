@@ -29,29 +29,17 @@ under   <section class="post">
 <div style="display: none" id="sourcetext">
 
 # Week 12
-
-<!--
 	1. Review
-		- Tumblr		
+		- Grade		
 	2. Basic rigging
 		- Parenting & Grouping (snowman & solar system)
 		- Constraints (ripple & eyeball animation)
-	3. Rigging on parts of body (spine)
-		- Basics
-			- freeze transformation
-			- deleting histories
-			- naming
-		- Proper parenting & grouping
-		- Good analyzing & planning 
-		- Trial & error	 
-	4. HIK and Control Rig in Maya
-	More rigging practices
-	5. Assignments & next class
+	3. Motion capture
 
 ____________________
 
 ## Basic rigging: parenting & grouping
-## 1. Snowman
+## Your practice I : Snowman
 ***Can you make a snowman nodding and dancing?***
 ### What to practice:
 - Proper naming
@@ -73,10 +61,77 @@ ____________________
 In Window, using **Insert** key.    
 In Mac, using **fn + left arrow** key.	
 
-## 2. Solar system 
+## Your practice II : Solar system 
 To review the techniques in making the snowman animation, try to make your own [solar system](https://www.youtube.com/watch?v=Tsnph4RBQ4c).
 
--->
+--------
+
+
+## More rigging practices
+### 1. Ripple animation
+- [Ripple animation](https://www.youtube.com/watch?v=LLXpD4ejqzY)
+- Here you will use **geometry and normal constraints** (Rigging | Deform / Constrain /) to make your object float on the wavy surface. 
+- You can apply **wave deformation** (Rigging | Deform / Nonlinear / Wave) to the surface to create waves. 
+- Proper pivot positioning
+- Apply Geometry constraints, choose the surface then the object.
+- Apply Normal constraints: in the option box, change the value in y axis of the aim vector into 1. 
+
+
+## Eyeball animation: using handles
+- [Eyeball animation](https://youtu.be/01zNa0Yzfy8)  
+- You can choose your body in the Visor (sculpting base meshes).   
+- You can make an eye ball using a NURBS sphere and a lamp texture (U Ramp)
+- Create eyeball handles with NURBs curves.
+- In the outliner, rename them, delete histories, freeze transformation, and properly group and parent them.
+
+![eveball](img/lab/eyeball.png) 
+
+### Make relations
+- Choose the curve handle and the geometry respectively and connect them through **aim constrain.** 
+ 	
+![aim](img/lab/aim.png)   
+Reset the options and turn on *maintain offset*.
+
+- Test your eyeball animation
+
+_____________________
+
+## Motion Capture 
+### Data collecting / generating
+- Download free motion capture data as .fbx
+
+	- [mocapdata.com](http://mocapdata.com/)  
+	mocapdata.com provides 933 premium and 4671 free motion datasets and is advertised as 'the world biggest state of the art motion capture library on the earth.'
+	- [turbosquid.com](http://www.turbosquid.com/Search/Motion-Capture/free/fbx)  
+	 TurboSquid provides 3D assets including 3D models. You can find free 3D models as well as free motion capture FBX data that can be imported to Maya. 
+
+- Create a folder to save the downloaded fbx files.   
+
+### In Maya
+- Open the Maya scene where your HIK character. 
+- Import fbx data into the scene. Check the imported character from the outliner window, and play to check the animation.  
+- In the HIK window, your character should be in the Character box (e.g., Character1) and change the Source to the imported character. (e.g., Humanoid1)
+- Now you can see that your character behaves according to the imported MOCAP motion.
+
+![mcap](img/lab/mcap.png) 
+
+### Export to Unreal
+- Choose the highest bone of your character, where has kyes. 
+- Go to File / Send to Unreal -> Selection and export your animation. 
+
+- You can choose the mesh and skeletons and export them too. 
+
+### In the Unreal Engine
+- Opne Epic Games Launcher and Launch Unreal Engine. You need to create your account in the Epic Games, if you don't have.
+- Create New Project. 
+- In the Content Browser, create one folder and import your fbx files to here.   
+
+### Related tutorial
+- [Unreal Engine 4 - Mixamo To Unreal Engine 4 - UE4 Import by Titanic Games](https://www.youtube.com/watch?v=8RB53mAiwGw)  
+- [ANIMATION FROM MAYA TO UE 4 10 HD by Manoanim APS](https://www.youtube.com/watch?v=zOZbghSJNpc)  
+- [MAYA CHARACTER TO UE4 EP5- WALK CYCLE ANIMATION by SacMakersDaniel](https://www.youtube.com/watch?v=_ZSDTp-l3pw) 
+- [MAYA CHARACTER TO UE4 EP7- IMPORTING CHARACTER AND ANIMATIONS by SacMakersDaniel](https://www.youtube.com/watch?v=5TBHJd6olo8&t=133s)    
+
 
 </div>
 <div id="wrapper">
